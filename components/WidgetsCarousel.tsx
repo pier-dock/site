@@ -9,7 +9,7 @@ export function WidgetsCarousel({ t }: { t: Dictionary["widgets"] }) {
     <section
       id="widgets"
       aria-labelledby="widgets-title"
-      className="relative overflow-clip border-t border-line-8 pt-28 pb-[72px]"
+      className="relative overflow-clip border-t border-line-8 pt-28 pb-10"
     >
       <div className="mx-auto max-w-[1200px] px-6">
         <div className="flex max-w-[560px] reveal-blur flex-col gap-1.5">
@@ -30,7 +30,7 @@ export function WidgetsCarousel({ t }: { t: Dictionary["widgets"] }) {
         role="region"
         aria-label={t.carouselLabel}
         tabIndex={0}
-        className={`mt-6 flex snap-x snap-mandatory gap-6 overflow-x-auto pt-10 pb-16 carousel-timeline ${gutter}`}
+        className={`mt-6 flex snap-x snap-mandatory gap-6 overflow-x-auto overflow-y-hidden pt-10 pb-24 carousel-timeline ${gutter}`}
       >
         {getWidgets(t.items).map((w, i) => (
           <WidgetCard key={w.id} widget={w} moreLabel={t.more} index={i} />

@@ -432,10 +432,11 @@
   }
 }
 
+/* Cabe no padding de baixo do carrossel (pb-24): nada é cortado durante a subida. */
 @keyframes widget-rise {
   from {
-    translate: 0 200px;
-    rotate: 6deg;
+    translate: 0 64px;
+    rotate: 4deg;
   }
 }
 
@@ -535,11 +536,12 @@
     @supports (animation-timeline: view()) {
       transform-origin: 0% 100%;
       animation:
-        widget-rise linear both,
+        widget-rise cubic-bezier(0.2, 0.8, 0.2, 1) both,
         reveal-x linear both;
       animation-timeline: --carousel, view(inline);
+      /* Em cascata durante a entrada: o último card alinha quando o carrossel termina de entrar. */
       animation-range:
-        entry calc(var(--reveal-step, 0) * 7%) cover calc(28% + var(--reveal-step, 0) * 6%),
+        entry calc(var(--reveal-step, 0) * 8%) entry calc(60% + var(--reveal-step, 0) * 8%),
         entry 0% entry 100%;
     }
   }
