@@ -1,4 +1,5 @@
 import type { Dictionary } from "@/lib/i18n/pt-BR";
+import { DockDemoLazy } from "./DockDemo/DockDemoLazy";
 import { DockStage } from "./DockDemo/DockStage";
 import { HeroCta } from "./HeroCta";
 import { Wallpaper } from "./Wallpaper";
@@ -30,7 +31,9 @@ export function Hero({ t }: { t: Dictionary["hero"] }) {
         </p>
         <HeroCta t={t} />
       </div>
-      <DockStage badge={t.demoBadge} label={t.demoLabel} />
+      <DockStage badge={t.demoBadge} label={t.demoLabel}>
+        <DockDemoLazy />
+      </DockStage>
     </section>
   );
 }
