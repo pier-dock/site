@@ -13,7 +13,7 @@ export function WidgetsCarousel({ t }: { t: Dictionary["widgets"] }) {
       className="relative overflow-hidden border-t border-line-8 pt-28 pb-[72px]"
     >
       <div className="mx-auto max-w-[1200px] px-6">
-        <div className="flex max-w-[560px] flex-col gap-1.5">
+        <div className="flex max-w-[560px] reveal flex-col gap-1.5">
           <h2
             id="widgets-titulo"
             className="m-0 text-[clamp(22px,2.4vw,28px)] leading-[1.2] font-semibold tracking-[-0.02em]"
@@ -31,7 +31,7 @@ export function WidgetsCarousel({ t }: { t: Dictionary["widgets"] }) {
         role="region"
         aria-label={t.carouselLabel}
         tabIndex={0}
-        className={`mt-6 flex snap-x snap-mandatory gap-6 overflow-x-auto pt-10 pb-16 ${gutter}`}
+        className={`mt-6 flex reveal snap-x snap-mandatory gap-6 overflow-x-auto pt-10 pb-16 ${gutter}`}
       >
         {widgets.map((w) => (
           <WidgetCard key={w.id} widget={w} moreLabel={t.more} moreHref={links.widgetsDocs} />

@@ -202,9 +202,7 @@
   border-width: 1px;
   border-style: solid;
   box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.1);
-  transition:
-    box-shadow 0.3s ease-out,
-    translate 0.3s ease-out;
+  transition: box-shadow 0.3s ease-out;
 
   &:hover,
   &:focus-within {
@@ -290,6 +288,86 @@
     );
   border-color: var(--color-system-edge);
   --widget-halo: var(--color-system-halo);
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    translate: 0 40px;
+    scale: 0.97;
+  }
+}
+
+@keyframes reveal-x {
+  from {
+    opacity: 0.35;
+    translate: 48px 0;
+    scale: 0.94;
+  }
+}
+
+@keyframes stage-rise {
+  from {
+    scale: 0.94;
+    translate: 0 24px;
+  }
+}
+
+@keyframes drift {
+  to {
+    translate: 0 -160px;
+  }
+}
+
+/*
+ * Animações ligadas à rolagem (scroll-driven), sem JS. Sem suporte ou com
+ * prefers-reduced-motion, o elemento fica no estado final: nada some.
+ * --reveal-step atrasa a entrada para escalonar itens lado a lado.
+ */
+@utility reveal {
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry calc(var(--reveal-step, 0) * 8%) cover
+        calc(28% + var(--reveal-step, 0) * 6%);
+    }
+  }
+}
+
+@utility reveal-step-* {
+  --reveal-step: --value(integer);
+}
+
+/* Dentro do carrossel: a linha do tempo é a rolagem horizontal do próprio carrossel. */
+@utility reveal-x {
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      animation: reveal-x linear both;
+      animation-timeline: view(inline);
+      animation-range: entry 0% entry 100%;
+    }
+  }
+}
+
+@utility stage-rise {
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      animation: stage-rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 45%;
+    }
+  }
+}
+
+@utility drift {
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: scroll()) {
+      animation: drift linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 100vh;
+    }
+  }
 }
 
 @utility scrollbar-none {

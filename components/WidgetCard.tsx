@@ -50,7 +50,7 @@ export function WidgetCard({ widget, moreLabel, moreHref }: WidgetCardProps) {
   return (
     <article
       aria-labelledby={titleId}
-      className={`widget-card ${widget.theme} flex h-[540px] flex-[0_0_340px] snap-start flex-col gap-4 overflow-hidden rounded-2xl p-[22px]`}
+      className={`widget-card ${widget.theme} flex h-[540px] flex-[0_0_340px] reveal-x snap-start flex-col gap-4 overflow-hidden rounded-2xl p-[22px]`}
     >
       <header className="flex items-center gap-3">
         <span className="flex size-11 items-center justify-center rounded-md border border-line-14 bg-black/35 shadow-chip">

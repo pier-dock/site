@@ -24,7 +24,7 @@ export function Features({ t }: { t: Dictionary["features"] }) {
       className="border-t border-line-8 px-6 py-28"
     >
       <div className="mx-auto flex max-w-[1200px] flex-col gap-12">
-        <div className="flex max-w-[640px] flex-col gap-3.5">
+        <div className="flex max-w-[640px] reveal flex-col gap-3.5">
           <p className="m-0 text-[13px] font-semibold tracking-[0.08em] text-coral-soft uppercase">
             {t.eyebrow}
           </p>
@@ -37,7 +37,7 @@ export function Features({ t }: { t: Dictionary["features"] }) {
         </div>
 
         <div className="flex flex-wrap gap-4">
-          <article className={`${card} min-h-[300px] flex-[2_1_586px]`}>
+          <article className={`${card} min-h-[300px] flex-[2_1_586px] reveal`}>
             <h3 className={cardTitle}>{t.github.title}</h3>
             <p className={`${cardBody} max-w-[420px]`}>{t.github.body}</p>
             <ContributionGrid
@@ -50,7 +50,7 @@ export function Features({ t }: { t: Dictionary["features"] }) {
             />
           </article>
 
-          <article className={`${card} min-h-[300px] flex-[1_1_386px]`}>
+          <article className={`${card} min-h-[300px] flex-[1_1_386px] reveal reveal-step-1`}>
             <div
               aria-hidden="true"
               className="absolute -right-[60px] -bottom-20 size-[260px] rounded-full bg-wall-blue opacity-90 blur-[60px]"
@@ -67,7 +67,7 @@ export function Features({ t }: { t: Dictionary["features"] }) {
             />
           </article>
 
-          <article className={`${card} min-h-[280px] flex-[1_1_386px]`}>
+          <article className={`${card} min-h-[280px] flex-[1_1_386px] reveal`}>
             <h3 className={cardTitle}>{t.shortcuts.title}</h3>
             <p className={cardBody}>{t.shortcuts.body}</p>
             <ul className="m-0 mt-auto flex list-none flex-col gap-2 p-0">
@@ -89,7 +89,7 @@ export function Features({ t }: { t: Dictionary["features"] }) {
             </ul>
           </article>
 
-          <article className={`${card} min-h-[280px] flex-[1_1_386px]`}>
+          <article className={`${card} min-h-[280px] flex-[1_1_386px] reveal reveal-step-1`}>
             <h3 className={cardTitle}>{t.platforms.title}</h3>
             <p className={cardBody}>{t.platforms.body}</p>
             <ul className="m-0 mt-auto flex list-none flex-wrap gap-2 p-0">
