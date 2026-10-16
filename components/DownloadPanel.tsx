@@ -3,7 +3,6 @@
 import { useRef } from "react";
 import type { Dictionary } from "@/lib/i18n";
 import { osList, type OS } from "@/lib/os";
-import { CopyButton } from "./CopyButton";
 import { DownloadIcon } from "./icons";
 import { useOS } from "./OSProvider";
 
@@ -94,27 +93,6 @@ export function DownloadPanel({ t }: { t: Dictionary["download"] }) {
             <DownloadIcon size={17} />
             {d.button}
           </a>
-        </div>
-
-        <div className="flex flex-col gap-2">
-          <p className="m-0 text-[13px] text-fg-3">
-            {t.terminal} ({d.via})
-          </p>
-          <div className="flex h-12 items-center gap-2.5 rounded-md border border-line-10 bg-ink pr-1.5 pl-4">
-            <span aria-hidden="true" className="font-mono text-[13px] text-coral-soft">
-              $
-            </span>
-            <code className="flex-1 scrollbar-none overflow-x-auto font-mono text-[13px] whitespace-nowrap text-fg">
-              {d.cmd}
-            </code>
-            <CopyButton
-              key={os}
-              text={d.cmd}
-              label={t.copyLabel}
-              idleText={t.copy}
-              doneText={t.copied}
-            />
-          </div>
         </div>
 
         <ul aria-label={t.alts} className="m-0 flex list-none flex-wrap gap-2 p-0">

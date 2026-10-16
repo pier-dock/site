@@ -140,10 +140,6 @@ export const en = {
     detectedAfter: ". Pick another system if you need to.",
     tabsLabel: "Operating system",
     pierFor: "Pier for",
-    terminal: "Or from the terminal",
-    copy: "Copy",
-    copied: "Copied",
-    copyLabel: "Copy command",
     alts: "Other formats",
   },
   downloads: {
@@ -193,11 +189,6 @@ export const en = {
     volumeLabel: "Volume {n}%",
     output: "Output: speakers",
     battery: "Battery at {n}%",
-    terminal: {
-      downloading: "==> Downloading Pier…",
-      installing: "==> Installing Pier",
-      done: "Pier installed successfully.",
-    },
     weekdays: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
     months: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
     /** Ordem do dia e do mês na data da dock: "Thu, Oct 16" ou "qui, 16 out". */

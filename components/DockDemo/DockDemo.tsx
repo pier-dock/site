@@ -14,7 +14,6 @@ import {
   VolumeIcon,
   WifiIcon,
 } from "../icons";
-import { useOS } from "../OSProvider";
 import { AppWindow } from "./AppWindow";
 import { Clock } from "./Clock";
 import { apps, battery, pendingReviews } from "./data";
@@ -34,7 +33,6 @@ const triggerId = (id: PopoverId) => `dock-trigger-${id}`;
 const divider = <span aria-hidden="true" className="mx-1.5 h-7 w-px shrink-0 bg-white/12" />;
 
 export default function DockDemo({ t }: { t: Dictionary["demo"] }) {
-  const { os, downloads } = useOS();
   const player = usePlayer();
   const [focused, setFocused] = useState(3);
   const [minimized, setMinimized] = useState<boolean[]>(() => apps.map(() => false));
@@ -98,8 +96,6 @@ export default function DockDemo({ t }: { t: Dictionary["demo"] }) {
           app={focusedApp.id}
           trackName={player.track.name}
           playState={player.playing ? t.nowPlaying : t.paused}
-          terminal={t.terminal}
-          command={downloads[os].cmd}
         />
       )}
 

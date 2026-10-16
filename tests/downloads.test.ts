@@ -3,7 +3,7 @@ import { buildDownloads } from "@/lib/downloads";
 import { getDictionary, locales } from "@/lib/i18n";
 import { osList } from "@/lib/os";
 
-const config = { repo: "acme/pier", version: "1.4.0", host: "pier.dev" };
+const config = { repo: "acme/pier", version: "1.4.0" };
 const downloads = buildDownloads({ ...config, t: getDictionary("en").downloads });
 
 describe("buildDownloads", () => {
@@ -19,13 +19,9 @@ describe("buildDownloads", () => {
     );
   });
 
-  it("usa o domínio do site no script de instalação", () => {
-    expect(downloads.linux.cmd).toBe("curl -fsSL https://pier.dev/install.sh | sh");
-  });
-
   it.each(osList)("preenche todos os campos de %s", (os) => {
     const d = downloads[os];
-    for (const value of [d.label, d.button, d.file, d.fileNote, d.req, d.via, d.cmd, d.url]) {
+    for (const value of [d.label, d.button, d.file, d.fileNote, d.req, d.url]) {
       expect(value).not.toBe("");
     }
     expect(d.url.endsWith(d.file)).toBe(true);

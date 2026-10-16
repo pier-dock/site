@@ -35,7 +35,7 @@ Na Vercel, defina as três em **Settings > Environment Variables** para Producti
 
 ## Como trocar as URLs de download
 
-Os downloads ficam todos em [`lib/downloads.ts`](lib/downloads.ts). Cada sistema tem rótulo, texto do botão, arquivo, requisitos, comando de terminal, alternativas e URL.
+Os downloads ficam todos em [`lib/downloads.ts`](lib/downloads.ts). Cada sistema tem rótulo, texto do botão, arquivo, requisitos, alternativas e URL.
 
 As URLs apontam para a última release do GitHub:
 
@@ -48,7 +48,7 @@ Os nomes dos arquivos seguem o padrão do `tauri-action` no repositório do app 
 > [!IMPORTANT]
 > `releases/latest/download/` só resolve se o arquivo existir na release marcada como _latest_. Quando publicar uma versão nova, atualize `NEXT_PUBLIC_VERSION` e faça um novo deploy. Releases em rascunho não contam como _latest_.
 
-Para mudar um nome de arquivo ou um comando, edite `buildDownloads()`. Os textos (botões e requisitos) ficam em `downloads` nos dicionários de `lib/i18n/`. Os testes em `tests/downloads.test.ts` conferem se todo sistema tem todos os campos. Os comandos `brew`, `winget` e o `install.sh` ainda são placeholders: troque quando o Pier estiver publicado nesses canais.
+Para mudar um nome de arquivo, edite `buildDownloads()`. Os textos (botões e requisitos) ficam em `downloads` nos dicionários de `lib/i18n/`. Os testes em `tests/downloads.test.ts` conferem se todo sistema tem todos os campos.
 
 ## Estrutura
 

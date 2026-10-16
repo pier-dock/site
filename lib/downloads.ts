@@ -1,6 +1,6 @@
 import type { Dictionary } from "./i18n";
 import type { OS } from "./os";
-import { githubRepo, siteHost, version } from "./site";
+import { githubRepo, version } from "./site";
 
 export type DownloadLink = { label: string; url: string };
 
@@ -11,24 +11,17 @@ export type Download = {
   /** Linha curta que acompanha o nome do arquivo no hero. */
   fileNote: string;
   req: string;
-  via: string;
-  cmd: string;
   url: string;
   alts: DownloadLink[];
 };
 
-type DownloadConfig = { repo: string; version: string; host: string; t: Dictionary["downloads"] };
+type DownloadConfig = { repo: string; version: string; t: Dictionary["downloads"] };
 
 export function assetUrl(repo: string, file: string) {
   return `https://github.com/${repo}/releases/latest/download/${file}`;
 }
 
-export function buildDownloads({
-  repo,
-  version: v,
-  host,
-  t,
-}: DownloadConfig): Record<OS, Download> {
+export function buildDownloads({ repo, version: v, t }: DownloadConfig): Record<OS, Download> {
   const files = {
     dmg: `Pier_${v}_universal.dmg`,
     exe: `Pier_${v}_x64-setup.exe`,
@@ -44,8 +37,6 @@ export function buildDownloads({
       file: files.dmg,
       fileNote: t.mac.fileNote,
       req: t.mac.req,
-      via: "Homebrew",
-      cmd: "brew install --cask pier",
       url: assetUrl(repo, files.dmg),
       alts: [release],
     },
@@ -55,8 +46,6 @@ export function buildDownloads({
       file: files.exe,
       fileNote: t.win.fileNote,
       req: t.win.req,
-      via: "winget",
-      cmd: "winget install Pier.Pier",
       url: assetUrl(repo, files.exe),
       alts: [release],
     },
@@ -66,8 +55,6 @@ export function buildDownloads({
       file: files.appImage,
       fileNote: t.linux.fileNote,
       req: t.linux.req,
-      via: "script",
-      cmd: `curl -fsSL https://${host}/install.sh | sh`,
       url: assetUrl(repo, files.appImage),
       alts: [{ label: t.debPackage, url: assetUrl(repo, files.deb) }, release],
     },
@@ -75,5 +62,5 @@ export function buildDownloads({
 }
 
 export function getDownloads(t: Dictionary["downloads"]) {
-  return buildDownloads({ repo: githubRepo, version, host: siteHost, t });
+  return buildDownloads({ repo: githubRepo, version, t });
 }

@@ -144,10 +144,6 @@ export const ptBR: Dictionary = {
     detectedAfter: ". Escolha outro sistema se precisar.",
     tabsLabel: "Sistema operacional",
     pierFor: "Pier para",
-    terminal: "Ou pelo terminal",
-    copy: "Copiar",
-    copied: "Copiado",
-    copyLabel: "Copiar comando",
     alts: "Outros formatos",
   },
   downloads: {
@@ -197,11 +193,6 @@ export const ptBR: Dictionary = {
     volumeLabel: "Volume {n}%",
     output: "Saída: alto-falantes",
     battery: "Bateria em {n}%",
-    terminal: {
-      downloading: "==> Baixando Pier…",
-      installing: "==> Instalando Pier",
-      done: "Pier instalado com sucesso.",
-    },
     weekdays: ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"],
     months: ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"],
     dateOrder: "day-month",
