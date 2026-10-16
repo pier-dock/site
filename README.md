@@ -48,45 +48,60 @@ Os nomes dos arquivos seguem o padrão do `tauri-action` no repositório do app 
 > [!IMPORTANT]
 > `releases/latest/download/` só resolve se o arquivo existir na release marcada como _latest_. Quando publicar uma versão nova, atualize `NEXT_PUBLIC_VERSION` e faça um novo deploy. Releases em rascunho não contam como _latest_.
 
-Para mudar um nome de arquivo, um requisito ou um comando, edite `buildDownloads()`. Os testes em `tests/downloads.test.ts` conferem se todo sistema tem todos os campos. Os comandos `brew`, `winget` e o `install.sh` ainda são placeholders: troque quando o Pier estiver publicado nesses canais.
+Para mudar um nome de arquivo ou um comando, edite `buildDownloads()`. Os textos (botões e requisitos) ficam em `downloads` nos dicionários de `lib/i18n/`. Os testes em `tests/downloads.test.ts` conferem se todo sistema tem todos os campos. Os comandos `brew`, `winget` e o `install.sh` ainda são placeholders: troque quando o Pier estiver publicado nesses canais.
 
 ## Estrutura
 
 ```
 app/
-  layout.tsx            layout raiz (pt-BR), fontes, metadata e viewport
-  (site)/page.tsx       a landing
-  opengraph-image.tsx   imagem OG gerada com next/og (twitter-image reexporta)
+  [lang]/
+    layout.tsx          layout raiz por idioma: <html lang>, fontes, metadata e viewport
+    page.tsx            a landing
+    opengraph-image.tsx imagem OG por idioma, gerada com next/og (twitter-image reexporta)
   apple-icon.tsx  icon.svg  favicon.ico  manifest.ts  sitemap.ts  robots.ts
-  globals.css           tokens do @theme e utilitários de vidro e dos widgets
+  globals.css           tokens do @theme, vidro, temas dos widgets e animações de rolagem
+assets/apps/            ícones SVG dos apps da demo
 components/             seções da página; DockDemo/ é a demo interativa
 lib/
+  i18n/                 en.ts (define o tipo Dictionary), pt-BR.ts e index.ts (idiomas, rotas, fill)
   os.ts                 detectPlatform(): função pura que recebe UA e client hints
   downloads.ts          dados de download por sistema
-  widgets.ts            lista tipada dos widgets do carrossel
-  seo.ts                metadata, viewport e JSON-LD
+  widgets.ts            getWidgets(): widgets do carrossel com os textos do idioma
+  seo.ts                metadata, hreflang, viewport e JSON-LD
   site.ts               variáveis de ambiente, autores e links
-  i18n/pt-BR.ts         textos da página
 tests/                  Vitest
 ```
+
+### Idiomas
+
+O inglês é o idioma principal e fica em `/`. O português fica em `/pt-br`. As duas páginas são geradas no build por `app/[lang]` (`/en` e `/pt-br`). No `next.config.ts`, um _rewrite_ serve `/en` na raiz e um _redirect_ leva `/en` de volta para `/`, para não haver duas URLs com o mesmo conteúdo. O seletor EN | PT da navbar é um link comum (`components/Header.tsx`).
+
+Todo texto vem de `lib/i18n/en.ts`, que define o tipo `Dictionary`. O `pt-BR.ts` precisa ter exatamente as mesmas chaves, e o TypeScript e o teste `tests/i18n.test.ts` acusam qualquer diferença. Textos com valores usam `{chave}` e `fill()`.
+
+Para adicionar um idioma:
+
+1. Crie `lib/i18n/<idioma>.ts` com o tipo `Dictionary`.
+2. Adicione-o em `locales`, `localePath` e `localeInfo` (`lib/i18n/index.ts`).
+3. Inclua o hreflang em `languages` (`lib/seo.ts`).
 
 ### Client Components
 
 Só estes rodam no navegador: `OSProvider`, `HeroCta`, `DownloadPanel`, `CopyButton` e `DockDemo/*`. A demo da dock fica num chunk separado (`next/dynamic`). O HTML dela já vem pronto do build, com o relógio em `--:--` até a hidratação.
 
+### Animações
+
+As animações ao rolar usam CSS (`animation-timeline: view()`), sem JavaScript: os utilitários `reveal`, `reveal-step-N`, `reveal-x`, `stage-rise` e `drift` em `app/globals.css`. Em navegadores sem suporte e com `prefers-reduced-motion`, os elementos ficam no estado final, sem nada escondido.
+
 ### Incluir um widget no carrossel
 
-1. Adicione um item em `widgets` (`lib/widgets.ts`) com `id`, textos, ícone e o tipo de `data`.
-2. Crie o utilitário de fundo `widget-<id>` em `app/globals.css`, com as cores como tokens no `@theme`.
-3. Crie o visual em `components/widgets/` e registre-o no `switch` de `WidgetCard.tsx`.
+1. Adicione os textos em `widgets.items` nos dicionários (`lib/i18n/en.ts` e `pt-BR.ts`).
+2. Adicione o widget em `getWidgets()` (`lib/widgets.ts`), com `id`, ícone e o tipo de `data`.
+3. Crie o tema `widget-<id>` em `app/globals.css` (fundo, `border-color` e `--widget-halo`, o brilho do hover), com as cores como tokens no `@theme`.
+4. Crie o visual em `components/widgets/` e registre-o no `switch` de `WidgetCard.tsx`.
 
 ### Tokens
 
 Cores, sombras e raios ficam no `@theme` de `app/globals.css`. Não use hex nem `rgb()` direto nos componentes. As imagens geradas com `next/og` não leem CSS, então usam as cores espelhadas em `lib/brand.ts`.
-
-### Idiomas
-
-O site está em pt-BR. Para adicionar inglês, crie `lib/i18n/en.ts` com o tipo `Dictionary`, a rota `/en` e a entrada `en: "/en"` em `languages` (`lib/seo.ts`). Daí o `hreflang` e o sitemap passam a listar a versão em inglês. Para o `<html lang>` variar por idioma, mova a página para `app/[lang]/` com `generateStaticParams`.
 
 ## Deploy
 
