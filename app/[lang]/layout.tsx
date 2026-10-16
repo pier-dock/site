@@ -36,7 +36,12 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
   const { lang } = await params;
   if (!isLocale(lang)) notFound();
   return (
-    <html lang={getDictionary(lang).lang} className={`${geistSans.variable} ${geistMono.variable}`}>
+    // O script da intro grava --intro-dy no <html> antes da hidratação.
+    <html
+      lang={getDictionary(lang).lang}
+      className={`${geistSans.variable} ${geistMono.variable}`}
+      suppressHydrationWarning
+    >
       <body>{children}</body>
     </html>
   );

@@ -91,13 +91,15 @@ export default function DockDemo({ t }: { t: Dictionary["demo"] }) {
 
   return (
     <>
-      {focusedApp && (
-        <AppWindow
-          app={focusedApp.id}
-          trackName={player.track.name}
-          playState={player.playing ? t.nowPlaying : t.paused}
-        />
-      )}
+      <div className="pointer-events-none absolute inset-0 intro-late">
+        {focusedApp && (
+          <AppWindow
+            app={focusedApp.id}
+            trackName={player.track.name}
+            playState={player.playing ? t.nowPlaying : t.paused}
+          />
+        )}
+      </div>
 
       {pop === "media" && <MediaPopover player={player} t={t} />}
       {pop === "prs" && <PrsPopover t={t} />}
@@ -105,10 +107,11 @@ export default function DockDemo({ t }: { t: Dictionary["demo"] }) {
       {pop === "contrib" && <ContribPopover t={t} />}
       {pop === "vol" && <VolumePopover volume={volume} onChange={setVolume} t={t} />}
 
-      <div className="absolute inset-x-0 bottom-7 flex justify-center-safe overflow-x-auto px-4 pt-16">
+      <div className="absolute inset-x-0 bottom-7 flex intro-dock justify-center-safe overflow-x-auto px-4 pt-16">
         <div
           role="group"
           aria-label={t.dockLabel}
+          data-intro-dock
           className="flex h-16 shrink-0 items-center gap-1 rounded-xl px-2 whitespace-nowrap glass-dock"
         >
           {apps.map((a, i) => {

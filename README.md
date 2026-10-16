@@ -92,6 +92,16 @@ Só estes rodam no navegador: `OSProvider`, `HeroCta`, `DownloadPanel`, `CopyBut
 
 As animações ao rolar usam CSS (`animation-timeline: view()`), sem JavaScript: os utilitários `reveal`, `reveal-step-N`, `reveal-x`, `stage-rise` e `drift` em `app/globals.css`. Em navegadores sem suporte e com `prefers-reduced-motion`, os elementos ficam no estado final, sem nada escondido.
 
+### Intro
+
+Ao abrir a página, a dock aparece logo abaixo do hero, o hero sai dela com um efeito gênio (como o do macOS) e a dock desce até o palco da demo. Três peças:
+
+- **CSS:** as animações `intro-*` em `app/globals.css`.
+- **Medição:** o script inline `components/IntroScript.tsx` mede, antes da primeira pintura, de onde a dock sai e quanto ela desce.
+- **Deformação:** o filtro SVG `components/GenieFilter.tsx` faz o afunilamento curvo. Ele só roda em telas a partir de 768px com mouse, porque é repintado a cada quadro e pesa no celular.
+
+Sem JavaScript, a dock só aparece no lugar. Com `prefers-reduced-motion`, nada anima.
+
 ### Incluir um widget no carrossel
 
 1. Adicione os textos em `widgets.items` nos dicionários (`lib/i18n/en.ts` e `pt-BR.ts`).

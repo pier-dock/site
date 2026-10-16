@@ -1,7 +1,9 @@
 import type { Dictionary } from "@/lib/i18n";
 import { DockDemoLazy } from "./DockDemo/DockDemoLazy";
 import { DockStage } from "./DockDemo/DockStage";
+import { GenieFilter } from "./GenieFilter";
 import { HeroCta } from "./HeroCta";
+import { IntroScript } from "./IntroScript";
 import { Wallpaper } from "./Wallpaper";
 
 type HeroProps = { t: Dictionary["hero"]; demo: Dictionary["demo"] };
@@ -10,7 +12,11 @@ export function Hero({ t, demo }: HeroProps) {
   return (
     <section id="top" aria-labelledby="hero-title" className="relative overflow-clip px-6 pt-24">
       <Wallpaper />
-      <div className="relative mx-auto flex max-w-[960px] flex-col items-center gap-6 text-center">
+      <GenieFilter />
+      <div
+        id="hero-intro"
+        className="relative mx-auto flex max-w-[960px] intro-hero flex-col items-center gap-6 text-center"
+      >
         <a
           href="#widgets"
           className="inline-flex h-8 items-center gap-2 rounded-full border border-line-12 bg-white/6 pr-1.5 pl-3 text-[13px] text-fg-soft transition-colors hover:bg-white/9"
@@ -36,6 +42,7 @@ export function Hero({ t, demo }: HeroProps) {
       <DockStage badge={t.demoBadge} label={t.demoLabel}>
         <DockDemoLazy t={demo} />
       </DockStage>
+      <IntroScript />
     </section>
   );
 }
