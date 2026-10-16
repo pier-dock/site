@@ -25,11 +25,11 @@ pnpm dev          # http://localhost:3000
 
 Copie `.env.example` para `.env.local` e ajuste. Todas são públicas (`NEXT_PUBLIC_*`) e entram no HTML durante o build, então mudar uma delas exige um novo deploy.
 
-| Variável                  | Padrão                  | Uso                                                                    |
-| ------------------------- | ----------------------- | ---------------------------------------------------------------------- |
-| `NEXT_PUBLIC_SITE_URL`    | `http://localhost:3000` | URL canônica: `metadataBase`, sitemap, robots, JSON-LD                 |
-| `NEXT_PUBLIC_GITHUB_REPO` | `pier-dock/pier-dock`   | Repositório no formato `dono/repo`: links do GitHub e URLs de download |
-| `NEXT_PUBLIC_VERSION`     | `0.2.0`                 | Versão exibida no JSON-LD e usada nos nomes dos arquivos de download   |
+| Variável                  | Padrão                                                    | Uso                                                                                                                                                                    |
+| ------------------------- | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `NEXT_PUBLIC_SITE_URL`    | domínio de produção da Vercel, ou `http://localhost:3000` | URL canônica: `metadataBase`, sitemap, robots e JSON-LD. Na Vercel pode ficar vazia: o site usa o domínio de produção do projeto (`*.vercel.app` ou o domínio próprio) |
+| `NEXT_PUBLIC_GITHUB_REPO` | `pier-dock/pier-dock`                                     | Repositório no formato `dono/repo`: links do GitHub e URLs de download                                                                                                 |
+| `NEXT_PUBLIC_VERSION`     | `0.2.0`                                                   | Versão exibida no JSON-LD e usada nos nomes dos arquivos de download                                                                                                   |
 
 Na Vercel, defina as três em **Settings > Environment Variables** para Production (e Preview, se quiser os links certos nos previews).
 
@@ -115,4 +115,8 @@ Cores, sombras e raios ficam no `@theme` de `app/globals.css`. Não use hex nem 
 
 ## Deploy
 
-Importe o repositório na Vercel (framework Next.js, sem configuração extra), defina as variáveis de ambiente e faça o deploy.
+1. Importe o repositório na Vercel (framework Next.js, sem configuração extra). O nome do projeto define o endereço: um projeto `pier` fica em `pier.vercel.app`, se estiver livre.
+2. Defina `NEXT_PUBLIC_GITHUB_REPO` e `NEXT_PUBLIC_VERSION` em **Settings > Environment Variables**.
+3. Faça o deploy.
+
+Não precisa definir `NEXT_PUBLIC_SITE_URL`. Sem ela, o build usa o domínio de produção que a Vercel informa (`NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL`). Ao ligar um domínio próprio em **Settings > Domains**, faça um novo deploy para o canonical, o sitemap e as imagens de compartilhamento passarem a usar o domínio novo.

@@ -2,7 +2,14 @@ function trimSlash(url: string) {
   return url.replace(/\/+$/, "");
 }
 
-export const siteUrl = trimSlash(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000");
+// Na Vercel, sem NEXT_PUBLIC_SITE_URL, vale o domínio de produção do projeto (o .vercel.app
+// ou o domínio próprio, quando houver). Os previews também apontam para ele no canonical.
+const vercelProduction = process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL;
+
+export const siteUrl = trimSlash(
+  process.env.NEXT_PUBLIC_SITE_URL ||
+    (vercelProduction ? `https://${vercelProduction}` : "http://localhost:3000"),
+);
 export const githubRepo = process.env.NEXT_PUBLIC_GITHUB_REPO || "pier-dock/pier-dock";
 export const version = (process.env.NEXT_PUBLIC_VERSION || "0.2.0").replace(/^v/, "");
 
