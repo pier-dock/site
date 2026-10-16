@@ -8,7 +8,7 @@ type HeroProps = { t: Dictionary["hero"]; demo: Dictionary["demo"] };
 
 export function Hero({ t, demo }: HeroProps) {
   return (
-    <section id="top" aria-labelledby="hero-title" className="relative overflow-hidden px-6 pt-24">
+    <section id="top" aria-labelledby="hero-title" className="relative overflow-clip px-6 pt-24">
       <Wallpaper />
       <div className="relative mx-auto flex max-w-[960px] flex-col items-center gap-6 text-center">
         <a

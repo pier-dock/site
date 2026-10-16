@@ -34,7 +34,7 @@ export function DownloadPanel({ t }: { t: Dictionary["download"] }) {
 
   return (
     <>
-      <p className="m-0 reveal text-[17px] text-fg-2 reveal-step-2">
+      <p className="m-0 reveal-blur text-[17px] text-fg-2 reveal-step-2">
         {t.detectedBefore}{" "}
         <strong className="font-semibold text-fg">{downloads[detected].label}</strong>
         {t.detectedAfter}
@@ -44,7 +44,7 @@ export function DownloadPanel({ t }: { t: Dictionary["download"] }) {
         role="tablist"
         aria-label={t.tabsLabel}
         onKeyDown={onKeyDown}
-        className="flex reveal rounded-md border border-line-10 bg-white/6 p-1 reveal-step-2"
+        className="flex reveal-blur rounded-md border border-line-10 bg-white/6 p-1 reveal-step-3"
       >
         {osList.map((o) => {
           const selected = o === os;

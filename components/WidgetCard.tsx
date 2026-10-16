@@ -42,15 +42,16 @@ function Visual({ widget }: { widget: Widget }) {
   }
 }
 
-type WidgetCardProps = { widget: Widget; moreLabel: string };
+type WidgetCardProps = { widget: Widget; moreLabel: string; index: number };
 
-export function WidgetCard({ widget, moreLabel }: WidgetCardProps) {
+export function WidgetCard({ widget, moreLabel, index }: WidgetCardProps) {
   const Icon = icons[widget.icon];
   const titleId = `widget-${widget.id}`;
   return (
     <article
       aria-labelledby={titleId}
-      className={`group widget-card ${widget.theme} relative flex h-[540px] flex-[0_0_340px] reveal-x snap-start flex-col gap-4 overflow-hidden rounded-2xl p-[22px]`}
+      style={{ "--reveal-step": index } as React.CSSProperties}
+      className={`group widget-card ${widget.theme} relative flex h-[540px] flex-[0_0_340px] widget-rise snap-start flex-col gap-4 overflow-hidden rounded-2xl p-[22px]`}
     >
       <header className="flex items-center gap-3">
         <span className="flex size-11 items-center justify-center rounded-md border border-line-14 bg-black/35 shadow-chip">

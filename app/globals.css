@@ -310,16 +310,58 @@
 
 @keyframes reveal-slide {
   from {
-    translate: 0 40px;
-    scale: 0.97;
+    translate: 0 90px;
+    scale: 0.94;
   }
 }
 
 @keyframes reveal-x {
   from {
     opacity: 0.35;
-    translate: 48px 0;
+    scale: 0.92;
+  }
+}
+
+@keyframes reveal-blur {
+  from {
+    translate: 0 64px;
     scale: 0.94;
+    filter: blur(12px);
+  }
+}
+
+@keyframes widget-rise {
+  from {
+    translate: 0 200px;
+    rotate: 6deg;
+  }
+}
+
+/* O ícone do app cai e "atraca" com um quique. */
+@keyframes dock-drop {
+  0% {
+    opacity: 0;
+    translate: 0 -140px;
+    rotate: -24deg;
+    scale: 0.5;
+  }
+  60% {
+    opacity: 1;
+    translate: 0 12px;
+    rotate: 6deg;
+    scale: 1.06;
+  }
+  80% {
+    translate: 0 -5px;
+    rotate: -2deg;
+    scale: 0.99;
+  }
+}
+
+@keyframes bloom {
+  from {
+    opacity: 0;
+    scale: 0.3;
   }
 }
 
@@ -357,7 +399,7 @@
     @supports (animation-timeline: view()) {
       animation: reveal-slide linear both;
       animation-timeline: view();
-      animation-range: entry 0% entry 100%;
+      animation-range: entry 10% cover 35%;
     }
   }
 }
@@ -366,13 +408,57 @@
   --reveal-step: --value(integer);
 }
 
-/* Dentro do carrossel: a linha do tempo é a rolagem horizontal do próprio carrossel. */
-@utility reveal-x {
+/* Sem fade (o desfoque some sozinho): seguro para texto mesmo no meio da animação. */
+@utility reveal-blur {
   @media (prefers-reduced-motion: no-preference) {
     @supports (animation-timeline: view()) {
-      animation: reveal-x linear both;
-      animation-timeline: view(inline);
-      animation-range: entry 0% entry 100%;
+      animation: reveal-blur linear both;
+      animation-timeline: view();
+      animation-range: entry calc(var(--reveal-step, 0) * 10%) cover
+        calc(30% + var(--reveal-step, 0) * 5%);
+    }
+  }
+}
+
+@utility carousel-timeline {
+  view-timeline: --carousel block;
+}
+
+/*
+ * Cards do carrossel: sobem em cascata quando o carrossel entra na tela (--carousel,
+ * eixo vertical) e crescem conforme entram pela rolagem horizontal (view(inline)).
+ */
+@utility widget-rise {
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      transform-origin: 0% 100%;
+      animation:
+        widget-rise linear both,
+        reveal-x linear both;
+      animation-timeline: --carousel, view(inline);
+      animation-range:
+        entry calc(var(--reveal-step, 0) * 7%) cover calc(28% + var(--reveal-step, 0) * 6%),
+        entry 0% entry 100%;
+    }
+  }
+}
+
+@utility dock-drop {
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      animation: dock-drop linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 40%;
+    }
+  }
+}
+
+@utility bloom {
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      animation: bloom linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 50%;
     }
   }
 }
