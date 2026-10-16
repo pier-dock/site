@@ -1,7 +1,9 @@
+import { Features } from "@/components/Features";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { OSProvider } from "@/components/OSProvider";
+import { WidgetsCarousel } from "@/components/WidgetsCarousel";
 import { ptBR as t } from "@/lib/i18n/pt-BR";
 
 export default function Home() {
@@ -17,6 +19,8 @@ export default function Home() {
       <main id="conteudo" className="overflow-x-clip">
         <OSProvider>
           <Hero t={t.hero} />
+          <Features t={t.features} />
+          <WidgetsCarousel t={t.widgets} />
         </OSProvider>
       </main>
       <Footer t={t.footer} />

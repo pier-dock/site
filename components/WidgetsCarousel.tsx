@@ -1,0 +1,42 @@
+import type { Dictionary } from "@/lib/i18n/pt-BR";
+import { links } from "@/lib/site";
+import { widgets } from "@/lib/widgets";
+import { WidgetCard } from "./WidgetCard";
+
+const gutter = "px-[max(24px,calc((100%-1152px)/2))] scroll-px-[max(24px,calc((100%-1152px)/2))]";
+
+export function WidgetsCarousel({ t }: { t: Dictionary["widgets"] }) {
+  return (
+    <section
+      id="widgets"
+      aria-labelledby="widgets-titulo"
+      className="relative overflow-hidden border-t border-line-8 py-28"
+    >
+      <div className="mx-auto max-w-[1200px] px-6">
+        <div className="flex max-w-[560px] flex-col gap-1.5">
+          <h2
+            id="widgets-titulo"
+            className="m-0 text-[clamp(22px,2.4vw,28px)] leading-[1.2] font-semibold tracking-[-0.02em]"
+          >
+            {t.title}
+          </h2>
+          <p className="m-0 text-[clamp(22px,2.4vw,28px)] leading-[1.2] font-medium tracking-[-0.02em] text-fg-4">
+            {t.subtitle}
+          </p>
+        </div>
+      </div>
+
+      {/* tabIndex deixa o carrossel focável: as setas do teclado rolam e o snap encaixa no card. */}
+      <div
+        role="region"
+        aria-label={t.carouselLabel}
+        tabIndex={0}
+        className={`mt-14 flex snap-x snap-mandatory gap-6 overflow-x-auto pt-2 pb-6 ${gutter}`}
+      >
+        {widgets.map((w) => (
+          <WidgetCard key={w.id} widget={w} moreLabel={t.more} moreHref={links.widgetsDocs} />
+        ))}
+      </div>
+    </section>
+  );
+}
