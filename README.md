@@ -25,11 +25,11 @@ pnpm dev          # http://localhost:3000
 
 Copie `.env.example` para `.env.local` e ajuste. Todas são públicas (`NEXT_PUBLIC_*`) e entram no HTML durante o build, então mudar uma delas exige um novo deploy.
 
-| Variável                  | Padrão                  | Uso                                                                                                 |
-| ------------------------- | ----------------------- | --------------------------------------------------------------------------------------------------- |
-| `NEXT_PUBLIC_SITE_URL`    | `http://localhost:3000` | URL canônica: `metadataBase`, sitemap, robots, JSON-LD e o domínio do script de instalação do Linux |
-| `NEXT_PUBLIC_GITHUB_REPO` | `pier-dock/pier-dock`   | Repositório no formato `dono/repo`: links do GitHub e URLs de download                              |
-| `NEXT_PUBLIC_VERSION`     | `0.2.0`                 | Versão exibida no JSON-LD e usada nos nomes dos arquivos de download                                |
+| Variável                  | Padrão                  | Uso                                                                    |
+| ------------------------- | ----------------------- | ---------------------------------------------------------------------- |
+| `NEXT_PUBLIC_SITE_URL`    | `http://localhost:3000` | URL canônica: `metadataBase`, sitemap, robots, JSON-LD                 |
+| `NEXT_PUBLIC_GITHUB_REPO` | `pier-dock/pier-dock`   | Repositório no formato `dono/repo`: links do GitHub e URLs de download |
+| `NEXT_PUBLIC_VERSION`     | `0.2.0`                 | Versão exibida no JSON-LD e usada nos nomes dos arquivos de download   |
 
 Na Vercel, defina as três em **Settings > Environment Variables** para Production (e Preview, se quiser os links certos nos previews).
 
