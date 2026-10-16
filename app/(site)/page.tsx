@@ -2,10 +2,12 @@ import { Download } from "@/components/Download";
 import { Features } from "@/components/Features";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { JsonLd } from "@/components/JsonLd";
 import { Hero } from "@/components/Hero";
 import { OSProvider } from "@/components/OSProvider";
 import { WidgetsCarousel } from "@/components/WidgetsCarousel";
 import { ptBR as t } from "@/lib/i18n/pt-BR";
+import { buildJsonLd } from "@/lib/seo";
 
 export default function Home() {
   return (
@@ -26,6 +28,7 @@ export default function Home() {
         </OSProvider>
       </main>
       <Footer t={t.footer} />
+      <JsonLd data={buildJsonLd(t)} />
     </>
   );
 }

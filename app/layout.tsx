@@ -1,5 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
-import "../globals.css";
+import { ptBR } from "@/lib/i18n/pt-BR";
+import { buildMetadata } from "@/lib/seo";
+import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,6 +17,10 @@ const geistMono = Geist_Mono({
 });
 
 export const ensureStatic = "navigation";
+
+export const metadata = buildMetadata(ptBR);
+
+export { viewport } from "@/lib/seo";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
