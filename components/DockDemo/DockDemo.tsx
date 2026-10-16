@@ -144,12 +144,13 @@ export default function DockDemo() {
                   }`}
                 >
                   <span
-                    className={`flex size-10 items-center justify-center rounded-[10px] text-sm font-semibold text-white transition-transform duration-150 ease-out ${a.color} ${
+                    // As iniciais fazem o papel do logo do app; via ::before elas ficam fora da
+                    // árvore de texto, e o nome do botão continua só o aria-label.
+                    data-initials={a.initials}
+                    className={`flex size-10 items-center justify-center rounded-[10px] text-sm font-semibold text-white transition-transform duration-150 ease-out before:content-[attr(data-initials)] ${a.color} ${
                       hover === i ? "motion-safe:-translate-y-1.5 motion-safe:scale-[1.12]" : ""
                     }`}
-                  >
-                    {a.initials}
-                  </span>
+                  />
                   <span
                     className={`h-1 rounded-[2px] transition-[width] duration-150 ${
                       isFocused ? "w-3.5 bg-coral" : "w-1 bg-white/55"
@@ -163,16 +164,16 @@ export default function DockDemo() {
 
           <button
             {...popTrigger("media")}
-            aria-label="Abrir player"
             className={`flex h-12 items-center gap-2.5 rounded-md px-2 text-left ${active("media")}`}
           >
+            <span className="sr-only">Abrir player: </span>
             <AlbumArt
               className="size-[34px] justify-center rounded-[7px] p-[5px]"
               stripe="h-0.5"
               gap="gap-0.5"
             />
             <span className="flex w-[132px] flex-col gap-0.5">
-              <span className="truncate text-[13px] font-medium">{player.track.name}</span>
+              <span className="truncate text-[13px] font-medium">{player.track.name} </span>
               <span className="text-xs text-fg-dock">Radiohead</span>
               <span className="mt-0.5 flex h-0.5 rounded-[1px] bg-white/12">
                 <span
@@ -220,11 +221,11 @@ export default function DockDemo() {
           </button>
           <button
             {...popTrigger("contrib")}
-            aria-label={`Contribuições: ${contributions} neste ano`}
             className={`flex h-12 items-center gap-2.5 rounded-[10px] px-2.5 text-left ${active("contrib")}`}
           >
+            <span className="sr-only">Contribuições: </span>
             <span className="flex flex-col gap-px">
-              <span className="text-[15px] font-semibold">{contributions}</span>
+              <span className="text-[15px] font-semibold">{contributions} </span>
               <span className="text-[11px] text-fg-dock">neste ano</span>
             </span>
             <ContributionGrid count={98} cell={4} gap={1.5} radius={1} />
