@@ -62,10 +62,11 @@ export function Header({ t, locale }: HeaderProps) {
                       href={localePath[l]}
                       hrefLang={info.htmlLang}
                       lang={info.htmlLang}
-                      aria-label={info.switchLabel}
+                      title={info.switchLabel}
                       className={`${base} text-fg-3 transition-colors hover:text-fg`}
                     >
                       {info.short}
+                      <span className="sr-only"> · {info.switchLabel}</span>
                     </a>
                   )}
                 </li>

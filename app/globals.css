@@ -298,6 +298,13 @@
   }
 }
 
+@keyframes reveal-slide {
+  from {
+    translate: 0 40px;
+    scale: 0.97;
+  }
+}
+
 @keyframes reveal-x {
   from {
     opacity: 0.35;
@@ -329,8 +336,18 @@
     @supports (animation-timeline: view()) {
       animation: reveal linear both;
       animation-timeline: view();
-      animation-range: entry calc(var(--reveal-step, 0) * 8%) cover
-        calc(28% + var(--reveal-step, 0) * 6%);
+      animation-range: entry calc(var(--reveal-step, 0) * 12%) entry 100%;
+    }
+  }
+}
+
+/* Sem fade: para blocos com texto pequeno que ficam perto do fim da página. */
+@utility reveal-slide {
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      animation: reveal-slide linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 100%;
     }
   }
 }

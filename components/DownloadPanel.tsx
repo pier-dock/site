@@ -76,7 +76,7 @@ export function DownloadPanel({ t }: { t: Dictionary["download"] }) {
         role="tabpanel"
         id={panelId}
         aria-labelledby={tabId(os)}
-        className="flex w-full max-w-[640px] reveal flex-col gap-5 rounded-xl p-7 text-left glass-panel reveal-step-3"
+        className="flex w-full max-w-[640px] reveal-slide flex-col gap-5 rounded-xl p-7 text-left glass-panel"
       >
         <div className="flex flex-wrap items-center gap-4">
           <div className="flex flex-[1_1_240px] flex-col gap-1">
