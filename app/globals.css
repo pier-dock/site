@@ -303,23 +303,22 @@
 /*
  * Intro ao abrir a página, no estilo do efeito gênio do macOS: a dock aparece logo
  * abaixo do hero, o hero escorre para fora dela e a dock desce até o palco.
- * O script inline do Hero mede --intro-dy (quanto a dock sobe) e --genie-oy (onde ela
- * fica, relativo ao topo do hero). Sem o script, a dock só aparece no lugar.
+ * Só transform e opacity, para rodar no compositor mesmo durante a hidratação.
+ * O script inline do Hero mede --intro-dy (quanto a dock sobe) e --oy-N (onde a dock
+ * fica em relação a cada fatia do hero). Sem o script, a dock só aparece no lugar.
  */
 @keyframes intro-dock {
   0% {
     opacity: 0;
     translate: 0 var(--intro-dy, 0px);
-    scale: 0.82;
-    filter: blur(10px);
+    scale: 0.85;
   }
   15% {
     opacity: 1;
     translate: 0 var(--intro-dy, 0px);
     scale: 1;
-    filter: blur(0);
   }
-  62% {
+  60% {
     translate: 0 var(--intro-dy, 0px);
     animation-timing-function: cubic-bezier(0.3, 1.25, 0.4, 1);
   }
@@ -329,55 +328,21 @@
 }
 
 /*
- * O afunilamento curvo vem do filtro #genie (components/GenieFilter.tsx); aqui fica só
- * a escala a partir do ponto da dock: primeiro sobe um filete, depois ele se abre.
+ * O hero é dividido em fatias horizontais (genie-slice, com --gi = posição de cima para
+ * baixo). Todas saem do ponto da dock, mas as de cima saem antes: num mesmo instante o
+ * topo já está largo e a base ainda está estreita, o que dá a silhueta curva do gênio.
  * Começa em opacity 0.01, não 0: com 0 o Chrome não registra o h1 como LCP.
  */
-@keyframes intro-genie {
-  0%,
-  16% {
+@keyframes genie-slice {
+  0% {
     opacity: 0.01;
-    scale: 0.1 0.03;
-    filter: url(#genie);
+    scale: 0.06 0.02;
   }
-  26% {
+  30% {
     opacity: 1;
   }
-  52% {
-    scale: 0.28 0.92;
-  }
-  74% {
-    scale: 0.75 1;
-  }
-  90% {
-    scale: 1.01;
-  }
-  98% {
-    filter: url(#genie);
-  }
-  100% {
-    scale: 1;
-    filter: none;
-  }
-}
-
-@keyframes intro-genie-lite {
-  0%,
-  16% {
-    opacity: 0.01;
-    scale: 0.1 0.03;
-  }
-  26% {
-    opacity: 1;
-  }
-  52% {
-    scale: 0.28 0.92;
-  }
-  74% {
-    scale: 0.75 1;
-  }
-  90% {
-    scale: 1.01;
+  55% {
+    scale: 0.4 0.9;
   }
   100% {
     scale: 1;
@@ -401,7 +366,6 @@
 @keyframes intro-bloom {
   from {
     opacity: 0;
-    scale: 0.6;
   }
 }
 
@@ -411,22 +375,18 @@
   }
 }
 
-/* A deformação (filtro SVG) só em telas grandes com mouse: no celular ela pesa na CPU. */
-@utility intro-hero {
+@utility genie-slice {
   @media (prefers-reduced-motion: no-preference) {
-    transform-origin: 50% var(--genie-oy, 115%);
-    animation: intro-genie-lite 1.2s cubic-bezier(0.45, 0, 0.2, 1) both;
-
-    @media (min-width: 768px) and (pointer: fine) {
-      animation-name: intro-genie;
-    }
+    transform-origin: 50% var(--oy, 400%);
+    animation: genie-slice 0.95s cubic-bezier(0.5, 0, 0.2, 1) both;
+    animation-delay: calc(0.12s + var(--gi, 0) * 55ms);
   }
 }
 
 /* Palco, janela e selo: só depois que a dock pousa. */
 @utility intro-late {
   @media (prefers-reduced-motion: no-preference) {
-    animation: intro-fade 0.7s 1.55s ease-out both;
+    animation: intro-fade 0.7s 1.5s ease-out both;
   }
 }
 

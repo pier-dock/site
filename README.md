@@ -96,9 +96,9 @@ As animações ao rolar usam CSS (`animation-timeline: view()`), sem JavaScript:
 
 Ao abrir a página, a dock aparece logo abaixo do hero, o hero sai dela com um efeito gênio (como o do macOS) e a dock desce até o palco da demo. Três peças:
 
-- **CSS:** as animações `intro-*` em `app/globals.css`.
-- **Medição:** o script inline `components/IntroScript.tsx` mede, antes da primeira pintura, de onde a dock sai e quanto ela desce.
-- **Deformação:** o filtro SVG `components/GenieFilter.tsx` faz o afunilamento curvo. Ele só roda em telas a partir de 768px com mouse, porque é repintado a cada quadro e pesa no celular.
+- **CSS:** as animações `intro-*` e `genie-slice` em `app/globals.css`. Elas usam só `transform` e `opacity`, então rodam no compositor e ficam fluidas mesmo durante a hidratação.
+- **Fatias:** o hero é dividido em fatias horizontais (selo, linhas do título, subtítulo, botões). Cada uma recebe `genieSlice(n)` (`components/genie.ts`). As de cima saem antes, o que desenha a silhueta curva do gênio.
+- **Medição:** o script inline `components/IntroScript.tsx` mede, antes da primeira pintura, de onde a dock sai e a distância de cada fatia até ela.
 
 Sem JavaScript, a dock só aparece no lugar. Com `prefers-reduced-motion`, nada anima.
 
