@@ -29,6 +29,14 @@ const [bold, medium] = await Promise.all([
 ]);
 const cells = contributionLevels(49);
 
+const iconDir = join(process.cwd(), "assets/apps");
+const appIcons = await Promise.all(
+  ["vscode", "spotify", "terminal", "brave"].map(async (name) => {
+    const data = await readFile(join(iconDir, `${name}.svg`));
+    return `data:image/svg+xml;base64,${data.toString("base64")}`;
+  }),
+);
+
 export default function OpengraphImage() {
   return new ImageResponse(
     <div
@@ -84,18 +92,27 @@ export default function OpengraphImage() {
           boxShadow: "inset 0 1.5px 0 rgba(255,255,255,0.22), 0 30px 60px rgba(0,0,0,0.5)",
         }}
       >
-        {brand.apps.map((color, i) => (
+        {appIcons.map((src, i) => (
           <div
-            key={color}
+            key={i}
             style={{
-              width: 62,
-              height: 62,
-              borderRadius: 16,
-              background: color,
               display: "flex",
-              boxShadow: i === 3 ? `0 0 0 3px ${brand.page}, 0 0 0 5px ${brand.coral}` : "none",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: 6,
+              padding: "0 2px",
             }}
-          />
+          >
+            <img src={src} width={62} height={62} style={{ borderRadius: 15 }} alt="" />
+            <div
+              style={{
+                width: i === 3 ? 18 : 6,
+                height: 5,
+                borderRadius: 3,
+                background: i === 3 ? brand.coral : "rgba(255,255,255,0.55)",
+              }}
+            />
+          </div>
         ))}
         <div
           style={{ width: 1.5, height: 44, margin: "0 8px", background: "rgba(255,255,255,0.16)" }}

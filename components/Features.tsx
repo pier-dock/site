@@ -1,3 +1,7 @@
+import Image from "next/image";
+import braveIcon from "@/assets/apps/brave.svg";
+import spotifyIcon from "@/assets/apps/spotify.svg";
+import vscodeIcon from "@/assets/apps/vscode.svg";
 import type { Dictionary } from "@/lib/i18n/pt-BR";
 import { ContributionGrid } from "./ContributionGrid";
 
@@ -7,9 +11,9 @@ const cardTitle = "relative m-0 text-[22px] font-semibold tracking-[-0.02em]";
 const cardBody = "relative m-0 text-[15px] leading-[1.55] text-fg-2";
 
 const shortcuts = [
-  { name: "Finder", color: "bg-app-finder", key: 1 },
-  { name: "Spotify", color: "bg-app-spotify", key: 2 },
-  { name: "Terminal", color: "bg-app-terminal", key: 3 },
+  { name: "Visual Studio Code", icon: vscodeIcon, key: 1 },
+  { name: "Spotify", icon: spotifyIcon, key: 2 },
+  { name: "Brave Browser", icon: braveIcon, key: 3 },
 ];
 
 export function Features({ t }: { t: Dictionary["features"] }) {
@@ -69,7 +73,13 @@ export function Features({ t }: { t: Dictionary["features"] }) {
             <ul className="m-0 mt-auto flex list-none flex-col gap-2 p-0">
               {shortcuts.map((s) => (
                 <li key={s.key} className="flex items-center gap-2.5 text-sm">
-                  <span aria-hidden="true" className={`size-[22px] rounded-[6px] ${s.color}`} />
+                  <Image
+                    src={s.icon}
+                    alt=""
+                    width={26}
+                    height={26}
+                    className="size-[26px] rounded-[7px]"
+                  />
                   <span className="flex-1">{s.name}</span>
                   <kbd className="rounded bg-white/8 px-1.5 py-0.5 font-mono text-[11px] text-fg-2">
                     Ctrl Alt {s.key}

@@ -1,9 +1,14 @@
+import type { StaticImageData } from "next/image";
+import spotifyIcon from "@/assets/apps/spotify.svg";
+
 export type WidgetIcon = "music" | "timer" | "calendar" | "sun" | "pullRequest" | "pulse";
 
 type WidgetBase = {
   name: string;
   description: string;
   icon: WidgetIcon;
+  /** Ícone do app no lugar do símbolo, quando o widget representa um app específico. */
+  logo?: StaticImageData;
   /** Cor do ícone no chip do cabeçalho (classe de texto). */
   accent: string;
   /** Utilitário de `globals.css` com o fundo, o brilho radial e a borda do card. */
@@ -83,6 +88,7 @@ export const widgets: Widget[] = [
     description:
       "Veja o que está tocando e controle Spotify, Apple Music ou qualquer player direto da dock.",
     icon: "music",
+    logo: spotifyIcon,
     accent: "text-media-accent",
     theme: "widget-media",
     visualLabel: "Tocando Weird Fishes/Arpeggi, de Radiohead, em 2:13 de 5:18.",

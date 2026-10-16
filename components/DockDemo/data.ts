@@ -1,14 +1,19 @@
+import type { StaticImageData } from "next/image";
+import braveIcon from "@/assets/apps/brave.svg";
+import spotifyIcon from "@/assets/apps/spotify.svg";
+import terminalIcon from "@/assets/apps/terminal.svg";
+import vscodeIcon from "@/assets/apps/vscode.svg";
 import { githubRepo } from "@/lib/site";
 
-export type AppId = "finder" | "spotify" | "terminal" | "brave";
+export type AppId = "vscode" | "spotify" | "terminal" | "brave";
 
-export type DemoApp = { id: AppId; name: string; initials: string; color: string; key: number };
+export type DemoApp = { id: AppId; name: string; icon: StaticImageData; key: number };
 
 export const apps: DemoApp[] = [
-  { id: "finder", name: "Finder", initials: "Fi", color: "bg-app-finder", key: 1 },
-  { id: "spotify", name: "Spotify", initials: "Sp", color: "bg-app-spotify", key: 2 },
-  { id: "terminal", name: "Terminal", initials: ">_", color: "bg-app-terminal", key: 3 },
-  { id: "brave", name: "Brave Browser", initials: "Br", color: "bg-app-brave", key: 4 },
+  { id: "vscode", name: "Visual Studio Code", icon: vscodeIcon, key: 1 },
+  { id: "spotify", name: "Spotify", icon: spotifyIcon, key: 2 },
+  { id: "terminal", name: "Terminal", icon: terminalIcon, key: 3 },
+  { id: "brave", name: "Brave Browser", icon: braveIcon, key: 4 },
 ];
 
 export type WindowTheme = {
@@ -21,20 +26,20 @@ export type WindowTheme = {
 };
 
 export const windows: Record<AppId, WindowTheme> = {
-  finder: {
-    title: "Finder — Documentos",
-    bg: "bg-win-paper",
-    bar: "bg-win-bar",
-    fg: "text-win-ink",
-    dots: "bg-win-dots",
-    border: "border-black/10",
+  vscode: {
+    title: "Dock.tsx — pier",
+    bg: "bg-code-bg",
+    bar: "bg-code-bar",
+    fg: "text-fg-2",
+    dots: "bg-win-dots-dark",
+    border: "border-line-12",
   },
   spotify: {
     title: "Spotify",
     bg: "bg-vinyl",
     bar: "bg-spotify-bar",
     fg: "text-spotify-sub",
-    dots: "bg-app-terminal",
+    dots: "bg-win-dots-dark",
     border: "border-white/10",
   },
   terminal: {
@@ -42,7 +47,7 @@ export const windows: Record<AppId, WindowTheme> = {
     bg: "bg-term-bg",
     bar: "bg-graphite",
     fg: "text-fg-2",
-    dots: "bg-app-terminal",
+    dots: "bg-win-dots-dark",
     border: "border-line-14",
   },
   brave: {
@@ -55,15 +60,12 @@ export const windows: Record<AppId, WindowTheme> = {
   },
 };
 
-export const folders = [
-  "Projetos",
-  "Design",
-  "Fotos",
-  "Música",
-  "Notas",
-  "Faturas",
-  "Livros",
-  "Viagem",
+export const editorFiles = [
+  { name: "▾ src", depth: 0 },
+  { name: "Dock.tsx", depth: 1, active: true },
+  { name: "Glass.tsx", depth: 1 },
+  { name: "widgets.ts", depth: 1 },
+  { name: "package.json", depth: 0 },
 ];
 
 export type Track = { name: string; duration: number };

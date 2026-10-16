@@ -11,6 +11,5 @@ export const brand = {
   wallRose: "#7A2E3A",
   wallBlue: "#1E3A8A",
   wallTeal: "#0F5257",
-  apps: ["#2A6FDB", "#1A9E4B", "#3A3A3F", "#E5502B"],
   gh: ["rgba(255,255,255,0.07)", "#0E4429", "#006D32", "#26A641", "#39D353"],
 } as const;

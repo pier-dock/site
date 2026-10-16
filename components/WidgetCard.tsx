@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Widget, WidgetIcon } from "@/lib/widgets";
 import {
   CalendarIcon,
@@ -53,7 +54,17 @@ export function WidgetCard({ widget, moreLabel, moreHref }: WidgetCardProps) {
     >
       <header className="flex items-center gap-3">
         <span className="flex size-11 items-center justify-center rounded-md border border-line-14 bg-black/35 shadow-chip">
-          <Icon size={20} className={widget.accent} />
+          {widget.logo ? (
+            <Image
+              src={widget.logo}
+              alt=""
+              width={44}
+              height={44}
+              className="size-[42px] rounded-[11px]"
+            />
+          ) : (
+            <Icon size={20} className={widget.accent} />
+          )}
         </span>
         <h3 id={titleId} className="m-0 flex-1 text-[17px] font-medium">
           {widget.name}

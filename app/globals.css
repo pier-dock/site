@@ -48,11 +48,6 @@
   --color-line-16: rgb(255 255 255 / 0.16);
   --color-line-18: rgb(255 255 255 / 0.18);
 
-  --color-app-finder: #2a6fdb;
-  --color-app-spotify: #1a9e4b;
-  --color-app-terminal: #3a3a3f;
-  --color-app-brave: #e5502b;
-
   --color-rainbow-1: #e8432e;
   --color-rainbow-2: #f2a230;
   --color-rainbow-3: #f5d33a;
@@ -60,19 +55,30 @@
   --color-rainbow-5: #3a7bd5;
   --color-vinyl: #121212;
 
-  --color-win-paper: #f6f6f8;
-  --color-win-bar: #e2e2e7;
   --color-win-sidebar: #e7e7ec;
   --color-win-ink: #3a3a40;
   --color-win-ink-2: #55555c;
   --color-win-dots: #c4c4ca;
-  --color-win-folder: #6fa8f5;
+  --color-win-dots-dark: #3a3a3f;
   --color-win-chrome: #dcdce1;
   --color-win-urlbar: #ececef;
   --color-spotify-bar: #0a0a0a;
   --color-spotify-sub: #b3b3b3;
   --color-spotify-glow: #1f3a28;
   --color-term-bg: #0c0c0e;
+
+  --color-code-bg: #1e1e1e;
+  --color-code-bar: #252526;
+  --color-code-side: #181818;
+  --color-code-side-head: #8a8a90;
+  --color-code-select: rgb(31 156 240 / 0.18);
+  --color-code-divider: rgb(255 255 255 / 0.06);
+  --color-code-text: #d4d4d4;
+  --color-code-keyword: #c586c0;
+  --color-code-fn: #dcdcaa;
+  --color-code-type: #4ec9b0;
+  --color-code-prop: #9cdcfe;
+  --color-code-num: #b5cea8;
 
   --color-media-1: #123a22;
   --color-media-2: #0e2617;
@@ -89,6 +95,7 @@
   --color-pomo-glow: rgb(255 99 99 / 0.45);
   --color-pomo-edge: rgb(255 140 140 / 0.2);
   --color-pomo-sub: #f0c4c4;
+  --color-pomo-halo: rgb(255 99 99 / 0.22);
   --color-pomo-ring: rgb(255 99 99 / 0.6);
 
   --color-agenda-1: #1a2150;
@@ -98,6 +105,7 @@
   --color-agenda-edge: rgb(150 170 255 / 0.2);
   --color-agenda-accent: #9db4ff;
   --color-agenda-sub: #c4d0ff;
+  --color-agenda-halo: rgb(94 120 255 / 0.24);
   --color-agenda-now: rgb(94 120 255 / 0.2);
   --color-agenda-now-edge: rgb(150 170 255 / 0.35);
 
@@ -109,6 +117,7 @@
   --color-weather-sun: #f5c451;
   --color-weather-rain: #7fb0ff;
   --color-weather-sub: #bcd3ee;
+  --color-weather-halo: rgb(245 165 36 / 0.18);
   --color-weather-alert: #f8d49a;
   --color-weather-alert-bg: rgb(245 165 36 / 0.14);
   --color-weather-alert-edge: rgb(245 165 36 / 0.3);
@@ -117,6 +126,7 @@
   --color-github-2: #14161b;
   --color-github-3: #0d0e12;
   --color-github-glow: rgb(57 211 83 / 0.22);
+  --color-github-halo: rgb(57 211 83 / 0.16);
 
   --color-system-1: #2a1c4e;
   --color-system-2: #1b1336;
@@ -125,6 +135,7 @@
   --color-system-edge: rgb(190 160 255 / 0.2);
   --color-system-sub: #d2c4f5;
   --color-system-fill: #9a7bff;
+  --color-system-halo: rgb(150 110 255 / 0.24);
 
   --color-stage: rgb(14 15 20 / 0.55);
   --color-glass: rgb(28 28 34);
@@ -135,6 +146,7 @@
   --shadow-tooltip: 0 8px 24px rgb(0 0 0 / 0.5);
   --shadow-cover: 0 20px 40px rgb(0 0 0 / 0.5);
   --shadow-cover-sm: 0 12px 30px rgb(0 0 0 / 0.5);
+  --shadow-app-icon: 0 4px 10px rgb(0 0 0 / 0.35);
   --shadow-chip: inset 0 1px 0 rgb(255 255 255 / 0.12);
   --shadow-glass-sample: inset 0 1px 0 rgb(255 255 255 / 0.25);
   --drop-shadow-ring: 0 0 8px var(--color-pomo-ring);
@@ -185,10 +197,21 @@
   border-bottom: 1px solid var(--color-line-7);
 }
 
-/* Só largura e estilo: a cor e a sombra vêm do tema de cada widget. */
+/* Só largura e estilo: a cor da borda e do brilho vêm do tema de cada widget. */
 @utility widget-card {
   border-width: 1px;
   border-style: solid;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.1);
+  transition:
+    box-shadow 0.3s ease-out,
+    translate 0.3s ease-out;
+
+  &:hover,
+  &:focus-within {
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.1),
+      0 0 60px var(--widget-halo);
+  }
 }
 
 @utility widget-media {
@@ -201,9 +224,7 @@
       var(--color-media-3) 100%
     );
   border-color: var(--color-media-edge);
-  box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.1),
-    0 0 60px var(--color-media-halo);
+  --widget-halo: var(--color-media-halo);
 }
 
 @utility widget-pomodoro {
@@ -216,7 +237,7 @@
       var(--color-pomo-3) 100%
     );
   border-color: var(--color-pomo-edge);
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.1);
+  --widget-halo: var(--color-pomo-halo);
 }
 
 @utility widget-agenda {
@@ -229,7 +250,7 @@
       var(--color-agenda-3) 100%
     );
   border-color: var(--color-agenda-edge);
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.1);
+  --widget-halo: var(--color-agenda-halo);
 }
 
 @utility widget-weather {
@@ -242,7 +263,7 @@
       var(--color-weather-3) 100%
     );
   border-color: var(--color-weather-edge);
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.1);
+  --widget-halo: var(--color-weather-halo);
 }
 
 @utility widget-github {
@@ -255,7 +276,7 @@
       var(--color-github-3) 100%
     );
   border-color: var(--color-line-12);
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.1);
+  --widget-halo: var(--color-github-halo);
 }
 
 @utility widget-system {
@@ -268,7 +289,7 @@
       var(--color-system-3) 100%
     );
   border-color: var(--color-system-edge);
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.1);
+  --widget-halo: var(--color-system-halo);
 }
 
 @utility scrollbar-none {

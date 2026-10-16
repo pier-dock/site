@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { downloads } from "@/lib/downloads";
 import { AlbumArt } from "../AlbumArt";
@@ -143,11 +144,13 @@ export default function DockDemo() {
                     isFocused ? "bg-white/8" : ""
                   }`}
                 >
-                  <span
-                    // As iniciais fazem o papel do logo do app; via ::before elas ficam fora da
-                    // árvore de texto, e o nome do botão continua só o aria-label.
-                    data-initials={a.initials}
-                    className={`flex size-10 items-center justify-center rounded-[10px] text-sm font-semibold text-white transition-transform duration-150 ease-out before:content-[attr(data-initials)] ${a.color} ${
+                  <Image
+                    src={a.icon}
+                    alt=""
+                    width={44}
+                    height={44}
+                    loading="eager"
+                    className={`size-11 rounded-[11px] shadow-app-icon transition-transform duration-150 ease-out ${
                       hover === i ? "motion-safe:-translate-y-1.5 motion-safe:scale-[1.12]" : ""
                     }`}
                   />

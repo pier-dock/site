@@ -2,7 +2,7 @@
 
 import { githubRepo } from "@/lib/site";
 import { AlbumArt } from "../AlbumArt";
-import { folders, windows, type AppId } from "./data";
+import { editorFiles, windows, type AppId } from "./data";
 
 type AppWindowProps = { app: AppId; trackName: string; playState: string; command: string };
 
@@ -24,21 +24,54 @@ export function AppWindow({ app, trackName, playState, command }: AppWindowProps
         </span>
       </div>
 
-      {app === "finder" && (
-        <div className="flex flex-1">
-          <div className="flex w-[130px] flex-col gap-2 bg-win-sidebar p-3 text-xs text-win-ink-2">
-            <span>Recentes</span>
-            <span>Aplicativos</span>
-            <span>Documentos</span>
-            <span>Downloads</span>
-          </div>
-          <div className="grid flex-1 grid-cols-4 content-start gap-4 p-[18px]">
-            {folders.map((f) => (
-              <span key={f} className="flex flex-col items-center gap-1.5 text-[11px] text-win-ink">
-                <span className="h-9 w-[46px] rounded-[6px] bg-win-folder" />
-                {f}
+      {app === "vscode" && (
+        <div className="flex flex-1 font-mono text-xs">
+          <div className="flex w-[150px] flex-col gap-1 border-r border-code-divider bg-code-side py-2.5 text-fg-3">
+            <span className="px-3 text-[10px] tracking-[0.08em] text-code-side-head">PIER</span>
+            {editorFiles.map((f) => (
+              <span
+                key={f.name}
+                className={`py-0.5 pr-3 ${f.depth ? "pl-6" : "pl-3"} ${f.active ? "bg-code-select text-fg" : ""}`}
+              >
+                {f.name}
               </span>
             ))}
+          </div>
+          <div className="flex-1 overflow-hidden px-3.5 py-3 leading-[1.75] whitespace-pre text-code-text">
+            <div>
+              <span className="text-code-keyword">export function</span>{" "}
+              <span className="text-code-fn">Dock</span>() {"{"}
+            </div>
+            <div>
+              {"  "}
+              <span className="text-code-keyword">return</span> (
+            </div>
+            <div>
+              {"    <"}
+              <span className="text-code-type">Glass</span>{" "}
+              <span className="text-code-prop">blur</span>={"{"}
+              <span className="text-code-num">28</span>
+              {"}"} <span className="text-code-prop">opacity</span>={"{"}
+              <span className="text-code-num">0.4</span>
+              {"}>"}
+            </div>
+            <div>
+              {"      <"}
+              <span className="text-code-type">Apps</span> /&gt;
+            </div>
+            <div>
+              {"      <"}
+              <span className="text-code-type">Widgets</span>{" "}
+              <span className="text-code-prop">items</span>={"{"}
+              <span className="text-code-prop">widgets</span>
+              {"} />"}
+            </div>
+            <div>
+              {"    </"}
+              <span className="text-code-type">Glass</span>&gt;
+            </div>
+            <div>{"  );"}</div>
+            <div>{"}"}</div>
           </div>
         </div>
       )}
