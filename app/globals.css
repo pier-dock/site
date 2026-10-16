@@ -1,26 +1,297 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@theme {
+  --color-page: #08080a;
+  --color-ink: #0b0b0c;
+  --color-surface: #111114;
+  --color-graphite: #1c1c1f;
+  --color-tooltip: #232326;
+
+  --color-fg: #ededef;
+  --color-fg-soft: #d4d4d8;
+  --color-fg-2: #c8c8cc;
+  --color-fg-dock: #b4b4b8;
+  --color-fg-3: #a1a1a8;
+  --color-fg-4: #8a8a92;
+  --color-fg-muted: #9b9ba1;
+
+  --color-coral: #ff6363;
+  --color-coral-soft: #ff8a8a;
+  --color-coral-pale: #ff9a9a;
+  --color-coral-ink: #1a0a0a;
+  --color-amber: #f5a524;
+  --color-green: #3dd68c;
+  --color-blue: #5e9eff;
+  --color-lilac: #c9b2ff;
+
+  --color-wall-rose: #7a2e3a;
+  --color-wall-blue: #1e3a8a;
+  --color-wall-teal: #0f5257;
+
+  --color-gh-0: rgb(255 255 255 / 0.07);
+  --color-gh-1: #0e4429;
+  --color-gh-2: #006d32;
+  --color-gh-3: #26a641;
+  --color-gh-4: #39d353;
+
+  --color-line-7: rgb(255 255 255 / 0.07);
+  --color-line-8: rgb(255 255 255 / 0.08);
+  --color-line-10: rgb(255 255 255 / 0.1);
+  --color-line-12: rgb(255 255 255 / 0.12);
+  --color-line-14: rgb(255 255 255 / 0.14);
+  --color-line-16: rgb(255 255 255 / 0.16);
+  --color-line-18: rgb(255 255 255 / 0.18);
+
+  --color-app-finder: #2a6fdb;
+  --color-app-spotify: #1a9e4b;
+  --color-app-terminal: #3a3a3f;
+  --color-app-brave: #e5502b;
+
+  --color-rainbow-1: #e8432e;
+  --color-rainbow-2: #f2a230;
+  --color-rainbow-3: #f5d33a;
+  --color-rainbow-4: #4fb35b;
+  --color-rainbow-5: #3a7bd5;
+  --color-vinyl: #121212;
+
+  --color-win-paper: #f6f6f8;
+  --color-win-bar: #e2e2e7;
+  --color-win-sidebar: #e7e7ec;
+  --color-win-ink: #3a3a40;
+  --color-win-ink-2: #55555c;
+  --color-win-dots: #c4c4ca;
+  --color-win-folder: #6fa8f5;
+  --color-win-chrome: #dcdce1;
+  --color-win-urlbar: #ececef;
+  --color-spotify-bar: #0a0a0a;
+  --color-spotify-sub: #b3b3b3;
+  --color-spotify-glow: #1f3a28;
+  --color-term-bg: #0c0c0e;
+
+  --color-media-1: #123a22;
+  --color-media-2: #0e2617;
+  --color-media-3: #0b1a10;
+  --color-media-glow: rgb(46 180 90 / 0.55);
+  --color-media-edge: rgb(120 255 170 / 0.18);
+  --color-media-halo: rgb(46 180 90 / 0.18);
+  --color-media-accent: #3ddc84;
+  --color-media-sub: #b9d8c4;
+
+  --color-pomo-1: #3a1518;
+  --color-pomo-2: #26100f;
+  --color-pomo-3: #170a0b;
+  --color-pomo-glow: rgb(255 99 99 / 0.45);
+  --color-pomo-edge: rgb(255 140 140 / 0.2);
+  --color-pomo-sub: #f0c4c4;
+  --color-pomo-ring: rgb(255 99 99 / 0.6);
+
+  --color-agenda-1: #1a2150;
+  --color-agenda-2: #12173a;
+  --color-agenda-3: #0b0e24;
+  --color-agenda-glow: rgb(94 120 255 / 0.45);
+  --color-agenda-edge: rgb(150 170 255 / 0.2);
+  --color-agenda-accent: #9db4ff;
+  --color-agenda-sub: #c4d0ff;
+  --color-agenda-now: rgb(94 120 255 / 0.2);
+  --color-agenda-now-edge: rgb(150 170 255 / 0.35);
+
+  --color-weather-1: #13304f;
+  --color-weather-2: #0e2238;
+  --color-weather-3: #0a1626;
+  --color-weather-glow: rgb(245 165 36 / 0.32);
+  --color-weather-edge: rgb(160 200 255 / 0.2);
+  --color-weather-sun: #f5c451;
+  --color-weather-rain: #7fb0ff;
+  --color-weather-sub: #bcd3ee;
+  --color-weather-alert: #f8d49a;
+  --color-weather-alert-bg: rgb(245 165 36 / 0.14);
+  --color-weather-alert-edge: rgb(245 165 36 / 0.3);
+
+  --color-github-1: #1c1f26;
+  --color-github-2: #14161b;
+  --color-github-3: #0d0e12;
+  --color-github-glow: rgb(57 211 83 / 0.22);
+
+  --color-system-1: #2a1c4e;
+  --color-system-2: #1b1336;
+  --color-system-3: #100b22;
+  --color-system-glow: rgb(150 110 255 / 0.42);
+  --color-system-edge: rgb(190 160 255 / 0.2);
+  --color-system-sub: #d2c4f5;
+  --color-system-fill: #9a7bff;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 20px;
+  --radius-2xl: 22px;
+  --radius-3xl: 24px;
+}
+
+@utility glass {
+  background: rgb(28 28 34 / 0.5);
+  backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid var(--color-line-16);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.2);
+}
+
+@utility glass-dock {
+  background: rgb(28 28 34 / 0.42);
+  backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid var(--color-line-16);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.22),
+    0 20px 50px rgb(0 0 0 / 0.5);
+}
+
+@utility glass-pop {
+  background: rgb(28 28 34 / 0.62);
+  backdrop-filter: blur(30px) saturate(180%);
+  border: 1px solid var(--color-line-16);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.2),
+    0 24px 60px rgb(0 0 0 / 0.5);
+}
+
+@utility glass-panel {
+  background: rgb(28 28 34 / 0.6);
+  backdrop-filter: blur(30px) saturate(180%);
+  border: 1px solid var(--color-line-14);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.15);
+}
+
+@utility glass-bar {
+  background: rgb(8 8 10 / 0.62);
+  backdrop-filter: blur(28px) saturate(180%);
+  border-bottom: 1px solid var(--color-line-7);
+}
+
+@utility widget-card {
+  border: 1px solid;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.1);
+}
+
+@utility widget-media {
+  background:
+    radial-gradient(90% 60% at 50% 62%, var(--color-media-glow), transparent 70%),
+    linear-gradient(
+      180deg,
+      var(--color-media-1) 0%,
+      var(--color-media-2) 55%,
+      var(--color-media-3) 100%
+    );
+  border-color: var(--color-media-edge);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.1),
+    0 0 60px var(--color-media-halo);
+}
+
+@utility widget-pomodoro {
+  background:
+    radial-gradient(90% 60% at 50% 62%, var(--color-pomo-glow), transparent 70%),
+    linear-gradient(
+      180deg,
+      var(--color-pomo-1) 0%,
+      var(--color-pomo-2) 55%,
+      var(--color-pomo-3) 100%
+    );
+  border-color: var(--color-pomo-edge);
+}
+
+@utility widget-agenda {
+  background:
+    radial-gradient(90% 60% at 50% 60%, var(--color-agenda-glow), transparent 70%),
+    linear-gradient(
+      180deg,
+      var(--color-agenda-1) 0%,
+      var(--color-agenda-2) 55%,
+      var(--color-agenda-3) 100%
+    );
+  border-color: var(--color-agenda-edge);
+}
+
+@utility widget-weather {
+  background:
+    radial-gradient(90% 60% at 50% 55%, var(--color-weather-glow), transparent 70%),
+    linear-gradient(
+      180deg,
+      var(--color-weather-1) 0%,
+      var(--color-weather-2) 55%,
+      var(--color-weather-3) 100%
+    );
+  border-color: var(--color-weather-edge);
+}
+
+@utility widget-github {
+  background:
+    radial-gradient(90% 55% at 50% 70%, var(--color-github-glow), transparent 70%),
+    linear-gradient(
+      180deg,
+      var(--color-github-1) 0%,
+      var(--color-github-2) 55%,
+      var(--color-github-3) 100%
+    );
+  border-color: var(--color-line-12);
+}
+
+@utility widget-system {
+  background:
+    radial-gradient(90% 60% at 50% 62%, var(--color-system-glow), transparent 70%),
+    linear-gradient(
+      180deg,
+      var(--color-system-1) 0%,
+      var(--color-system-2) 55%,
+      var(--color-system-3) 100%
+    );
+  border-color: var(--color-system-edge);
+}
+
+@utility scrollbar-none {
+  scrollbar-width: none;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    scroll-padding-top: 80px;
+    -webkit-text-size-adjust: 100%;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    background: var(--color-page);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-coral-soft);
+    outline-offset: 2px;
+  }
+
+  button {
+    cursor: pointer;
+  }
 }
