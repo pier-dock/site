@@ -1,5 +1,7 @@
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { Hero } from "@/components/Hero";
+import { OSProvider } from "@/components/OSProvider";
 import { ptBR as t } from "@/lib/i18n/pt-BR";
 
 export default function Home() {
@@ -12,7 +14,11 @@ export default function Home() {
         {t.skip}
       </a>
       <Header t={t.nav} />
-      <main id="conteudo" className="overflow-x-clip" />
+      <main id="conteudo" className="overflow-x-clip">
+        <OSProvider>
+          <Hero t={t.hero} />
+        </OSProvider>
+      </main>
       <Footer t={t.footer} />
     </>
   );

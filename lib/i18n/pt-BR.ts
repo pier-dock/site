@@ -40,7 +40,6 @@ export const ptBR = {
     github: "Ver código no GitHub",
     free: "Gratuito",
     alsoFor: "Também para",
-    alsoForLabel: "Ver download para",
     mobileTitle: "Disponível para desktop",
     mobileNote: "macOS, Windows e Linux · Gratuito",
     mobileSend: "Enviar link para mim",
