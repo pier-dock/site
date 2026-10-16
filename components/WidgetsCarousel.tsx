@@ -1,5 +1,4 @@
 import type { Dictionary } from "@/lib/i18n";
-import { links } from "@/lib/site";
 import { getWidgets } from "@/lib/widgets";
 import { WidgetCard } from "./WidgetCard";
 
@@ -34,7 +33,7 @@ export function WidgetsCarousel({ t }: { t: Dictionary["widgets"] }) {
         className={`mt-6 flex reveal snap-x snap-mandatory gap-6 overflow-x-auto pt-10 pb-16 ${gutter}`}
       >
         {getWidgets(t.items).map((w) => (
-          <WidgetCard key={w.id} widget={w} moreLabel={t.more} moreHref={links.widgetsDocs} />
+          <WidgetCard key={w.id} widget={w} moreLabel={t.more} />
         ))}
       </div>
     </section>

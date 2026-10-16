@@ -18,5 +18,10 @@ export const links = {
   releases: `${repoUrl}/releases`,
   latestRelease: `${repoUrl}/releases/latest`,
   issues: `${repoUrl}/issues/new`,
-  widgetsDocs: `${repoUrl}#weather-and-calendar-widgets`,
+  docs: {
+    features: `${repoUrl}#features`,
+    usage: `${repoUrl}#usage`,
+    github: `${repoUrl}#github-widgets`,
+    widgets: `${repoUrl}#weather-and-calendar-widgets`,
+  },
 } as const;

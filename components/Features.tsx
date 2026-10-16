@@ -3,18 +3,61 @@ import braveIcon from "@/assets/apps/brave.svg";
 import spotifyIcon from "@/assets/apps/spotify.svg";
 import vscodeIcon from "@/assets/apps/vscode.svg";
 import type { Dictionary } from "@/lib/i18n";
+import { links } from "@/lib/site";
 import { ContributionGrid } from "./ContributionGrid";
+import { ArrowUpRightIcon } from "./icons";
 
-const card =
-  "relative flex flex-col gap-3 overflow-hidden rounded-xl border border-line-8 bg-surface p-8";
-const cardTitle = "relative m-0 text-[22px] font-semibold tracking-[-0.02em]";
 const cardBody = "relative m-0 text-[15px] leading-[1.55] text-fg-2";
 
 const shortcuts = [
-  { name: "Visual Studio Code", icon: vscodeIcon, key: 1 },
-  { name: "Spotify", icon: spotifyIcon, key: 2 },
-  { name: "Brave Browser", icon: braveIcon, key: 3 },
+  { name: "Visual Studio Code", icon: vscodeIcon, key: 1, delay: "delay-0" },
+  { name: "Spotify", icon: spotifyIcon, key: 2, delay: "delay-75" },
+  { name: "Brave Browser", icon: braveIcon, key: 3, delay: "delay-150" },
 ];
+
+const platforms = [
+  { name: "macOS", delay: "delay-0" },
+  { name: "Windows", delay: "delay-75" },
+  { name: "Linux", delay: "delay-150" },
+];
+
+type FeatureCardProps = {
+  id: string;
+  title: string;
+  href: string;
+  className: string;
+  children: React.ReactNode;
+};
+
+/** Um link vazio por cima do card inteiro, nomeado pelo título, deixa o card todo clicável. */
+function FeatureCard({ id, title, href, className, children }: FeatureCardProps) {
+  const titleId = `feature-${id}`;
+  return (
+    <article
+      className={`group relative flex flex-col gap-3 overflow-hidden rounded-xl border border-line-8 bg-surface p-8 transition-[transform,border-color,background-color,box-shadow] duration-300 ease-out hover:[transform:translateY(-4px)] hover:border-line-16 hover:bg-surface-hover hover:shadow-card-hover has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-coral-soft ${className}`}
+    >
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(70%_60%_at_50%_0%,var(--color-line-10),transparent_70%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+      />
+      <span
+        aria-hidden="true"
+        className="absolute top-7 right-7 flex size-8 items-center justify-center rounded-full border border-line-12 bg-white/5 text-fg-2 opacity-0 transition-[opacity,transform] duration-300 group-hover:[transform:translate(2px,-2px)] group-hover:opacity-100"
+      >
+        <ArrowUpRightIcon size={14} />
+      </span>
+      <h3 id={titleId} className="relative m-0 pr-10 text-[22px] font-semibold tracking-[-0.02em]">
+        {title}
+      </h3>
+      {children}
+      <a
+        href={href}
+        aria-labelledby={titleId}
+        className="absolute inset-0 z-10 rounded-xl outline-none"
+      />
+    </article>
+  );
+}
 
 export function Features({ t }: { t: Dictionary["features"] }) {
   return (
@@ -37,8 +80,12 @@ export function Features({ t }: { t: Dictionary["features"] }) {
         </div>
 
         <div className="flex flex-wrap gap-4">
-          <article className={`${card} min-h-[300px] flex-[2_1_586px] reveal`}>
-            <h3 className={cardTitle}>{t.github.title}</h3>
+          <FeatureCard
+            id="github"
+            title={t.github.title}
+            href={links.docs.github}
+            className="min-h-[300px] flex-[2_1_586px] reveal"
+          >
             <p className={`${cardBody} max-w-[420px]`}>{t.github.body}</p>
             <ContributionGrid
               count={364}
@@ -46,31 +93,39 @@ export function Features({ t }: { t: Dictionary["features"] }) {
               gap={3}
               radius={2.5}
               label={t.github.mapLabel}
-              className="mt-auto"
+              className="relative mt-auto transition-[filter] duration-500 group-hover:brightness-150 group-hover:saturate-150"
             />
-          </article>
+          </FeatureCard>
 
-          <article className={`${card} min-h-[300px] flex-[1_1_386px] reveal reveal-step-1`}>
+          <FeatureCard
+            id="glass"
+            title={t.glass.title}
+            href={links.docs.features}
+            className="min-h-[300px] flex-[1_1_386px] reveal reveal-step-1"
+          >
             <div
               aria-hidden="true"
-              className="absolute -right-[60px] -bottom-20 size-[260px] rounded-full bg-wall-blue opacity-90 blur-[60px]"
+              className="absolute -right-[60px] -bottom-20 size-[260px] rounded-full bg-wall-blue opacity-90 blur-[60px] transition-transform duration-700 ease-out group-hover:[transform:translate(-90px,-30px)]"
             />
             <div
               aria-hidden="true"
-              className="absolute right-20 -bottom-10 size-[200px] rounded-full bg-wall-rose opacity-90 blur-[50px]"
+              className="absolute right-20 -bottom-10 size-[200px] rounded-full bg-wall-rose opacity-90 blur-[50px] transition-transform duration-700 ease-out group-hover:[transform:translate(110px,-20px)]"
             />
-            <h3 className={cardTitle}>{t.glass.title}</h3>
             <p className={cardBody}>{t.glass.body}</p>
             <div
               aria-hidden="true"
-              className="relative mt-auto h-14 rounded-[16px] border border-line-18 bg-glass/40 shadow-glass-sample backdrop-blur-[24px] backdrop-saturate-[1.8]"
+              className="relative mt-auto h-14 rounded-[16px] border border-line-18 bg-glass/40 shadow-glass-sample backdrop-blur-[24px] backdrop-saturate-[1.8] transition-transform duration-500 group-hover:[transform:translateY(-6px)]"
             />
-          </article>
+          </FeatureCard>
 
-          <article className={`${card} min-h-[280px] flex-[1_1_386px] reveal`}>
-            <h3 className={cardTitle}>{t.shortcuts.title}</h3>
+          <FeatureCard
+            id="shortcuts"
+            title={t.shortcuts.title}
+            href={links.docs.usage}
+            className="min-h-[280px] flex-[1_1_386px] reveal"
+          >
             <p className={cardBody}>{t.shortcuts.body}</p>
-            <ul className="m-0 mt-auto flex list-none flex-col gap-2 p-0">
+            <ul className="relative m-0 mt-auto flex list-none flex-col gap-2 p-0">
               {shortcuts.map((s) => (
                 <li key={s.key} className="flex items-center gap-2.5 text-sm">
                   <Image
@@ -78,31 +133,37 @@ export function Features({ t }: { t: Dictionary["features"] }) {
                     alt=""
                     width={26}
                     height={26}
-                    className="size-[26px] rounded-[7px]"
+                    className={`size-[26px] rounded-[7px] transition-transform duration-300 ease-out group-hover:[transform:translateY(-3px)_scale(1.12)] ${s.delay}`}
                   />
                   <span className="flex-1">{s.name}</span>
-                  <kbd className="rounded bg-white/8 px-1.5 py-0.5 font-mono text-[11px] text-fg-2">
+                  <kbd
+                    className={`rounded bg-white/8 px-1.5 py-0.5 font-mono text-[11px] text-fg-2 transition-colors duration-300 group-hover:bg-white/14 group-hover:text-fg ${s.delay}`}
+                  >
                     Ctrl Alt {s.key}
                   </kbd>
                 </li>
               ))}
             </ul>
-          </article>
+          </FeatureCard>
 
-          <article className={`${card} min-h-[280px] flex-[1_1_386px] reveal reveal-step-1`}>
-            <h3 className={cardTitle}>{t.platforms.title}</h3>
+          <FeatureCard
+            id="platforms"
+            title={t.platforms.title}
+            href="#download"
+            className="min-h-[280px] flex-[1_1_386px] reveal reveal-step-1"
+          >
             <p className={cardBody}>{t.platforms.body}</p>
-            <ul className="m-0 mt-auto flex list-none flex-wrap gap-2 p-0">
-              {["macOS", "Windows", "Linux"].map((os) => (
+            <ul className="relative m-0 mt-auto flex list-none flex-wrap gap-2 p-0">
+              {platforms.map((p) => (
                 <li
-                  key={os}
-                  className="flex h-8 items-center rounded-sm border border-line-10 bg-white/7 px-3 text-[13px]"
+                  key={p.name}
+                  className={`flex h-8 items-center rounded-sm border border-line-10 bg-white/7 px-3 text-[13px] transition-colors duration-300 group-hover:border-line-18 group-hover:bg-white/12 ${p.delay}`}
                 >
-                  {os}
+                  {p.name}
                 </li>
               ))}
             </ul>
-          </article>
+          </FeatureCard>
         </div>
       </div>
     </section>
