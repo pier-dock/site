@@ -43,7 +43,7 @@ export function PomodoroVisual({ data }: { data: PomodoroData }) {
       </div>
       <span className="flex h-11 items-center gap-2 rounded-full bg-fg px-[22px] text-sm font-semibold text-pomo-3">
         <PlayPauseIcon playing size={13} />
-        Pausar
+        {data.pause}
       </span>
     </div>
   );

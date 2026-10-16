@@ -1,12 +1,22 @@
 import type { Metadata, Viewport } from "next";
 import { brand } from "./brand";
-import type { Dictionary } from "./i18n/pt-BR";
+import { localePath, locales, type Dictionary, type Locale } from "./i18n";
 import { authors, githubRepo, links, siteUrl, version } from "./site";
 
-/** Rotas por idioma. O `en` entra aqui quando a página em inglês existir. */
-export const languages = { "pt-BR": "/", "x-default": "/" } as const;
+/** hreflang → caminho. O x-default aponta para o inglês, servido na raiz. */
+export const languages: Record<string, string> = {
+  en: localePath.en,
+  "pt-BR": localePath["pt-br"],
+  "x-default": localePath.en,
+};
 
-export function buildMetadata(t: Dictionary): Metadata {
+export const absoluteUrl = (path: string) => `${siteUrl}${path}`;
+
+/** URL da imagem gerada por `app/[lang]/opengraph-image.tsx` (id fixo em generateImageMetadata). */
+export const ogImagePath = (locale: Locale) => `/${locale}/opengraph-image/card`;
+
+export function buildMetadata(t: Dictionary, locale: Locale): Metadata {
+  const path = localePath[locale];
   return {
     metadataBase: new URL(siteUrl),
     title: { default: t.meta.title, template: "%s · Pier" },
@@ -16,12 +26,15 @@ export function buildMetadata(t: Dictionary): Metadata {
     creator: authors.map((a) => a.name).join(", "),
     applicationName: "Pier",
     category: "technology",
-    alternates: { canonical: "/", languages },
+    alternates: { canonical: path, languages },
     openGraph: {
       type: "website",
-      url: "/",
+      url: path,
       siteName: "Pier",
       locale: t.ogLocale,
+      alternateLocale: locales
+        .filter((l) => l !== locale)
+        .map((l) => (l === "en" ? "en_US" : "pt_BR")),
       title: t.meta.title,
       description: t.meta.description,
     },
@@ -42,8 +55,10 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export function buildJsonLd(t: Dictionary) {
+export function buildJsonLd(t: Dictionary, locale: Locale) {
   const org = `${siteUrl}/#organization`;
+  const page = absoluteUrl(localePath[locale]);
+  const image = absoluteUrl(ogImagePath(locale));
   return {
     "@context": "https://schema.org",
     "@graph": [
@@ -52,17 +67,17 @@ export function buildJsonLd(t: Dictionary) {
         "@id": `${siteUrl}/#software`,
         name: "Pier",
         description: t.meta.description,
-        url: siteUrl,
+        url: page,
         operatingSystem: "macOS, Windows, Linux",
         applicationCategory: "UtilitiesApplication",
         softwareVersion: version,
         downloadUrl: links.latestRelease,
         license: `https://github.com/${githubRepo}/blob/main/LICENSE`,
         isAccessibleForFree: true,
-        offers: { "@type": "Offer", price: 0, priceCurrency: "BRL" },
-        screenshot: `${siteUrl}/opengraph-image`,
-        image: `${siteUrl}/opengraph-image`,
-        inLanguage: t.locale,
+        offers: { "@type": "Offer", price: 0, priceCurrency: t.currency },
+        screenshot: image,
+        image,
+        inLanguage: t.lang,
         author: authors.map((a) => ({ "@type": "Person", name: a.name })),
         publisher: { "@id": org },
       },
@@ -78,8 +93,8 @@ export function buildJsonLd(t: Dictionary) {
         "@type": "WebSite",
         "@id": `${siteUrl}/#website`,
         name: "Pier",
-        url: siteUrl,
-        inLanguage: t.locale,
+        url: `${siteUrl}/`,
+        inLanguage: t.lang,
         publisher: { "@id": org },
       },
     ],

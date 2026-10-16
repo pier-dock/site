@@ -3,11 +3,15 @@ import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { brand } from "@/lib/brand";
 import { contributionLevels } from "@/lib/contributions";
-import { ptBR } from "@/lib/i18n/pt-BR";
+import { getDictionary, isLocale, type Locale } from "@/lib/i18n";
 
-export const alt = ptBR.meta.ogAlt;
-export const size = { width: 1200, height: 630 };
-export const contentType = "image/png";
+const size = { width: 1200, height: 630 };
+
+// Uma imagem por idioma, com o alt traduzido; o id fixo dá uma URL estável ao JSON-LD.
+export function generateImageMetadata({ params }: { params: { lang: string } }) {
+  const lang: Locale = isLocale(params.lang) ? params.lang : "en";
+  return [{ id: "card", alt: getDictionary(lang).meta.ogAlt, size, contentType: "image/png" }];
+}
 
 const fontDir = join(process.cwd(), "node_modules/geist/dist/fonts/geist-sans");
 
@@ -37,7 +41,9 @@ const appIcons = await Promise.all(
   }),
 );
 
-export default function OpengraphImage() {
+export default async function OpengraphImage({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params;
+  const t = getDictionary(isLocale(lang) ? lang : "en");
   return new ImageResponse(
     <div
       style={{
@@ -70,11 +76,11 @@ export default function OpengraphImage() {
           lineHeight: 1,
         }}
       >
-        <span>Sua dock, do seu jeito.</span>
-        <span>Em qualquer sistema.</span>
+        <span>{t.hero.titleTop}</span>
+        <span>{t.hero.titleBottom}</span>
       </div>
       <span style={{ marginTop: 26, fontSize: 26, fontWeight: 500, color: brand.fg2 }}>
-        Gratuito para macOS, Windows e Linux
+        {t.og.tagline}
       </span>
 
       <div
@@ -118,8 +124,10 @@ export default function OpengraphImage() {
           style={{ width: 1.5, height: 44, margin: "0 8px", background: "rgba(255,255,255,0.16)" }}
         />
         <div style={{ display: "flex", flexDirection: "column", gap: 2, marginRight: 12 }}>
-          <span style={{ fontSize: 24, fontWeight: 700 }}>2.142</span>
-          <span style={{ fontSize: 16, fontWeight: 500, color: brand.fg2 }}>neste ano</span>
+          <span style={{ fontSize: 24, fontWeight: 700 }}>{t.demo.contribTotal}</span>
+          <span style={{ fontSize: 16, fontWeight: 500, color: brand.fg2 }}>
+            {t.demo.contribThisYear}
+          </span>
         </div>
         <div
           style={{

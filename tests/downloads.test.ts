@@ -1,8 +1,10 @@
 import { describe, expect, it } from "vitest";
 import { buildDownloads } from "@/lib/downloads";
+import { getDictionary, locales } from "@/lib/i18n";
 import { osList } from "@/lib/os";
 
-const downloads = buildDownloads({ repo: "acme/pier", version: "1.4.0", host: "pier.dev" });
+const config = { repo: "acme/pier", version: "1.4.0", host: "pier.dev" };
+const downloads = buildDownloads({ ...config, t: getDictionary("en").downloads });
 
 describe("buildDownloads", () => {
   it("monta as URLs da última release com repo e versão", () => {
@@ -28,5 +30,11 @@ describe("buildDownloads", () => {
     }
     expect(d.url.endsWith(d.file)).toBe(true);
     expect(d.alts.length).toBeGreaterThan(0);
+  });
+
+  it.each(locales)("traduz os botões em %s", (locale) => {
+    const d = buildDownloads({ ...config, t: getDictionary(locale).downloads });
+    expect(d.mac.button).toBe(getDictionary(locale).downloads.mac.button);
+    expect(d.mac.url).toBe(downloads.mac.url);
   });
 });

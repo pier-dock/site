@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, use, useMemo, useState, useSyncExternalStore } from "react";
+import type { Download } from "@/lib/downloads";
 import { defaultPlatform, detectPlatform, type OS, type Platform } from "@/lib/os";
 
 type NavigatorWithHints = Navigator & { userAgentData?: { platform?: string } };
@@ -27,11 +28,14 @@ type OSContextValue = {
   detected: OS;
   isMobile: boolean;
   setOs: (os: OS) => void;
+  downloads: Record<OS, Download>;
 };
 
 const OSContext = createContext<OSContextValue | null>(null);
 
-export function OSProvider({ children }: { children: React.ReactNode }) {
+type OSProviderProps = { downloads: Record<OS, Download>; children: React.ReactNode };
+
+export function OSProvider({ downloads, children }: OSProviderProps) {
   // O HTML estático sai com o padrão "mac"; na hidratação o React troca pelo valor do navegador.
   const platform = useSyncExternalStore(subscribe, readPlatform, serverPlatform);
   const [picked, setOs] = useState<OS | null>(null);
@@ -42,8 +46,9 @@ export function OSProvider({ children }: { children: React.ReactNode }) {
       detected: platform.os,
       isMobile: platform.isMobile,
       setOs,
+      downloads,
     }),
-    [picked, platform],
+    [picked, platform, downloads],
   );
 
   return <OSContext value={value}>{children}</OSContext>;

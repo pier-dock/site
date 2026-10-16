@@ -2,7 +2,7 @@ import Image from "next/image";
 import braveIcon from "@/assets/apps/brave.svg";
 import spotifyIcon from "@/assets/apps/spotify.svg";
 import vscodeIcon from "@/assets/apps/vscode.svg";
-import type { Dictionary } from "@/lib/i18n/pt-BR";
+import type { Dictionary } from "@/lib/i18n";
 import { ContributionGrid } from "./ContributionGrid";
 
 const card =
@@ -19,8 +19,8 @@ const shortcuts = [
 export function Features({ t }: { t: Dictionary["features"] }) {
   return (
     <section
-      id="recursos"
-      aria-labelledby="recursos-titulo"
+      id="features"
+      aria-labelledby="features-title"
       className="border-t border-line-8 px-6 py-28"
     >
       <div className="mx-auto flex max-w-[1200px] flex-col gap-12">
@@ -29,7 +29,7 @@ export function Features({ t }: { t: Dictionary["features"] }) {
             {t.eyebrow}
           </p>
           <h2
-            id="recursos-titulo"
+            id="features-title"
             className="m-0 text-[clamp(32px,4.4vw,52px)] leading-[1.04] font-bold tracking-[-0.045em]"
           >
             {t.title}

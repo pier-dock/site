@@ -1,8 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { downloads } from "@/lib/downloads";
-import type { Dictionary } from "@/lib/i18n/pt-BR";
+import type { Dictionary } from "@/lib/i18n";
 import { osList, type OS } from "@/lib/os";
 import { CopyButton } from "./CopyButton";
 import { DownloadIcon } from "./icons";
@@ -12,7 +11,7 @@ const tabId = (os: OS) => `download-tab-${os}`;
 const panelId = "download-panel";
 
 export function DownloadPanel({ t }: { t: Dictionary["download"] }) {
-  const { os, detected, setOs } = useOS();
+  const { os, detected, setOs, downloads } = useOS();
   const tabs = useRef<Partial<Record<OS, HTMLButtonElement | null>>>({});
   const d = downloads[os];
 

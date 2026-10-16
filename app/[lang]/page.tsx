@@ -1,34 +1,40 @@
+import { notFound } from "next/navigation";
 import { Download } from "@/components/Download";
 import { Features } from "@/components/Features";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { JsonLd } from "@/components/JsonLd";
 import { Hero } from "@/components/Hero";
+import { JsonLd } from "@/components/JsonLd";
 import { OSProvider } from "@/components/OSProvider";
 import { WidgetsCarousel } from "@/components/WidgetsCarousel";
-import { ptBR as t } from "@/lib/i18n/pt-BR";
+import { getDownloads } from "@/lib/downloads";
+import { getDictionary, isLocale } from "@/lib/i18n";
 import { buildJsonLd } from "@/lib/seo";
 
-export default function Home() {
+export default async function Home({ params }: PageProps<"/[lang]">) {
+  const { lang } = await params;
+  if (!isLocale(lang)) notFound();
+  const t = getDictionary(lang);
+
   return (
     <>
       <a
-        href="#conteudo"
+        href="#content"
         className="sr-only z-50 rounded-md bg-fg px-4 py-2 text-sm font-semibold text-ink focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
       >
         {t.skip}
       </a>
-      <Header t={t.nav} />
-      <main id="conteudo" className="overflow-x-clip">
-        <OSProvider>
-          <Hero t={t.hero} />
+      <Header t={t.nav} locale={lang} />
+      <main id="content" className="overflow-x-clip">
+        <OSProvider downloads={getDownloads(t.downloads)}>
+          <Hero t={t.hero} demo={t.demo} />
           <Features t={t.features} />
           <WidgetsCarousel t={t.widgets} />
           <Download t={t.download} />
         </OSProvider>
       </main>
-      <Footer t={t.footer} />
-      <JsonLd data={buildJsonLd(t)} />
+      <Footer t={t.footer} lang={t.lang} />
+      <JsonLd data={buildJsonLd(t, lang)} />
     </>
   );
 }

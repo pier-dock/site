@@ -1,4 +1,4 @@
-import type { Dictionary } from "@/lib/i18n/pt-BR";
+import type { Dictionary } from "@/lib/i18n";
 import { DownloadPanel } from "./DownloadPanel";
 import { AppIcon } from "./Logo";
 
@@ -6,7 +6,7 @@ export function Download({ t }: { t: Dictionary["download"] }) {
   return (
     <section
       id="download"
-      aria-labelledby="download-titulo"
+      aria-labelledby="download-title"
       className="relative overflow-hidden border-t border-line-8 px-6 py-28"
     >
       <div
@@ -18,7 +18,7 @@ export function Download({ t }: { t: Dictionary["download"] }) {
           <AppIcon size={88} />
         </div>
         <h2
-          id="download-titulo"
+          id="download-title"
           className="m-0 reveal text-[clamp(36px,5vw,60px)] leading-[1.02] font-bold tracking-[-0.05em] reveal-step-1"
         >
           {t.title}

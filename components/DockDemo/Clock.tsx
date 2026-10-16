@@ -1,9 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
-
-const weekdays = ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"];
-const months = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];
+import type { Dictionary } from "@/lib/i18n";
 
 function subscribe(onChange: () => void) {
   const id = setInterval(onChange, 1000);
@@ -13,15 +11,23 @@ function subscribe(onChange: () => void) {
 function snapshot() {
   const now = new Date();
   const time = `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
-  return `${time}|${weekdays[now.getDay()]}, ${now.getDate()} ${months[now.getMonth()]}`;
+  return `${time}|${now.getDay()}|${now.getDate()}|${now.getMonth()}`;
 }
 
 // A hora é do visitante: o HTML estático sai com "--:--" e o navegador preenche na hidratação.
 const serverSnapshot = () => null;
 
-export function Clock() {
+export function Clock({ t }: { t: Dictionary["demo"] }) {
   const value = useSyncExternalStore(subscribe, snapshot, serverSnapshot);
-  const [time, date] = value ? value.split("|") : ["--:--", " "];
+  let time = "--:--";
+  let date = " ";
+  if (value) {
+    const [hhmm, weekday, day, month] = value.split("|");
+    const wd = t.weekdays[Number(weekday)];
+    const mo = t.months[Number(month)];
+    time = hhmm ?? time;
+    date = t.dateOrder === "month-day" ? `${wd}, ${mo} ${day}` : `${wd}, ${day} ${mo}`;
+  }
   return (
     <span className="flex w-[74px] flex-col items-end gap-px pr-2.5 pl-2">
       <time className="text-[15px] font-semibold tabular-nums">{time}</time>

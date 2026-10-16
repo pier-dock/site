@@ -1,3 +1,4 @@
+import type { Dictionary } from "./i18n";
 import type { OS } from "./os";
 import { githubRepo, siteHost, version } from "./site";
 
@@ -16,28 +17,33 @@ export type Download = {
   alts: DownloadLink[];
 };
 
-type DownloadConfig = { repo: string; version: string; host: string };
+type DownloadConfig = { repo: string; version: string; host: string; t: Dictionary["downloads"] };
 
 export function assetUrl(repo: string, file: string) {
   return `https://github.com/${repo}/releases/latest/download/${file}`;
 }
 
-export function buildDownloads({ repo, version: v, host }: DownloadConfig): Record<OS, Download> {
+export function buildDownloads({
+  repo,
+  version: v,
+  host,
+  t,
+}: DownloadConfig): Record<OS, Download> {
   const files = {
     dmg: `Pier_${v}_universal.dmg`,
     exe: `Pier_${v}_x64-setup.exe`,
     appImage: `Pier_${v}_amd64.AppImage`,
     deb: `Pier_${v}_amd64.deb`,
   };
-  const release = { label: "Todas as versões", url: `https://github.com/${repo}/releases` };
+  const release = { label: t.allReleases, url: `https://github.com/${repo}/releases` };
 
   return {
     mac: {
       label: "macOS",
-      button: "Baixar para macOS",
+      button: t.mac.button,
       file: files.dmg,
-      fileNote: "Apple Silicon e Intel",
-      req: "macOS 12 ou mais recente",
+      fileNote: t.mac.fileNote,
+      req: t.mac.req,
       via: "Homebrew",
       cmd: "brew install --cask pier",
       url: assetUrl(repo, files.dmg),
@@ -45,10 +51,10 @@ export function buildDownloads({ repo, version: v, host }: DownloadConfig): Reco
     },
     win: {
       label: "Windows",
-      button: "Baixar para Windows",
+      button: t.win.button,
       file: files.exe,
-      fileNote: "x64",
-      req: "Windows 10 ou 11",
+      fileNote: t.win.fileNote,
+      req: t.win.req,
       via: "winget",
       cmd: "winget install Pier.Pier",
       url: assetUrl(repo, files.exe),
@@ -56,16 +62,18 @@ export function buildDownloads({ repo, version: v, host }: DownloadConfig): Reco
     },
     linux: {
       label: "Linux",
-      button: "Baixar para Linux",
+      button: t.linux.button,
       file: files.appImage,
-      fileNote: "x86_64",
-      req: "GNOME 45 a 49",
+      fileNote: t.linux.fileNote,
+      req: t.linux.req,
       via: "script",
       cmd: `curl -fsSL https://${host}/install.sh | sh`,
       url: assetUrl(repo, files.appImage),
-      alts: [{ label: "Pacote .deb", url: assetUrl(repo, files.deb) }, release],
+      alts: [{ label: t.debPackage, url: assetUrl(repo, files.deb) }, release],
     },
   };
 }
 
-export const downloads = buildDownloads({ repo: githubRepo, version, host: siteHost });
+export function getDownloads(t: Dictionary["downloads"]) {
+  return buildDownloads({ repo: githubRepo, version, host: siteHost, t });
+}

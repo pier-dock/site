@@ -1,10 +1,10 @@
-import type { Dictionary } from "@/lib/i18n/pt-BR";
-import { authorNames, links } from "@/lib/site";
+import type { Dictionary } from "@/lib/i18n";
+import { formatAuthors, links } from "@/lib/site";
 import { LogoMark } from "./Logo";
 
 const footerLink = "text-fg-2 transition-colors hover:text-fg";
 
-export function Footer({ t }: { t: Dictionary["footer"] }) {
+export function Footer({ t, lang }: { t: Dictionary["footer"]; lang: string }) {
   return (
     <footer className="border-t border-line-8 px-6 py-10">
       <div className="mx-auto flex max-w-[1200px] flex-wrap items-center gap-6 text-[13px] text-fg-3">
@@ -13,7 +13,7 @@ export function Footer({ t }: { t: Dictionary["footer"] }) {
           pier
         </span>
         <p className="flex-1">
-          {t.madeBy} {authorNames}
+          {t.madeBy} {formatAuthors(lang)}
         </p>
         <nav aria-label={t.label}>
           <ul className="flex flex-wrap gap-6">

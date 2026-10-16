@@ -1,6 +1,9 @@
-export const ptBR = {
-  locale: "pt-BR",
+import type { Dictionary } from "./en";
+
+export const ptBR: Dictionary = {
+  lang: "pt-BR",
   ogLocale: "pt_BR",
+  currency: "BRL",
   meta: {
     title: "Pier — a dock para macOS, Windows e Linux",
     description:
@@ -19,6 +22,9 @@ export const ptBR = {
     ],
     ogAlt: "Pier: sua dock, do seu jeito. Em qualquer sistema.",
   },
+  og: {
+    tagline: "Gratuito para macOS, Windows e Linux",
+  },
   skip: "Pular para o conteúdo",
   nav: {
     label: "Principal",
@@ -29,6 +35,7 @@ export const ptBR = {
     github: "GitHub",
     githubLabel: "Código do Pier no GitHub",
     cta: "Baixar",
+    language: "Idioma",
   },
   hero: {
     badge: "Novo: widgets de Clima, Pomodoro e Agenda",
@@ -73,6 +80,63 @@ export const ptBR = {
     subtitle: "Informação útil sem abrir mais uma janela.",
     carouselLabel: "Widgets do Pier",
     more: "Saiba mais sobre o widget",
+    items: {
+      media: {
+        name: "Mídia",
+        description:
+          "Veja o que está tocando e controle Spotify, Apple Music ou qualquer player direto da dock.",
+        visualLabel: "Tocando Weird Fishes/Arpeggi, de Radiohead, em 2:13 de 5:18.",
+      },
+      pomodoro: {
+        name: "Pomodoro",
+        description:
+          "Ciclos de foco e pausa com o anel sempre à vista. Liga o Não perturbe sozinho.",
+        visualLabel: "Foco: faltam 18 minutos e 42 segundos, sessão 2 de 4.",
+        phase: "Foco · 2 de 4",
+        pause: "Pausar",
+      },
+      agenda: {
+        name: "Agenda",
+        description:
+          "O próximo compromisso com contagem regressiva e Entrar na chamada em um clique.",
+        visualLabel:
+          "Agora: Daily do time, das 16:00 às 16:30, termina em 18 minutos. Depois: Revisão de design às 17:30.",
+        now: "Agora",
+        nowTitle: "Daily do time",
+        endsIn: "Termina em 18 min",
+        join: "Entrar",
+        next: ["Revisão de design", "Academia", "Amanhã · Planejamento"],
+      },
+      weather: {
+        name: "Clima",
+        description:
+          "Temperatura agora, próximas horas e um aviso quando a chuva estiver chegando.",
+        visualLabel: "24 graus, parcialmente nublado. Chuva às 16h.",
+        summary: "Parcialmente nublado",
+        alert: "Chuva às 16h · leve um guarda-chuva",
+        hours: ["15h", "16h", "17h", "18h", "19h"],
+      },
+      github: {
+        name: "GitHub",
+        description:
+          "Suas contribuições do ano, PRs abertos e revisões que estão esperando por você.",
+        visualLabel: "2.142 contribuições em 2026, nenhum PR aberto e 12 revisões pendentes.",
+        total: "2.142",
+        caption: "contribuições em 2026",
+        prs: "PRs abertos",
+        reviews: "Revisões",
+      },
+      system: {
+        name: "Uso do sistema",
+        description: "CPU, memória e rede em tempo real, e quais apps estão pesando na máquina.",
+        visualLabel: "CPU em 34%, memória com 10,9 de 16 GB, rede baixando 2,4 MB/s.",
+        cpu: "CPU · últimos 60 s",
+        memory: "Memória",
+        memoryValue: "10,9 de 16 GB",
+        network: "Rede",
+        networkValue: "↓ 2,4 MB/s · ↑ 180 KB/s",
+      },
+    },
   },
   download: {
     title: "Atraque seus apps.",
@@ -86,6 +150,62 @@ export const ptBR = {
     copyLabel: "Copiar comando",
     alts: "Outros formatos",
   },
+  downloads: {
+    allReleases: "Todas as versões",
+    debPackage: "Pacote .deb",
+    mac: {
+      button: "Baixar para macOS",
+      fileNote: "Apple Silicon e Intel",
+      req: "macOS 12 ou mais recente",
+    },
+    win: { button: "Baixar para Windows", fileNote: "x64", req: "Windows 10 ou 11" },
+    linux: { button: "Baixar para Linux", fileNote: "x86_64", req: "GNOME 45 a 49" },
+  },
+  demo: {
+    dockLabel: "Dock de demonstração",
+    focused: " (em foco)",
+    minimized: " (minimizado)",
+    openPlayer: "Abrir player: ",
+    play: "Tocar",
+    pause: "Pausar",
+    next: "Próxima faixa",
+    prev: "Faixa anterior",
+    nowPlaying: "Tocando agora",
+    paused: "Pausado",
+    progress: "Progresso da faixa",
+    progressOf: "{pos} de {dur}",
+    prsTrigger: "Seus pull requests, 0 abertos",
+    prsTitle: "Seus pull requests",
+    prsCount: "0 abertos",
+    prsEmpty: "Nenhum pull request aberto",
+    prsEmptyNote: "Tudo limpo por aqui.",
+    reviewsTrigger: "Revisões pendentes, {n}",
+    reviewsTitle: "Aguardando sua revisão",
+    reviewsMore: "+ {n} no GitHub",
+    reviews: [
+      { title: "Blur nativo no KDE Wayland", when: "há 2 h" },
+      { title: "Widget de Agenda: botão Entrar", when: "há 5 h" },
+      { title: "Corrige atalho Ctrl+Alt no Windows", when: "ontem" },
+    ],
+    contribPrefix: "Contribuições: ",
+    contribTotal: "2.142",
+    contribThisYear: "neste ano",
+    contribTitle: "Contribuições em 2026",
+    contribMap: "Mapa de contribuições do ano",
+    wifi: "Wi-Fi conectado",
+    volume: "Volume",
+    volumeLabel: "Volume {n}%",
+    output: "Saída: alto-falantes",
+    battery: "Bateria em {n}%",
+    terminal: {
+      downloading: "==> Baixando Pier…",
+      installing: "==> Instalando Pier",
+      done: "Pier instalado com sucesso.",
+    },
+    weekdays: ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"],
+    months: ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"],
+    dateOrder: "day-month",
+  },
   footer: {
     madeBy: "Feito por",
     label: "Rodapé",
@@ -96,5 +216,3 @@ export const ptBR = {
     issues: "Reportar problema",
   },
 };
-
-export type Dictionary = typeof ptBR;

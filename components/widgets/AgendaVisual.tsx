@@ -6,7 +6,7 @@ export function AgendaVisual({ data }: { data: AgendaData }) {
     <div className="flex flex-1 flex-col justify-center gap-2.5">
       <div className="flex flex-col gap-2 rounded-[14px] border border-agenda-now-edge bg-agenda-now p-4">
         <span className="flex justify-between text-[11px] font-semibold tracking-[0.06em] text-agenda-sub uppercase">
-          <span>Agora</span>
+          <span>{data.nowLabel}</span>
           <span className="tabular-nums">{data.now.range}</span>
         </span>
         <span className="text-lg font-semibold">{data.now.title}</span>
@@ -14,7 +14,7 @@ export function AgendaVisual({ data }: { data: AgendaData }) {
           <span className="text-[13px] text-agenda-sub">{data.now.endsIn}</span>
           <span className="flex h-[34px] items-center gap-1.5 rounded-[9px] bg-fg px-3.5 text-[13px] font-semibold text-agenda-3">
             <VideoIcon size={13} />
-            Entrar
+            {data.join}
           </span>
         </span>
       </div>

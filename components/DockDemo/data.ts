@@ -3,7 +3,6 @@ import braveIcon from "@/assets/apps/brave.svg";
 import spotifyIcon from "@/assets/apps/spotify.svg";
 import terminalIcon from "@/assets/apps/terminal.svg";
 import vscodeIcon from "@/assets/apps/vscode.svg";
-import { githubRepo } from "@/lib/site";
 
 export type AppId = "vscode" | "spotify" | "terminal" | "brave";
 
@@ -84,12 +83,5 @@ export const tracks: Track[] = [
   { name: "Videotape", duration: 279 },
 ];
 
-export const reviews = [
-  { title: "Blur nativo no KDE Wayland", meta: `${githubRepo} · há 2 h` },
-  { title: "Widget de Agenda: botão Entrar", meta: `${githubRepo} · há 5 h` },
-  { title: "Corrige atalho Ctrl+Alt no Windows", meta: `${githubRepo} · ontem` },
-];
-
 export const pendingReviews = 12;
-export const contributions = "2.142";
 export const battery = 79;

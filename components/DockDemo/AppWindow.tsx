@@ -1,12 +1,19 @@
 "use client";
 
+import type { Dictionary } from "@/lib/i18n";
 import { githubRepo } from "@/lib/site";
 import { AlbumArt } from "../AlbumArt";
 import { editorFiles, windows, type AppId } from "./data";
 
-type AppWindowProps = { app: AppId; trackName: string; playState: string; command: string };
+type AppWindowProps = {
+  app: AppId;
+  trackName: string;
+  playState: string;
+  command: string;
+  terminal: Dictionary["demo"]["terminal"];
+};
 
-export function AppWindow({ app, trackName, playState, command }: AppWindowProps) {
+export function AppWindow({ app, trackName, playState, command, terminal }: AppWindowProps) {
   const w = windows[app];
   return (
     <div
@@ -98,9 +105,9 @@ export function AppWindow({ app, trackName, playState, command }: AppWindowProps
           <div>
             <span className="text-green">~</span> $ {command}
           </div>
-          <div className="text-fg-muted">==&gt; Baixando Pier…</div>
-          <div className="text-fg-muted">==&gt; Instalando Pier</div>
-          <div>Pier instalado com sucesso.</div>
+          <div className="text-fg-muted">{terminal.downloading}</div>
+          <div className="text-fg-muted">{terminal.installing}</div>
+          <div>{terminal.done}</div>
           <div>
             <span className="text-green">~</span> ${" "}
             <span className="inline-block h-[15px] w-2 bg-fg-soft align-[-2px]" />

@@ -1,12 +1,14 @@
-import type { Dictionary } from "@/lib/i18n/pt-BR";
+import type { Dictionary } from "@/lib/i18n";
 import { DockDemoLazy } from "./DockDemo/DockDemoLazy";
 import { DockStage } from "./DockDemo/DockStage";
 import { HeroCta } from "./HeroCta";
 import { Wallpaper } from "./Wallpaper";
 
-export function Hero({ t }: { t: Dictionary["hero"] }) {
+type HeroProps = { t: Dictionary["hero"]; demo: Dictionary["demo"] };
+
+export function Hero({ t, demo }: HeroProps) {
   return (
-    <section id="topo" aria-labelledby="titulo" className="relative overflow-hidden px-6 pt-24">
+    <section id="top" aria-labelledby="hero-title" className="relative overflow-hidden px-6 pt-24">
       <Wallpaper />
       <div className="relative mx-auto flex max-w-[960px] flex-col items-center gap-6 text-center">
         <a
@@ -19,7 +21,7 @@ export function Hero({ t }: { t: Dictionary["hero"] }) {
           </span>
         </a>
         <h1
-          id="titulo"
+          id="hero-title"
           className="m-0 text-[clamp(44px,7.4vw,92px)] leading-[0.98] font-bold tracking-[-0.055em] text-balance"
         >
           {t.titleTop}
@@ -32,7 +34,7 @@ export function Hero({ t }: { t: Dictionary["hero"] }) {
         <HeroCta t={t} />
       </div>
       <DockStage badge={t.demoBadge} label={t.demoLabel}>
-        <DockDemoLazy />
+        <DockDemoLazy t={demo} />
       </DockStage>
     </section>
   );

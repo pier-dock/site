@@ -1,7 +1,6 @@
 "use client";
 
-import { downloads } from "@/lib/downloads";
-import type { Dictionary } from "@/lib/i18n/pt-BR";
+import type { Dictionary } from "@/lib/i18n";
 import { osList } from "@/lib/os";
 import { links } from "@/lib/site";
 import { CheckIcon, CodeIcon, DownloadIcon, LinkIcon } from "./icons";
@@ -15,7 +14,7 @@ const secondary =
 const meta = "m-0 flex h-5 flex-wrap justify-center gap-1.5 self-stretch text-[13px] text-fg-3";
 
 export function HeroCta({ t }: { t: Dictionary["hero"] }) {
-  const { os, isMobile, setOs } = useOS();
+  const { os, isMobile, setOs, downloads } = useOS();
   const { copied, copy } = useCopy();
   const d = downloads[os];
   const others = osList.filter((o) => o !== os);

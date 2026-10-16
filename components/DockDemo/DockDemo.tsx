@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { downloads } from "@/lib/downloads";
+import { fill, type Dictionary } from "@/lib/i18n";
 import { AlbumArt } from "../AlbumArt";
 import { ContributionGrid } from "../ContributionGrid";
 import {
@@ -17,7 +17,7 @@ import {
 import { useOS } from "../OSProvider";
 import { AppWindow } from "./AppWindow";
 import { Clock } from "./Clock";
-import { apps, battery, contributions, pendingReviews } from "./data";
+import { apps, battery, pendingReviews } from "./data";
 import {
   ContribPopover,
   MediaPopover,
@@ -33,8 +33,8 @@ const triggerId = (id: PopoverId) => `dock-trigger-${id}`;
 
 const divider = <span aria-hidden="true" className="mx-1.5 h-7 w-px shrink-0 bg-white/12" />;
 
-export default function DockDemo() {
-  const { os } = useOS();
+export default function DockDemo({ t }: { t: Dictionary["demo"] }) {
+  const { os, downloads } = useOS();
   const player = usePlayer();
   const [focused, setFocused] = useState(3);
   const [minimized, setMinimized] = useState<boolean[]>(() => apps.map(() => false));
@@ -97,26 +97,27 @@ export default function DockDemo() {
         <AppWindow
           app={focusedApp.id}
           trackName={player.track.name}
-          playState={player.playing ? "Tocando agora" : "Pausado"}
+          playState={player.playing ? t.nowPlaying : t.paused}
+          terminal={t.terminal}
           command={downloads[os].cmd}
         />
       )}
 
-      {pop === "media" && <MediaPopover player={player} />}
-      {pop === "prs" && <PrsPopover />}
-      {pop === "reviews" && <ReviewsPopover />}
-      {pop === "contrib" && <ContribPopover />}
-      {pop === "vol" && <VolumePopover volume={volume} onChange={setVolume} />}
+      {pop === "media" && <MediaPopover player={player} t={t} />}
+      {pop === "prs" && <PrsPopover t={t} />}
+      {pop === "reviews" && <ReviewsPopover t={t} />}
+      {pop === "contrib" && <ContribPopover t={t} />}
+      {pop === "vol" && <VolumePopover volume={volume} onChange={setVolume} t={t} />}
 
       <div className="absolute inset-x-0 bottom-7 flex justify-center-safe overflow-x-auto px-4 pt-16">
         <div
           role="group"
-          aria-label="Dock de demonstração"
+          aria-label={t.dockLabel}
           className="flex h-16 shrink-0 items-center gap-1 rounded-xl px-2 whitespace-nowrap glass-dock"
         >
           {apps.map((a, i) => {
             const isFocused = focused === i;
-            const state = isFocused ? " (em foco)" : minimized[i] ? " (minimizado)" : "";
+            const state = isFocused ? t.focused : minimized[i] ? t.minimized : "";
             return (
               <span key={a.id} className="relative flex">
                 {hover === i && (
@@ -169,7 +170,7 @@ export default function DockDemo() {
             {...popTrigger("media")}
             className={`flex h-12 items-center gap-2.5 rounded-md px-2 text-left ${active("media")}`}
           >
-            <span className="sr-only">Abrir player: </span>
+            <span className="sr-only">{t.openPlayer}</span>
             <AlbumArt
               className="size-[34px] justify-center rounded-[7px] p-[5px]"
               stripe="h-0.5"
@@ -188,7 +189,7 @@ export default function DockDemo() {
           </button>
           <button
             type="button"
-            aria-label={player.playing ? "Pausar" : "Tocar"}
+            aria-label={player.playing ? t.pause : t.play}
             onClick={player.toggle}
             className="flex size-8 items-center justify-center rounded-sm text-fg hover:bg-white/6"
           >
@@ -196,7 +197,7 @@ export default function DockDemo() {
           </button>
           <button
             type="button"
-            aria-label="Próxima faixa"
+            aria-label={t.next}
             onClick={player.next}
             className="flex size-8 items-center justify-center rounded-sm text-fg hover:bg-white/6"
           >
@@ -206,7 +207,7 @@ export default function DockDemo() {
 
           <button
             {...popTrigger("prs")}
-            aria-label="Seus pull requests, 0 abertos"
+            aria-label={t.prsTrigger}
             className={`flex h-11 items-center gap-[7px] rounded-[10px] px-2.5 text-fg ${active("prs")}`}
           >
             <PullRequestIcon size={18} />
@@ -214,7 +215,7 @@ export default function DockDemo() {
           </button>
           <button
             {...popTrigger("reviews")}
-            aria-label={`Revisões pendentes, ${pendingReviews}`}
+            aria-label={fill(t.reviewsTrigger, { n: pendingReviews })}
             className={`flex h-11 items-center gap-[7px] rounded-[10px] px-2.5 text-fg ${active("reviews")}`}
           >
             <ReviewIcon size={18} />
@@ -226,10 +227,10 @@ export default function DockDemo() {
             {...popTrigger("contrib")}
             className={`flex h-12 items-center gap-2.5 rounded-[10px] px-2.5 text-left ${active("contrib")}`}
           >
-            <span className="sr-only">Contribuições: </span>
+            <span className="sr-only">{t.contribPrefix}</span>
             <span className="flex flex-col gap-px">
-              <span className="text-[15px] font-semibold">{contributions} </span>
-              <span className="text-[11px] text-fg-dock">neste ano</span>
+              <span className="text-[15px] font-semibold">{t.contribTotal} </span>
+              <span className="text-[11px] text-fg-dock">{t.contribThisYear}</span>
             </span>
             <ContributionGrid count={98} cell={4} gap={1.5} radius={1} />
           </button>
@@ -237,27 +238,27 @@ export default function DockDemo() {
 
           <span
             role="img"
-            aria-label="Wi-Fi conectado"
+            aria-label={t.wifi}
             className="flex size-8 items-center justify-center text-fg"
           >
             <WifiIcon size={17} />
           </span>
           <button
             {...popTrigger("vol")}
-            aria-label={`Volume ${volume}%`}
+            aria-label={fill(t.volumeLabel, { n: volume })}
             className={`flex size-8 items-center justify-center rounded-sm text-fg ${active("vol")}`}
           >
             <VolumeIcon level={volume} size={17} />
           </button>
           <span
             role="img"
-            aria-label={`Bateria em ${battery}%`}
+            aria-label={fill(t.battery, { n: battery })}
             className="flex h-8 items-center gap-1.5 px-1.5 text-[13px] text-fg"
           >
             <BatteryIcon size={17} />
             <span aria-hidden="true">{battery}%</span>
           </span>
-          <Clock />
+          <Clock t={t} />
         </div>
       </div>
     </>
