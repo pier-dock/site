@@ -94,11 +94,11 @@ As animações ao rolar usam CSS (`animation-timeline: view()`), sem JavaScript:
 
 ### Intro
 
-Ao abrir a página, a dock aparece logo abaixo do hero, o hero sai dela com um efeito gênio (como o do macOS) e a dock desce até o palco da demo. Três peças:
+Ao abrir a página, a dock surge no meio da tela e um "hover" percorre os itens dela, um a um. Quando ele chega no último, o título aparece; então a dock desce até o palco da demo e o resto do hero entra. Três peças:
 
-- **CSS:** as animações `intro-*` e `genie-slice` em `app/globals.css`. Elas usam só `transform` e `opacity`, então rodam no compositor e ficam fluidas mesmo durante a hidratação.
-- **Fatias:** o hero é dividido em fatias horizontais (selo, linhas do título, subtítulo, botões). Cada uma recebe `genieSlice(n)` (`components/genie.ts`). As de cima saem antes, o que desenha a silhueta curva do gênio.
-- **Medição:** o script inline `components/IntroScript.tsx` mede, antes da primeira pintura, de onde a dock sai e a distância de cada fatia até ela.
+- **CSS:** as animações `intro-*` em `app/globals.css`. Elas usam só `transform` e `opacity`, então rodam no compositor e ficam fluidas mesmo durante a hidratação. Os tempos ficam em variáveis no `:root` (`--intro-step`, `--intro-sweep`, `--intro-title`, `--intro-reveal`).
+- **Ordem:** `introHover(n)` marca os itens da dock que o hover percorre, e `introOrder(n)` dá a posição na cascata do título e do resto do hero (`components/intro.ts`).
+- **Medição:** o script inline `components/IntroScript.tsx` mede, antes da primeira pintura, quanto a dock sobe para ficar no meio da tela e quantos itens dela estão visíveis (no celular são menos, então o título chega antes).
 
 Sem JavaScript, a dock só aparece no lugar. Com `prefers-reduced-motion`, nada anima.
 
