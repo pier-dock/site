@@ -28,7 +28,7 @@ export function WidgetsCarousel({ t }: { t: Dictionary["widgets"] }) {
 
       <DragCarousel
         label={t.carouselLabel}
-        className={`mt-6 flex snap-x snap-mandatory gap-6 overflow-x-auto overflow-y-hidden pt-10 pb-24 carousel-timeline mouse:cursor-grab mouse:snap-none mouse:overflow-x-hidden mouse:select-none mouse:data-dragging:cursor-grabbing ${gutter}`}
+        className={`flex snap-x snap-mandatory gap-6 overflow-x-auto overflow-y-hidden pt-16 pb-24 carousel-timeline mouse:cursor-grab mouse:snap-none mouse:overflow-x-hidden mouse:select-none mouse:data-dragging:cursor-grabbing ${gutter}`}
       >
         {getWidgets(t.items).map((w, i) => (
           <WidgetCard key={w.id} widget={w} index={i} />
