@@ -33,7 +33,7 @@ export function WidgetsCarousel({ t }: { t: Dictionary["widgets"] }) {
         className={`mt-6 flex snap-x snap-mandatory gap-6 overflow-x-auto overflow-y-hidden pt-10 pb-24 carousel-timeline ${gutter}`}
       >
         {getWidgets(t.items).map((w, i) => (
-          <WidgetCard key={w.id} widget={w} moreLabel={t.more} index={i} />
+          <WidgetCard key={w.id} widget={w} index={i} />
         ))}
       </div>
     </section>

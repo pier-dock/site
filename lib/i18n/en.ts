@@ -77,7 +77,6 @@ export const en = {
     title: "There's a widget for that.",
     subtitle: "Useful info without opening another window.",
     carouselLabel: "Pier widgets",
-    more: "Learn more about the widget",
     items: {
       media: {
         name: "Media",

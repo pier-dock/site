@@ -45,14 +45,6 @@ export function CodeIcon(props: IconProps) {
   );
 }
 
-export function ChevronRightIcon(props: IconProps) {
-  return (
-    <Icon strokeWidth={2.4} {...props}>
-      <path d="m9 6 6 6-6 6" />
-    </Icon>
-  );
-}
-
 export function CopyIcon(props: IconProps) {
   return (
     <Icon {...props}>
@@ -260,14 +252,5 @@ export function PlayIcon({ size = 20, ...props }: IconProps) {
     >
       <path d="M8 5v14l11-7z" />
     </svg>
-  );
-}
-
-export function ArrowUpRightIcon(props: IconProps) {
-  return (
-    <Icon strokeWidth={2.2} {...props}>
-      <path d="M7 17 17 7" />
-      <path d="M8 7h9v9" />
-    </Icon>
   );
 }

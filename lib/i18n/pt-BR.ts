@@ -79,7 +79,6 @@ export const ptBR: Dictionary = {
     title: "Tem um widget para isso.",
     subtitle: "Informação útil sem abrir mais uma janela.",
     carouselLabel: "Widgets do Pier",
-    more: "Saiba mais sobre o widget",
     items: {
       media: {
         name: "Mídia",

@@ -1,7 +1,6 @@
 import type { StaticImageData } from "next/image";
 import spotifyIcon from "@/assets/apps/spotify.svg";
 import type { Dictionary } from "./i18n";
-import { links } from "./site";
 
 export type WidgetIcon = "music" | "timer" | "calendar" | "sun" | "pullRequest" | "pulse";
 
@@ -17,8 +16,6 @@ type WidgetBase = {
   theme: string;
   /** Resumo lido por leitores de tela no lugar da ilustração. */
   visualLabel: string;
-  /** Para onde o card leva: a documentação do widget no README do app. */
-  docs: string;
 };
 
 export type MediaData = {
@@ -127,7 +124,6 @@ export function getWidgets(t: Dictionary["widgets"]["items"]): Widget[] {
       accent: "text-media-accent",
       theme: "widget-media",
       visualLabel: media.visualLabel,
-      docs: links.docs.features,
       data: {
         track: "Weird Fishes/Arpeggi",
         artist: "Radiohead",
@@ -145,7 +141,6 @@ export function getWidgets(t: Dictionary["widgets"]["items"]): Widget[] {
       accent: "text-coral-soft",
       theme: "widget-pomodoro",
       visualLabel: pomodoro.visualLabel,
-      docs: links.docs.widgets,
       data: {
         remaining: "18:42",
         phase: pomodoro.phase,
@@ -163,7 +158,6 @@ export function getWidgets(t: Dictionary["widgets"]["items"]): Widget[] {
       accent: "text-agenda-accent",
       theme: "widget-agenda",
       visualLabel: agenda.visualLabel,
-      docs: links.docs.widgets,
       data: {
         nowLabel: agenda.now,
         join: agenda.join,
@@ -179,7 +173,6 @@ export function getWidgets(t: Dictionary["widgets"]["items"]): Widget[] {
       accent: "text-weather-sun",
       theme: "widget-weather",
       visualLabel: weather.visualLabel,
-      docs: links.docs.widgets,
       data: {
         temp: "24°",
         summary: weather.summary,
@@ -195,7 +188,6 @@ export function getWidgets(t: Dictionary["widgets"]["items"]): Widget[] {
       accent: "text-fg",
       theme: "widget-github",
       visualLabel: github.visualLabel,
-      docs: links.docs.github,
       data: {
         total: github.total,
         caption: github.caption,
@@ -213,7 +205,6 @@ export function getWidgets(t: Dictionary["widgets"]["items"]): Widget[] {
       accent: "text-lilac",
       theme: "widget-system",
       visualLabel: system.visualLabel,
-      docs: links.docs.features,
       data: {
         cpuLabel: system.cpu,
         cpu: 34,
