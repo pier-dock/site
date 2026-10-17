@@ -7,15 +7,15 @@ const config = { repo: "acme/pier", version: "1.4.0" };
 const downloads = buildDownloads({ ...config, t: getDictionary("en").downloads });
 
 describe("buildDownloads", () => {
-  it("monta as URLs da última release com repo e versão", () => {
+  it("monta as URLs da release da versão informada", () => {
     expect(downloads.mac.url).toBe(
-      "https://github.com/acme/pier/releases/latest/download/Pier_1.4.0_universal.dmg",
+      "https://github.com/acme/pier/releases/download/v1.4.0/Pier_1.4.0_universal.dmg",
     );
     expect(downloads.win.url).toBe(
-      "https://github.com/acme/pier/releases/latest/download/Pier_1.4.0_x64-setup.exe",
+      "https://github.com/acme/pier/releases/download/v1.4.0/Pier_1.4.0_x64-setup.exe",
     );
     expect(downloads.linux.url).toBe(
-      "https://github.com/acme/pier/releases/latest/download/Pier_1.4.0_amd64.AppImage",
+      "https://github.com/acme/pier/releases/download/v1.4.0/Pier_1.4.0_amd64.AppImage",
     );
   });
 

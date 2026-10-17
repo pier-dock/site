@@ -11,7 +11,8 @@ export const siteUrl = trimSlash(
     (vercelProduction ? `https://${vercelProduction}` : "http://localhost:3000"),
 );
 export const githubRepo = process.env.NEXT_PUBLIC_GITHUB_REPO || "pier-dock/pier-dock";
-export const version = (process.env.NEXT_PUBLIC_VERSION || "0.2.0").replace(/^v/, "");
+/** Só vale quando o GitHub não responde; a versão de verdade vem de `getLatestVersion`. */
+export const fallbackVersion = (process.env.NEXT_PUBLIC_VERSION || "0.3.0").replace(/^v/, "");
 
 export const authors = [{ name: "Nathan Ferreira" }, { name: "Matheus Basilio" }] as const;
 export function formatAuthors(lang: string) {

@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { brand } from "./brand";
 import { localePath, locales, type Dictionary, type Locale } from "./i18n";
-import { authors, githubRepo, links, siteUrl, version } from "./site";
+import { authors, githubRepo, links, siteUrl } from "./site";
 
 /** hreflang → caminho. O x-default aponta para o inglês, servido na raiz. */
 export const languages: Record<string, string> = {
@@ -55,7 +55,7 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export function buildJsonLd(t: Dictionary, locale: Locale) {
+export function buildJsonLd(t: Dictionary, locale: Locale, version: string) {
   const org = `${siteUrl}/#organization`;
   const page = absoluteUrl(localePath[locale]);
   const image = absoluteUrl(ogImagePath(locale));
