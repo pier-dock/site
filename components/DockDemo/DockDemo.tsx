@@ -14,6 +14,7 @@ import {
   VolumeIcon,
   WifiIcon,
 } from "../icons";
+import { introHover } from "../intro";
 import { AppWindow } from "./AppWindow";
 import { Clock } from "./Clock";
 import { apps, battery, pendingReviews } from "./data";
@@ -34,6 +35,9 @@ const divider = <span aria-hidden="true" className="mx-1.5 h-7 w-px shrink-0 bg-
 
 // No celular a dock mostra só os apps e a capa do player; o resto aparece a partir do sm.
 const desktopOnly = "hidden sm:contents";
+
+// O hover da intro passa primeiro pelos apps e segue pelos widgets, na ordem da dock.
+const widget = (n: number) => introHover(apps.length + n);
 
 export default function DockDemo({ t }: { t: Dictionary["demo"] }) {
   const player = usePlayer();
@@ -148,12 +152,13 @@ export default function DockDemo({ t }: { t: Dictionary["demo"] }) {
                   }`}
                 >
                   <Image
+                    {...introHover(i)}
                     src={a.icon}
                     alt=""
                     width={44}
                     height={44}
                     loading="eager"
-                    className={`size-9 rounded-[9px] shadow-app-icon transition-transform duration-150 ease-out sm:size-11 sm:rounded-[11px] ${
+                    className={`intro-hover size-9 rounded-[9px] shadow-app-icon transition-transform duration-150 ease-out [--hover-lift:-6px] [--hover-scale:1.12] sm:size-11 sm:rounded-[11px] ${
                       hover === i ? "motion-safe:-translate-y-1.5 motion-safe:scale-[1.12]" : ""
                     }`}
                   />
@@ -170,7 +175,8 @@ export default function DockDemo({ t }: { t: Dictionary["demo"] }) {
 
           <button
             {...popTrigger("media")}
-            className={`flex h-12 items-center gap-2.5 rounded-md px-1.5 text-left sm:px-2 ${active("media")}`}
+            {...widget(0)}
+            className={`intro-hover flex h-12 items-center gap-2.5 rounded-md px-1.5 text-left sm:px-2 ${active("media")}`}
           >
             <span className="sr-only">{t.openPlayer}</span>
             <AlbumArt
@@ -194,7 +200,8 @@ export default function DockDemo({ t }: { t: Dictionary["demo"] }) {
               type="button"
               aria-label={player.playing ? t.pause : t.play}
               onClick={player.toggle}
-              className="flex size-8 items-center justify-center rounded-sm text-fg hover:bg-white/6"
+              {...widget(1)}
+              className="intro-hover flex size-8 items-center justify-center rounded-sm text-fg hover:bg-white/6"
             >
               <PlayPauseIcon playing={player.playing} size={15} />
             </button>
@@ -202,7 +209,8 @@ export default function DockDemo({ t }: { t: Dictionary["demo"] }) {
               type="button"
               aria-label={t.next}
               onClick={player.next}
-              className="flex size-8 items-center justify-center rounded-sm text-fg hover:bg-white/6"
+              {...widget(2)}
+              className="intro-hover flex size-8 items-center justify-center rounded-sm text-fg hover:bg-white/6"
             >
               <SkipForwardIcon size={15} />
             </button>
@@ -210,16 +218,18 @@ export default function DockDemo({ t }: { t: Dictionary["demo"] }) {
 
             <button
               {...popTrigger("prs")}
+              {...widget(3)}
               aria-label={t.prsTrigger}
-              className={`flex h-11 items-center gap-[7px] rounded-[10px] px-2.5 text-fg ${active("prs")}`}
+              className={`intro-hover flex h-11 items-center gap-[7px] rounded-[10px] px-2.5 text-fg ${active("prs")}`}
             >
               <PullRequestIcon size={18} />
               <span className="text-[13px] font-medium text-fg-dock">0</span>
             </button>
             <button
               {...popTrigger("reviews")}
+              {...widget(4)}
               aria-label={fill(t.reviewsTrigger, { n: pendingReviews })}
-              className={`flex h-11 items-center gap-[7px] rounded-[10px] px-2.5 text-fg ${active("reviews")}`}
+              className={`intro-hover flex h-11 items-center gap-[7px] rounded-[10px] px-2.5 text-fg ${active("reviews")}`}
             >
               <ReviewIcon size={18} />
               <span className="rounded-[6px] bg-coral px-1.5 py-px text-xs font-semibold text-coral-ink">
@@ -228,7 +238,8 @@ export default function DockDemo({ t }: { t: Dictionary["demo"] }) {
             </button>
             <button
               {...popTrigger("contrib")}
-              className={`flex h-12 items-center gap-2.5 rounded-[10px] px-2.5 text-left ${active("contrib")}`}
+              {...widget(5)}
+              className={`intro-hover flex h-12 items-center gap-2.5 rounded-[10px] px-2.5 text-left ${active("contrib")}`}
             >
               <span className="sr-only">{t.contribPrefix}</span>
               <span className="flex flex-col gap-px">
@@ -242,26 +253,31 @@ export default function DockDemo({ t }: { t: Dictionary["demo"] }) {
             <span
               role="img"
               aria-label={t.wifi}
-              className="flex size-8 items-center justify-center text-fg"
+              {...widget(6)}
+              className="intro-hover flex size-8 items-center justify-center text-fg"
             >
               <WifiIcon size={17} />
             </span>
             <button
               {...popTrigger("vol")}
+              {...widget(7)}
               aria-label={fill(t.volumeLabel, { n: volume })}
-              className={`flex size-8 items-center justify-center rounded-sm text-fg ${active("vol")}`}
+              className={`intro-hover flex size-8 items-center justify-center rounded-sm text-fg ${active("vol")}`}
             >
               <VolumeIcon level={volume} size={17} />
             </button>
             <span
               role="img"
               aria-label={fill(t.battery, { n: battery })}
-              className="flex h-8 items-center gap-1.5 px-1.5 text-[13px] text-fg"
+              {...widget(8)}
+              className="intro-hover flex h-8 items-center gap-1.5 px-1.5 text-[13px] text-fg"
             >
               <BatteryIcon size={17} />
               <span aria-hidden="true">{battery}%</span>
             </span>
-            <Clock t={t} />
+            <span {...widget(9)} className="intro-hover flex">
+              <Clock t={t} />
+            </span>
           </span>
         </div>
       </div>
