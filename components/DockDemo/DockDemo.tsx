@@ -114,7 +114,11 @@ export default function DockDemo({ t }: { t: Dictionary["demo"] }) {
       {pop === "contrib" && <ContribPopover t={t} />}
       {pop === "vol" && <VolumePopover volume={volume} onChange={setVolume} t={t} />}
 
-      <div className="absolute inset-x-0 bottom-7 flex intro-dock justify-center-safe overflow-x-auto px-2 pt-16 sm:px-4">
+      {/*
+        O overflow-x-auto também corta na vertical: o pb dá espaço para a sombra da dock
+        (20px + 50px de blur) e o -bottom compensa, deixando a dock a 28px do fim do palco.
+      */}
+      <div className="absolute inset-x-0 -bottom-12 flex intro-dock justify-center-safe overflow-x-auto px-2 pt-16 pb-[76px] sm:px-4">
         <div
           role="group"
           aria-label={t.dockLabel}
