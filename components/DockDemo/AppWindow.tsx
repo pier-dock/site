@@ -17,7 +17,7 @@ export function AppWindow({ app, trackName, playState }: AppWindowProps) {
   return (
     <div
       aria-hidden="true"
-      className={`absolute top-14 left-1/2 flex h-[250px] w-[min(600px,86%)] -translate-x-1/2 flex-col overflow-hidden rounded-md border shadow-window ${w.bg} ${w.border}`}
+      className={`absolute top-14 left-1/2 flex h-[200px] w-[min(600px,86%)] -translate-x-1/2 flex-col overflow-hidden rounded-md border shadow-window sm:h-[250px] ${w.bg} ${w.border}`}
     >
       <div className={`relative flex h-[34px] shrink-0 items-center gap-1.5 px-3 ${w.bar}`}>
         <span className={`size-2.5 rounded-full ${w.dots}`} />
@@ -32,7 +32,7 @@ export function AppWindow({ app, trackName, playState }: AppWindowProps) {
 
       {app === "vscode" && (
         <div className="flex flex-1 font-mono text-xs">
-          <div className="flex w-[150px] flex-col gap-1 border-r border-code-divider bg-code-side py-2.5 text-fg-3">
+          <div className="hidden w-[150px] flex-col gap-1 border-r border-code-divider bg-code-side py-2.5 text-fg-3 sm:flex">
             <span className="px-3 text-[10px] tracking-[0.08em] text-code-side-head">PIER</span>
             {editorFiles.map((f) => (
               <span
@@ -83,18 +83,20 @@ export function AppWindow({ app, trackName, playState }: AppWindowProps) {
       )}
 
       {app === "spotify" && (
-        <div className="flex flex-1 items-center gap-5 bg-linear-to-b from-spotify-glow to-vinyl p-[22px]">
+        <div className="flex flex-1 items-center gap-4 bg-linear-to-b from-spotify-glow to-vinyl p-4 sm:gap-5 sm:p-[22px]">
           <AlbumArt
-            className="size-[140px] justify-center rounded-[4px] p-4 shadow-cover-sm"
+            className="size-16 shrink-0 justify-center rounded-[4px] p-2 shadow-cover-sm sm:size-[140px] sm:p-4"
             stripe="h-1 rounded-[2px]"
             gap="gap-1"
           />
-          <span className="flex flex-col gap-1.5">
+          <span className="flex min-w-0 flex-col gap-1.5">
             <span className="text-[11px] tracking-[0.08em] text-spotify-sub uppercase">
               {playState}
             </span>
-            <span className="text-[26px] font-bold tracking-[-0.03em] text-white">{trackName}</span>
-            <span className="text-sm text-spotify-sub">Radiohead · In Rainbows</span>
+            <span className="text-base leading-tight font-bold tracking-[-0.03em] break-words text-white sm:text-[26px] sm:leading-normal">
+              {trackName}
+            </span>
+            <span className="truncate text-sm text-spotify-sub">Radiohead · In Rainbows</span>
           </span>
         </div>
       )}

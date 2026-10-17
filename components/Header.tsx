@@ -10,7 +10,7 @@ type HeaderProps = { t: Dictionary["nav"]; locale: Locale };
 export function Header({ t, locale }: HeaderProps) {
   return (
     <header className="sticky top-0 z-20 intro-header glass-bar">
-      <div className="mx-auto flex h-16 max-w-[1200px] items-center gap-6 px-6">
+      <div className="mx-auto flex h-16 max-w-[1200px] items-center gap-3 px-6 sm:gap-6">
         <a
           href="#top"
           aria-label={t.home}

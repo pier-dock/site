@@ -9,11 +9,11 @@ import { useOS } from "./OSProvider";
 import { useCopy } from "./useCopy";
 
 const primary =
-  "flex h-[52px] items-center gap-2.5 rounded-[13px] bg-coral px-[22px] text-base font-semibold text-coral-ink shadow-cta transition-[filter] hover:brightness-110";
+  "flex h-[52px] w-full items-center justify-center gap-2.5 rounded-[13px] bg-coral px-[22px] text-base font-semibold text-coral-ink shadow-cta transition-[filter] hover:brightness-110 sm:w-auto";
 const secondary =
-  "flex h-[52px] items-center gap-2.5 rounded-[13px] border border-line-14 bg-white/7 px-5 text-base font-medium text-fg transition-colors hover:bg-white/10";
+  "flex h-[52px] w-full items-center justify-center gap-2.5 rounded-[13px] border border-line-14 bg-white/7 px-5 text-base font-medium text-fg transition-colors hover:bg-white/10 sm:w-auto";
 const meta =
-  "genie-slice m-0 flex h-5 flex-wrap justify-center gap-1.5 self-stretch text-[13px] text-fg-3";
+  "genie-slice m-0 flex min-h-5 flex-wrap justify-center gap-1.5 self-stretch text-[13px] text-fg-3";
 
 export function HeroCta({ t }: { t: Dictionary["hero"] }) {
   const { os, isMobile, setOs, downloads } = useOS();
@@ -25,7 +25,7 @@ export function HeroCta({ t }: { t: Dictionary["hero"] }) {
     <div className="mt-2 flex flex-col items-center gap-3.5 self-stretch">
       <div
         {...genieSlice(4)}
-        className="flex genie-slice flex-wrap justify-center gap-3 self-stretch"
+        className="mx-auto flex w-full max-w-sm genie-slice flex-wrap justify-center gap-3 sm:max-w-none"
       >
         {isMobile ? (
           <button

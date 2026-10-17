@@ -32,6 +32,9 @@ const triggerId = (id: PopoverId) => `dock-trigger-${id}`;
 
 const divider = <span aria-hidden="true" className="mx-1.5 h-7 w-px shrink-0 bg-white/12" />;
 
+// No celular a dock mostra só os apps e a capa do player; o resto aparece a partir do sm.
+const desktopOnly = "hidden sm:contents";
+
 export default function DockDemo({ t }: { t: Dictionary["demo"] }) {
   const player = usePlayer();
   const [focused, setFocused] = useState(3);
@@ -107,12 +110,12 @@ export default function DockDemo({ t }: { t: Dictionary["demo"] }) {
       {pop === "contrib" && <ContribPopover t={t} />}
       {pop === "vol" && <VolumePopover volume={volume} onChange={setVolume} t={t} />}
 
-      <div className="absolute inset-x-0 bottom-7 flex intro-dock justify-center-safe overflow-x-auto px-4 pt-16">
+      <div className="absolute inset-x-0 bottom-7 flex intro-dock justify-center-safe overflow-x-auto px-2 pt-16 sm:px-4">
         <div
           role="group"
           aria-label={t.dockLabel}
           data-intro-dock
-          className="flex h-16 shrink-0 items-center gap-1 rounded-xl px-2 whitespace-nowrap glass-dock"
+          className="flex h-14 shrink-0 items-center gap-1 rounded-xl px-1.5 whitespace-nowrap glass-dock sm:h-16 sm:px-2"
         >
           {apps.map((a, i) => {
             const isFocused = focused === i;
@@ -123,7 +126,7 @@ export default function DockDemo({ t }: { t: Dictionary["demo"] }) {
                   <span
                     role="tooltip"
                     id={`dock-tip-${a.id}`}
-                    className="pointer-events-none absolute bottom-16 left-1/2 flex -translate-x-1/2 items-center gap-2 rounded-sm border border-line-12 bg-tooltip py-1.5 pr-2 pl-2.5 text-xs font-medium shadow-tooltip"
+                    className="pointer-events-none absolute bottom-16 left-1/2 hidden -translate-x-1/2 items-center gap-2 rounded-sm border border-line-12 bg-tooltip py-1.5 pr-2 pl-2.5 text-xs font-medium shadow-tooltip sm:flex"
                   >
                     {a.name}
                     <kbd className="rounded bg-white/10 px-[5px] py-0.5 font-mono text-[10.5px] text-fg-2">
@@ -140,7 +143,7 @@ export default function DockDemo({ t }: { t: Dictionary["demo"] }) {
                   onMouseLeave={() => setHover(-1)}
                   onFocus={() => setHover(i)}
                   onBlur={() => setHover(-1)}
-                  className={`flex h-14 w-12 flex-col items-center justify-center gap-[5px] rounded-md ${
+                  className={`flex h-12 w-10 flex-col items-center justify-center gap-1 rounded-md sm:h-14 sm:w-12 sm:gap-[5px] ${
                     isFocused ? "bg-white/8" : ""
                   }`}
                 >
@@ -150,7 +153,7 @@ export default function DockDemo({ t }: { t: Dictionary["demo"] }) {
                     width={44}
                     height={44}
                     loading="eager"
-                    className={`size-11 rounded-[11px] shadow-app-icon transition-transform duration-150 ease-out ${
+                    className={`size-9 rounded-[9px] shadow-app-icon transition-transform duration-150 ease-out sm:size-11 sm:rounded-[11px] ${
                       hover === i ? "motion-safe:-translate-y-1.5 motion-safe:scale-[1.12]" : ""
                     }`}
                   />
@@ -167,7 +170,7 @@ export default function DockDemo({ t }: { t: Dictionary["demo"] }) {
 
           <button
             {...popTrigger("media")}
-            className={`flex h-12 items-center gap-2.5 rounded-md px-2 text-left ${active("media")}`}
+            className={`flex h-12 items-center gap-2.5 rounded-md px-1.5 text-left sm:px-2 ${active("media")}`}
           >
             <span className="sr-only">{t.openPlayer}</span>
             <AlbumArt
@@ -175,7 +178,7 @@ export default function DockDemo({ t }: { t: Dictionary["demo"] }) {
               stripe="h-0.5"
               gap="gap-0.5"
             />
-            <span className="flex w-[132px] flex-col gap-0.5">
+            <span className="hidden w-[132px] flex-col gap-0.5 sm:flex">
               <span className="truncate text-[13px] font-medium">{player.track.name} </span>
               <span className="text-xs text-fg-dock">Radiohead</span>
               <span className="mt-0.5 flex h-0.5 rounded-[1px] bg-white/12">
@@ -186,78 +189,80 @@ export default function DockDemo({ t }: { t: Dictionary["demo"] }) {
               </span>
             </span>
           </button>
-          <button
-            type="button"
-            aria-label={player.playing ? t.pause : t.play}
-            onClick={player.toggle}
-            className="flex size-8 items-center justify-center rounded-sm text-fg hover:bg-white/6"
-          >
-            <PlayPauseIcon playing={player.playing} size={15} />
-          </button>
-          <button
-            type="button"
-            aria-label={t.next}
-            onClick={player.next}
-            className="flex size-8 items-center justify-center rounded-sm text-fg hover:bg-white/6"
-          >
-            <SkipForwardIcon size={15} />
-          </button>
-          {divider}
+          <span className={desktopOnly}>
+            <button
+              type="button"
+              aria-label={player.playing ? t.pause : t.play}
+              onClick={player.toggle}
+              className="flex size-8 items-center justify-center rounded-sm text-fg hover:bg-white/6"
+            >
+              <PlayPauseIcon playing={player.playing} size={15} />
+            </button>
+            <button
+              type="button"
+              aria-label={t.next}
+              onClick={player.next}
+              className="flex size-8 items-center justify-center rounded-sm text-fg hover:bg-white/6"
+            >
+              <SkipForwardIcon size={15} />
+            </button>
+            {divider}
 
-          <button
-            {...popTrigger("prs")}
-            aria-label={t.prsTrigger}
-            className={`flex h-11 items-center gap-[7px] rounded-[10px] px-2.5 text-fg ${active("prs")}`}
-          >
-            <PullRequestIcon size={18} />
-            <span className="text-[13px] font-medium text-fg-dock">0</span>
-          </button>
-          <button
-            {...popTrigger("reviews")}
-            aria-label={fill(t.reviewsTrigger, { n: pendingReviews })}
-            className={`flex h-11 items-center gap-[7px] rounded-[10px] px-2.5 text-fg ${active("reviews")}`}
-          >
-            <ReviewIcon size={18} />
-            <span className="rounded-[6px] bg-coral px-1.5 py-px text-xs font-semibold text-coral-ink">
-              {pendingReviews}
-            </span>
-          </button>
-          <button
-            {...popTrigger("contrib")}
-            className={`flex h-12 items-center gap-2.5 rounded-[10px] px-2.5 text-left ${active("contrib")}`}
-          >
-            <span className="sr-only">{t.contribPrefix}</span>
-            <span className="flex flex-col gap-px">
-              <span className="text-[15px] font-semibold">{t.contribTotal} </span>
-              <span className="text-[11px] text-fg-dock">{t.contribThisYear}</span>
-            </span>
-            <ContributionGrid count={98} cell={4} gap={1.5} radius={1} />
-          </button>
-          {divider}
+            <button
+              {...popTrigger("prs")}
+              aria-label={t.prsTrigger}
+              className={`flex h-11 items-center gap-[7px] rounded-[10px] px-2.5 text-fg ${active("prs")}`}
+            >
+              <PullRequestIcon size={18} />
+              <span className="text-[13px] font-medium text-fg-dock">0</span>
+            </button>
+            <button
+              {...popTrigger("reviews")}
+              aria-label={fill(t.reviewsTrigger, { n: pendingReviews })}
+              className={`flex h-11 items-center gap-[7px] rounded-[10px] px-2.5 text-fg ${active("reviews")}`}
+            >
+              <ReviewIcon size={18} />
+              <span className="rounded-[6px] bg-coral px-1.5 py-px text-xs font-semibold text-coral-ink">
+                {pendingReviews}
+              </span>
+            </button>
+            <button
+              {...popTrigger("contrib")}
+              className={`flex h-12 items-center gap-2.5 rounded-[10px] px-2.5 text-left ${active("contrib")}`}
+            >
+              <span className="sr-only">{t.contribPrefix}</span>
+              <span className="flex flex-col gap-px">
+                <span className="text-[15px] font-semibold">{t.contribTotal} </span>
+                <span className="text-[11px] text-fg-dock">{t.contribThisYear}</span>
+              </span>
+              <ContributionGrid count={98} cell={4} gap={1.5} radius={1} />
+            </button>
+            {divider}
 
-          <span
-            role="img"
-            aria-label={t.wifi}
-            className="flex size-8 items-center justify-center text-fg"
-          >
-            <WifiIcon size={17} />
+            <span
+              role="img"
+              aria-label={t.wifi}
+              className="flex size-8 items-center justify-center text-fg"
+            >
+              <WifiIcon size={17} />
+            </span>
+            <button
+              {...popTrigger("vol")}
+              aria-label={fill(t.volumeLabel, { n: volume })}
+              className={`flex size-8 items-center justify-center rounded-sm text-fg ${active("vol")}`}
+            >
+              <VolumeIcon level={volume} size={17} />
+            </button>
+            <span
+              role="img"
+              aria-label={fill(t.battery, { n: battery })}
+              className="flex h-8 items-center gap-1.5 px-1.5 text-[13px] text-fg"
+            >
+              <BatteryIcon size={17} />
+              <span aria-hidden="true">{battery}%</span>
+            </span>
+            <Clock t={t} />
           </span>
-          <button
-            {...popTrigger("vol")}
-            aria-label={fill(t.volumeLabel, { n: volume })}
-            className={`flex size-8 items-center justify-center rounded-sm text-fg ${active("vol")}`}
-          >
-            <VolumeIcon level={volume} size={17} />
-          </button>
-          <span
-            role="img"
-            aria-label={fill(t.battery, { n: battery })}
-            className="flex h-8 items-center gap-1.5 px-1.5 text-[13px] text-fg"
-          >
-            <BatteryIcon size={17} />
-            <span aria-hidden="true">{battery}%</span>
-          </span>
-          <Clock t={t} />
         </div>
       </div>
     </>
