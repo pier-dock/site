@@ -100,6 +100,7 @@ export function DownloadPanel({ t }: { t: Dictionary["download"] }) {
             <li key={a.url}>
               <a
                 href={a.url}
+                {...(a.newTab && { target: "_blank", rel: "noopener" })}
                 className="flex h-[30px] items-center rounded-sm border border-line-10 bg-white/5 px-2.5 text-xs text-fg-soft transition-colors hover:text-fg"
               >
                 {a.label}

@@ -2,7 +2,8 @@ import type { Dictionary } from "./i18n";
 import type { OS } from "./os";
 import { githubRepo } from "./site";
 
-export type DownloadLink = { label: string; url: string };
+/** `newTab` só para páginas: arquivo baixa sem sair do site, e em aba nova abriria uma aba vazia. */
+export type DownloadLink = { label: string; url: string; newTab?: boolean };
 
 export type Download = {
   label: string;
@@ -30,7 +31,11 @@ export function buildDownloads({ repo, version: v, t }: DownloadConfig): Record<
     appImage: `Pier_${v}_amd64.AppImage`,
     deb: `Pier_${v}_amd64.deb`,
   };
-  const release = { label: t.allReleases, url: `https://github.com/${repo}/releases` };
+  const release = {
+    label: t.allReleases,
+    url: `https://github.com/${repo}/releases`,
+    newTab: true,
+  };
 
   return {
     mac: {

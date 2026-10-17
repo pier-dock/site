@@ -37,7 +37,13 @@ export function Header({ t, locale }: HeaderProps) {
               </a>
             </li>
             <li>
-              <a href={links.repo} aria-label={t.githubLabel} className={navLink}>
+              <a
+                href={links.repo}
+                target="_blank"
+                rel="noopener"
+                aria-label={t.githubLabel}
+                className={navLink}
+              >
                 {t.github}
               </a>
             </li>

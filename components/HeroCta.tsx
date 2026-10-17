@@ -42,7 +42,7 @@ export function HeroCta({ t }: { t: Dictionary["hero"] }) {
             {d.button}
           </a>
         )}
-        <a href={links.repo} className={secondary}>
+        <a href={links.repo} target="_blank" rel="noopener" className={secondary}>
           <CodeIcon size={18} />
           {t.github}
         </a>
