@@ -3,9 +3,7 @@ import braveIcon from "@/assets/apps/brave.svg";
 import spotifyIcon from "@/assets/apps/spotify.svg";
 import vscodeIcon from "@/assets/apps/vscode.svg";
 import type { Dictionary } from "@/lib/i18n";
-import { links } from "@/lib/site";
 import { ContributionGrid } from "./ContributionGrid";
-import { ArrowUpRightIcon } from "./icons";
 
 const cardBody = "relative m-0 text-[15px] leading-[1.55] text-fg-2";
 
@@ -24,37 +22,24 @@ const platforms = [
 type FeatureCardProps = {
   id: string;
   title: string;
-  href: string;
   className: string;
   children: React.ReactNode;
 };
 
-/** Um link vazio por cima do card inteiro, nomeado pelo título, deixa o card todo clicável. */
-function FeatureCard({ id, title, href, className, children }: FeatureCardProps) {
+function FeatureCard({ id, title, className, children }: FeatureCardProps) {
   const titleId = `feature-${id}`;
   return (
     <article
-      className={`group relative flex flex-col gap-3 overflow-hidden rounded-xl border border-line-8 bg-surface p-8 transition-[transform,border-color,background-color,box-shadow] duration-300 ease-out hover:[transform:translateY(-4px)] hover:border-line-16 hover:bg-surface-hover hover:shadow-card-hover has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-coral-soft ${className}`}
+      className={`group relative flex flex-col gap-3 overflow-hidden rounded-xl border border-line-8 bg-surface p-8 transition-[transform,border-color,background-color,box-shadow] duration-300 ease-out hover:[transform:translateY(-4px)] hover:border-line-16 hover:bg-surface-hover hover:shadow-card-hover ${className}`}
     >
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(70%_60%_at_50%_0%,var(--color-line-10),transparent_70%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
       />
-      <span
-        aria-hidden="true"
-        className="absolute top-7 right-7 flex size-8 items-center justify-center rounded-full border border-line-12 bg-white/5 text-fg-2 opacity-0 transition-[opacity,transform] duration-300 group-hover:[transform:translate(2px,-2px)] group-hover:opacity-100"
-      >
-        <ArrowUpRightIcon size={14} />
-      </span>
-      <h3 id={titleId} className="relative m-0 pr-10 text-[22px] font-semibold tracking-[-0.02em]">
+      <h3 id={titleId} className="relative m-0 text-[22px] font-semibold tracking-[-0.02em]">
         {title}
       </h3>
       {children}
-      <a
-        href={href}
-        aria-labelledby={titleId}
-        className="absolute inset-0 z-10 rounded-xl outline-none"
-      />
     </article>
   );
 }
@@ -83,7 +68,6 @@ export function Features({ t }: { t: Dictionary["features"] }) {
           <FeatureCard
             id="github"
             title={t.github.title}
-            href={links.docs.github}
             className="min-h-[300px] flex-[2_1_586px] reveal"
           >
             <p className={`${cardBody} max-w-[420px]`}>{t.github.body}</p>
@@ -100,7 +84,6 @@ export function Features({ t }: { t: Dictionary["features"] }) {
           <FeatureCard
             id="glass"
             title={t.glass.title}
-            href={links.docs.features}
             className="min-h-[300px] flex-[1_1_386px] reveal reveal-step-1"
           >
             <div
@@ -121,7 +104,6 @@ export function Features({ t }: { t: Dictionary["features"] }) {
           <FeatureCard
             id="shortcuts"
             title={t.shortcuts.title}
-            href={links.docs.usage}
             className="min-h-[280px] flex-[1_1_386px] reveal"
           >
             <p className={cardBody}>{t.shortcuts.body}</p>
@@ -149,7 +131,6 @@ export function Features({ t }: { t: Dictionary["features"] }) {
           <FeatureCard
             id="platforms"
             title={t.platforms.title}
-            href="#download"
             className="min-h-[280px] flex-[1_1_386px] reveal reveal-step-1"
           >
             <p className={cardBody}>{t.platforms.body}</p>

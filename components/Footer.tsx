@@ -18,17 +18,29 @@ export function Footer({ t, lang }: { t: Dictionary["footer"]; lang: string }) {
         <nav aria-label={t.label}>
           <ul className="flex flex-wrap gap-6">
             <li>
-              <a href={links.repo} aria-label={t.githubLabel} className={footerLink}>
+              <a
+                href={links.repo}
+                target="_blank"
+                rel="noopener"
+                aria-label={t.githubLabel}
+                className={footerLink}
+              >
                 {t.github}
               </a>
             </li>
             <li>
-              <a href={links.releases} aria-label={t.releasesLabel} className={footerLink}>
+              <a
+                href={links.releases}
+                target="_blank"
+                rel="noopener"
+                aria-label={t.releasesLabel}
+                className={footerLink}
+              >
                 {t.releases}
               </a>
             </li>
             <li>
-              <a href={links.issues} className={footerLink}>
+              <a href={links.issues} target="_blank" rel="noopener" className={footerLink}>
                 {t.issues}
               </a>
             </li>

@@ -16,13 +16,14 @@ describe.each(locales)("SEO em %s", (locale) => {
   });
 
   it("descreve o app como SoftwareApplication gratuito nos três sistemas", () => {
-    const app = buildJsonLd(t, locale)["@graph"][0];
+    const app = buildJsonLd(t, locale, "1.4.0")["@graph"][0];
     expect(app).toMatchObject({
       "@type": "SoftwareApplication",
       operatingSystem: "macOS, Windows, Linux",
       applicationCategory: "UtilitiesApplication",
       offers: { price: 0 },
       inLanguage: t.lang,
+      softwareVersion: "1.4.0",
     });
     expect(app?.screenshot).toContain(ogImagePath(locale));
   });

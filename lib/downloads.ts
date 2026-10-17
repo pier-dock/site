@@ -1,8 +1,9 @@
 import type { Dictionary } from "./i18n";
 import type { OS } from "./os";
-import { githubRepo, version } from "./site";
+import { githubRepo } from "./site";
 
-export type DownloadLink = { label: string; url: string };
+/** `newTab` só para páginas: arquivo baixa sem sair do site, e em aba nova abriria uma aba vazia. */
+export type DownloadLink = { label: string; url: string; newTab?: boolean };
 
 export type Download = {
   label: string;
@@ -17,8 +18,10 @@ export type Download = {
 
 type DownloadConfig = { repo: string; version: string; t: Dictionary["downloads"] };
 
-export function assetUrl(repo: string, file: string) {
-  return `https://github.com/${repo}/releases/latest/download/${file}`;
+// Aponta para a tag, não para /latest: o nome do arquivo leva a versão, então se o cache ainda
+// guardar a anterior logo após uma release, /latest/download/<arquivo antigo> daria 404.
+export function assetUrl(repo: string, version: string, file: string) {
+  return `https://github.com/${repo}/releases/download/v${version}/${file}`;
 }
 
 export function buildDownloads({ repo, version: v, t }: DownloadConfig): Record<OS, Download> {
@@ -28,7 +31,11 @@ export function buildDownloads({ repo, version: v, t }: DownloadConfig): Record<
     appImage: `Pier_${v}_amd64.AppImage`,
     deb: `Pier_${v}_amd64.deb`,
   };
-  const release = { label: t.allReleases, url: `https://github.com/${repo}/releases` };
+  const release = {
+    label: t.allReleases,
+    url: `https://github.com/${repo}/releases`,
+    newTab: true,
+  };
 
   return {
     mac: {
@@ -37,7 +44,7 @@ export function buildDownloads({ repo, version: v, t }: DownloadConfig): Record<
       file: files.dmg,
       fileNote: t.mac.fileNote,
       req: t.mac.req,
-      url: assetUrl(repo, files.dmg),
+      url: assetUrl(repo, v, files.dmg),
       alts: [release],
     },
     win: {
@@ -46,7 +53,7 @@ export function buildDownloads({ repo, version: v, t }: DownloadConfig): Record<
       file: files.exe,
       fileNote: t.win.fileNote,
       req: t.win.req,
-      url: assetUrl(repo, files.exe),
+      url: assetUrl(repo, v, files.exe),
       alts: [release],
     },
     linux: {
@@ -55,12 +62,12 @@ export function buildDownloads({ repo, version: v, t }: DownloadConfig): Record<
       file: files.appImage,
       fileNote: t.linux.fileNote,
       req: t.linux.req,
-      url: assetUrl(repo, files.appImage),
-      alts: [{ label: t.debPackage, url: assetUrl(repo, files.deb) }, release],
+      url: assetUrl(repo, v, files.appImage),
+      alts: [{ label: t.debPackage, url: assetUrl(repo, v, files.deb) }, release],
     },
   };
 }
 
-export function getDownloads(t: Dictionary["downloads"]) {
+export function getDownloads(t: Dictionary["downloads"], version: string) {
   return buildDownloads({ repo: githubRepo, version, t });
 }

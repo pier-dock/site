@@ -6,7 +6,7 @@ export function DockStage({ badge, label, children }: DockStageProps) {
       role="region"
       aria-label={label}
       data-intro-stage
-      className="relative mx-auto mt-16 h-[480px] max-w-[1100px] origin-bottom stage-rise"
+      className="relative mx-auto mt-12 h-[380px] max-w-[1100px] origin-bottom stage-rise sm:mt-16 sm:h-[480px]"
     >
       {/* O fundo do palco é uma camada própria para poder surgir depois da dock na intro. */}
       <div

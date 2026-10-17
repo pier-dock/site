@@ -1,5 +1,6 @@
 import type { Dictionary } from "@/lib/i18n";
 import { getWidgets } from "@/lib/widgets";
+import { DragCarousel } from "./DragCarousel";
 import { WidgetCard } from "./WidgetCard";
 
 const gutter = "px-[max(24px,calc((100%-1152px)/2))] scroll-px-[max(24px,calc((100%-1152px)/2))]";
@@ -25,17 +26,14 @@ export function WidgetsCarousel({ t }: { t: Dictionary["widgets"] }) {
         </div>
       </div>
 
-      {/* tabIndex deixa o carrossel focável: as setas do teclado rolam e o snap encaixa no card. */}
-      <div
-        role="region"
-        aria-label={t.carouselLabel}
-        tabIndex={0}
-        className={`mt-6 flex snap-x snap-mandatory gap-6 overflow-x-auto overflow-y-hidden pt-10 pb-24 carousel-timeline ${gutter}`}
+      <DragCarousel
+        label={t.carouselLabel}
+        className={`flex snap-x snap-mandatory gap-6 overflow-x-auto overflow-y-hidden pt-16 pb-24 carousel-timeline mouse:cursor-grab mouse:snap-none mouse:overflow-x-hidden mouse:select-none mouse:data-dragging:cursor-grabbing ${gutter}`}
       >
         {getWidgets(t.items).map((w, i) => (
-          <WidgetCard key={w.id} widget={w} moreLabel={t.more} index={i} />
+          <WidgetCard key={w.id} widget={w} index={i} />
         ))}
-      </div>
+      </DragCarousel>
     </section>
   );
 }

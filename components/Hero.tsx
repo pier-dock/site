@@ -10,7 +10,11 @@ type HeroProps = { t: Dictionary["hero"]; demo: Dictionary["demo"] };
 
 export function Hero({ t, demo }: HeroProps) {
   return (
-    <section id="top" aria-labelledby="hero-title" className="relative overflow-clip px-6 pt-24">
+    <section
+      id="top"
+      aria-labelledby="hero-title"
+      className="relative overflow-clip px-6 pt-14 sm:pt-24"
+    >
       <Wallpaper />
       <div
         id="hero-intro"
@@ -19,10 +23,10 @@ export function Hero({ t, demo }: HeroProps) {
         <a
           href="#widgets"
           {...genieSlice(0)}
-          className="inline-flex h-8 genie-slice items-center gap-2 rounded-full border border-line-12 bg-white/6 pr-1.5 pl-3 text-[13px] text-fg-soft transition-colors hover:bg-white/9"
+          className="inline-flex min-h-8 max-w-full genie-slice items-center gap-2 rounded-full border border-line-12 bg-white/6 py-1 pr-1.5 pl-3 text-left text-xs leading-snug text-fg-soft transition-colors hover:bg-white/9 sm:text-[13px]"
         >
           {t.badge}
-          <span className="flex h-[22px] items-center rounded-[11px] bg-coral/16 px-2 text-coral-pale">
+          <span className="flex h-[22px] shrink-0 items-center rounded-[11px] bg-coral/16 px-2 whitespace-nowrap text-coral-pale">
             {t.badgeCta}
           </span>
         </a>
