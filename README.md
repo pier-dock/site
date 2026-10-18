@@ -29,7 +29,7 @@ Copie `.env.example` para `.env.local` e ajuste. Todas são públicas (`NEXT_PUB
 | ------------------------- | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `NEXT_PUBLIC_SITE_URL`    | domínio de produção da Vercel, ou `http://localhost:3000` | URL canônica: `metadataBase`, sitemap, robots e JSON-LD. Na Vercel pode ficar vazia: o site usa o domínio de produção do projeto (`*.vercel.app` ou o domínio próprio) |
 | `NEXT_PUBLIC_GITHUB_REPO` | `pier-dock/pier-dock`                                     | Repositório no formato `dono/repo`: links do GitHub e URLs de download                                                                                                 |
-| `NEXT_PUBLIC_VERSION`     | `0.2.0`                                                   | Versão exibida no JSON-LD e usada nos nomes dos arquivos de download                                                                                                   |
+| `NEXT_PUBLIC_VERSION`     | `0.3.0`                                                   | Só um último recurso: a versão de verdade vem da última release do GitHub e esta vale apenas se ele não responder no build                                             |
 
 Na Vercel, defina as três em **Settings > Environment Variables** para Production (e Preview, se quiser os links certos nos previews).
 
@@ -37,16 +37,18 @@ Na Vercel, defina as três em **Settings > Environment Variables** para Producti
 
 Os downloads ficam todos em [`lib/downloads.ts`](lib/downloads.ts). Cada sistema tem rótulo, texto do botão, arquivo, requisitos, alternativas e URL.
 
-As URLs apontam para a última release do GitHub:
+As URLs apontam para a tag da versão resolvida por [`getLatestVersion`](lib/release.ts):
 
 ```
-https://github.com/<NEXT_PUBLIC_GITHUB_REPO>/releases/latest/download/<arquivo>
+https://github.com/<NEXT_PUBLIC_GITHUB_REPO>/releases/download/v<versão>/<arquivo>
 ```
+
+O nome do arquivo já leva a versão, então a URL aponta para a tag e não para `releases/latest/download/`: logo depois de uma release, o cache pode ainda guardar a versão anterior e `/latest/download/<arquivo antigo>` daria 404.
 
 Os nomes dos arquivos seguem o padrão do `tauri-action` no repositório do app (`Pier_<versão>_universal.dmg`, `Pier_<versão>_x64-setup.exe`, `Pier_<versão>_amd64.AppImage` e `Pier_<versão>_amd64.deb`).
 
 > [!IMPORTANT]
-> `releases/latest/download/` só resolve se o arquivo existir na release marcada como _latest_. Quando publicar uma versão nova, atualize `NEXT_PUBLIC_VERSION` e faça um novo deploy. Releases em rascunho não contam como _latest_.
+> A versão é resolvida no build (o site é estático), então uma release nova só aparece depois de um novo deploy. Quem dispara esse deploy é a workflow `Deploy site` do repositório do app, que chama o **Deploy Hook** da Vercel quando uma release é publicada — por isso, publique a release só depois que todos os instaladores terminarem de subir. Releases em rascunho não contam como _latest_.
 
 Para mudar um nome de arquivo, edite `buildDownloads()`. Os textos (botões e requisitos) ficam em `downloads` nos dicionários de `lib/i18n/`. Os testes em `tests/downloads.test.ts` conferem se todo sistema tem todos os campos.
 
@@ -118,5 +120,6 @@ Cores, sombras e raios ficam no `@theme` de `app/globals.css`. Não use hex nem 
 1. Importe o repositório na Vercel (framework Next.js, sem configuração extra). O nome do projeto define o endereço: um projeto `pier` fica em `pier.vercel.app`, se estiver livre.
 2. Defina `NEXT_PUBLIC_GITHUB_REPO` e `NEXT_PUBLIC_VERSION` em **Settings > Environment Variables**.
 3. Faça o deploy.
+4. Em **Settings > Git > Deploy Hooks**, crie um hook para a branch `main` e guarde a URL no segredo `VERCEL_DEPLOY_HOOK` do repositório do app. A workflow `Deploy site` chama esse hook quando uma release é publicada, e o site passa a mostrar a versão nova sem deploy manual.
 
 Não precisa definir `NEXT_PUBLIC_SITE_URL`. Sem ela, o build usa o domínio de produção que a Vercel informa (`NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL`). Ao ligar um domínio próprio em **Settings > Domains**, faça um novo deploy para o canonical, o sitemap e as imagens de compartilhamento passarem a usar o domínio novo.
