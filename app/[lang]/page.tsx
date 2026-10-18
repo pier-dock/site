@@ -35,7 +35,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
           <Download t={t.download} />
         </OSProvider>
       </main>
-      <Footer t={t.footer} lang={t.lang} />
+      <Footer t={t.footer} />
       <JsonLd data={buildJsonLd(t, lang, version)} />
     </>
   );
