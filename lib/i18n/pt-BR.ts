@@ -197,7 +197,7 @@ export const ptBR: Dictionary = {
     dateOrder: "day-month",
   },
   footer: {
-    madeBy: "Feito por",
+    madeBy: "Feito pelo Pier Team",
     label: "Rodapé",
     github: "GitHub",
     githubLabel: "Código do Pier no GitHub",

@@ -194,7 +194,7 @@ export const en = {
     dateOrder: "month-day" as "month-day" | "day-month",
   },
   footer: {
-    madeBy: "Made by",
+    madeBy: "Made by the Pier Team",
     label: "Footer",
     github: "GitHub",
     githubLabel: "Pier's code on GitHub",
