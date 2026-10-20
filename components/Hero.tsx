@@ -10,6 +10,19 @@ type HeroProps = { t: Dictionary["hero"]; demo: Dictionary["demo"] };
 export function Hero({ t, demo }: HeroProps) {
   return (
     <section id="top" aria-labelledby="hero-title" className="relative overflow-clip px-6 pt-22">
+      {/*
+        Meio sol preso à base da seção, que é a base da área da dock. Ocupa a largura toda (as
+        elipses passam de 1100px) e é mais alto que a área, para não ser cortado reto em cima.
+        Fica atrás do texto (z-[2]); os popovers da dock passam por cima dele.
+      */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-[560px] intro-late overflow-hidden"
+      >
+        <div className="absolute bottom-[-660px] left-1/2 -ml-[750px] h-[1040px] w-[1500px] sun-halo" />
+        <div className="absolute bottom-[-560px] left-1/2 -ml-[610px] h-[850px] w-[1220px] sun-core" />
+        <div className="absolute inset-x-0 top-0 h-40 bg-linear-to-b from-page to-page/0" />
+      </div>
       <div
         id="hero-intro"
         className="relative z-[2] mx-auto flex max-w-[880px] flex-col items-center gap-5 text-center"
@@ -32,7 +45,7 @@ export function Hero({ t, demo }: HeroProps) {
         </p>
         <HeroCta t={t} />
       </div>
-      <DockStage badge={t.demoBadge} label={t.demoLabel}>
+      <DockStage label={t.demoLabel}>
         <DockDemoLazy t={demo} />
       </DockStage>
       <IntroScript />
