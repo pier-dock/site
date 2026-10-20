@@ -601,6 +601,58 @@
   }
 }
 
+/*
+ * Clawd andando (ver `Clawd.tsx`): vai de uma ponta à outra da trilha e volta, virando de lado
+ * na metade do ciclo, enquanto o sprite balança como o `claude-walk` da dock. A trilha é um
+ * container, então 100cqw é a largura dela.
+ */
+@keyframes clawd-pace {
+  50% {
+    translate: calc(100cqw - var(--clawd-size)) 0;
+  }
+}
+
+@keyframes clawd-face {
+  0%,
+  49.99% {
+    scale: 1 1;
+  }
+  50%,
+  100% {
+    scale: -1 1;
+  }
+}
+
+@keyframes clawd-wobble {
+  0%,
+  100% {
+    translate: -2px 0;
+    rotate: -4deg;
+  }
+  50% {
+    translate: 2px 0;
+    rotate: 4deg;
+  }
+}
+
+@utility clawd-track {
+  container-type: inline-size;
+}
+
+@utility clawd-walk {
+  @media (prefers-reduced-motion: no-preference) {
+    animation:
+      clawd-pace var(--clawd-duration) linear infinite,
+      clawd-face var(--clawd-duration) linear infinite;
+  }
+}
+
+@utility clawd-wobble {
+  @media (prefers-reduced-motion: no-preference) {
+    animation: clawd-wobble 0.9s ease-in-out infinite;
+  }
+}
+
 @utility scrollbar-none {
   scrollbar-width: none;
 }
