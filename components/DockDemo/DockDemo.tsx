@@ -26,6 +26,7 @@ import {
   popoverDomId,
   type PopoverId,
 } from "./Popovers";
+import { useDockSound } from "./useDockSound";
 import { usePlayer } from "./usePlayer";
 
 const triggerId = (id: PopoverId) => `dock-trigger-${id}`;
@@ -38,6 +39,12 @@ const desktopOnly = "hidden sm:contents";
 // O hover da intro passa primeiro pelos apps e segue pelos widgets, na ordem da dock.
 const widget = (n: number) => introHover(apps.length + n);
 
+// Item da dock sob o ponteiro: o botão de um app ou widget, ou um indicador (Wi-Fi, bateria, relógio).
+function dockItem(target: EventTarget | null) {
+  if (!(target instanceof Element)) return null;
+  return target.closest("button") ?? target.closest("[data-intro-item]");
+}
+
 export default function DockDemo({ t }: { t: Dictionary["demo"] }) {
   const player = usePlayer();
   const [focused, setFocused] = useState(3);
@@ -45,6 +52,7 @@ export default function DockDemo({ t }: { t: Dictionary["demo"] }) {
   const [hover, setHover] = useState(-1);
   const [pop, setPop] = useState<PopoverId | null>(null);
   const [volume, setVolume] = useState(60);
+  const playKey = useDockSound(volume);
 
   useEffect(() => {
     if (!pop) return;
@@ -111,6 +119,10 @@ export default function DockDemo({ t }: { t: Dictionary["demo"] }) {
           role="group"
           aria-label={t.dockLabel}
           data-intro-dock
+          onMouseOver={(e) => {
+            const item = dockItem(e.target);
+            if (item && item !== dockItem(e.relatedTarget)) playKey();
+          }}
           className="flex h-14 shrink-0 items-center gap-1 rounded-xl px-1.5 whitespace-nowrap glass-dock sm:h-16 sm:px-2"
         >
           {apps.map((a, i) => {
