@@ -69,6 +69,10 @@ export const ptBR: Dictionary = {
       title: "Um app, três sistemas",
       body: "A mesma dock e as mesmas configurações no macOS, no Windows e no Linux. Exporte e leve para outra máquina.",
     },
+    claude: {
+      title: "Claude Buddy",
+      body: "O Clawd, mascote do Claude, anda pela dock enquanto o Claude Code trabalha, pula quando uma sessão pede permissão e descansa quando está tudo parado.",
+    },
   },
   widgets: {
     title: "Tem um widget para isso.",

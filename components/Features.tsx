@@ -3,7 +3,10 @@ import braveIcon from "@/assets/apps/brave.svg";
 import spotifyIcon from "@/assets/apps/spotify.svg";
 import vscodeIcon from "@/assets/apps/vscode.svg";
 import type { Dictionary } from "@/lib/i18n";
+import { ClawdIcon } from "./Clawd";
 import { ContributionGrid } from "./ContributionGrid";
+import { apps } from "./DockDemo/data";
+import { BatteryIcon, VolumeIcon, WifiIcon } from "./icons";
 
 const cardBody = "relative m-0 text-[15px] leading-[1.55] text-fg-2";
 
@@ -82,9 +85,48 @@ export function Features({ t }: { t: Dictionary["features"] }) {
           </FeatureCard>
 
           <FeatureCard
+            id="claude"
+            title={t.claude.title}
+            className="min-h-[300px] flex-[1_1_360px] reveal reveal-step-1"
+          >
+            <p className={`${cardBody} max-w-[460px]`}>{t.claude.body}</p>
+            <div aria-hidden="true" className="relative mt-auto flex justify-center pt-12">
+              <div className="relative flex h-14 items-center gap-1 rounded-xl px-2 glass-dock sm:h-16">
+                {apps.map((a, i) => (
+                  <span
+                    key={a.id}
+                    className="flex h-12 w-10 flex-col items-center justify-center gap-1 sm:h-14 sm:w-12"
+                  >
+                    <Image
+                      src={a.icon}
+                      alt=""
+                      width={44}
+                      height={44}
+                      className="size-9 rounded-[9px] shadow-app-icon sm:size-11 sm:rounded-[11px]"
+                    />
+                    <span
+                      className={`h-1 rounded-[2px] ${i === 0 ? "w-3.5 bg-coral" : "w-1 bg-white/55"}`}
+                    />
+                  </span>
+                ))}
+                <span className="mx-1.5 h-7 w-px shrink-0 bg-white/12" />
+                <span className="relative flex size-10 items-center justify-center rounded-[10px] bg-white/6 text-clawd sm:size-11">
+                  <ClawdIcon size={18} />
+                  <span className="absolute right-1 bottom-1 size-[5px] animate-pulse rounded-full bg-clawd" />
+                </span>
+                <span className="hidden items-center gap-2.5 px-2.5 text-fg xl:flex">
+                  <WifiIcon size={17} />
+                  <VolumeIcon level={60} size={17} />
+                  <BatteryIcon size={17} />
+                </span>
+              </div>
+            </div>
+          </FeatureCard>
+
+          <FeatureCard
             id="glass"
             title={t.glass.title}
-            className="min-h-[300px] flex-[1_1_386px] reveal reveal-step-1"
+            className="min-h-[280px] flex-[1_1_300px] reveal"
           >
             <div
               aria-hidden="true"
@@ -104,7 +146,7 @@ export function Features({ t }: { t: Dictionary["features"] }) {
           <FeatureCard
             id="shortcuts"
             title={t.shortcuts.title}
-            className="min-h-[280px] flex-[1_1_386px] reveal"
+            className="min-h-[280px] flex-[1_1_300px] reveal reveal-step-1"
           >
             <p className={cardBody}>{t.shortcuts.body}</p>
             <ul className="relative m-0 mt-auto flex list-none flex-col gap-2 p-0">
@@ -131,7 +173,7 @@ export function Features({ t }: { t: Dictionary["features"] }) {
           <FeatureCard
             id="platforms"
             title={t.platforms.title}
-            className="min-h-[280px] flex-[1_1_386px] reveal reveal-step-1"
+            className="min-h-[280px] flex-[1_1_300px] reveal reveal-step-2"
           >
             <p className={cardBody}>{t.platforms.body}</p>
             <ul className="relative m-0 mt-auto flex list-none flex-wrap gap-2 p-0">
