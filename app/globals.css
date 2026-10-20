@@ -321,14 +321,12 @@
 }
 
 /*
- * Antes do atraso o título fica em opacity 0.01, não 0: com 0 o Chrome não registra o h1 como
- * LCP. Mas texto quase transparente vira uma sombra escura sobre o fundo desfocado, então ele
- * também fica encolhido a um ponto e só ganha tamanho no primeiro instante da animação.
+ * Antes do atraso o título fica em opacity 0.01, não 0, e no tamanho real: com opacity 0 ou
+ * encolhido o Chrome não registra o h1 como LCP (ou registra com área quase nula).
  */
 @keyframes intro-title {
   0% {
     opacity: 0.01;
-    scale: 0.01;
   }
   0.1% {
     opacity: 0;
