@@ -3,7 +3,7 @@ import braveIcon from "@/assets/apps/brave.svg";
 import spotifyIcon from "@/assets/apps/spotify.svg";
 import vscodeIcon from "@/assets/apps/vscode.svg";
 import type { Dictionary } from "@/lib/i18n";
-import { ClawdIcon } from "./Clawd";
+import { ClawdIcon, ClawdWalker } from "./Clawd";
 import { ContributionGrid } from "./ContributionGrid";
 import { apps } from "./DockDemo/data";
 import { BatteryIcon, VolumeIcon, WifiIcon } from "./icons";
@@ -26,18 +26,20 @@ type FeatureCardProps = {
   id: string;
   title: string;
   className: string;
+  /** Sem corte: para enfeites que passam da borda, como o Clawd andando em cima do card. */
+  clip?: boolean;
   children: React.ReactNode;
 };
 
-function FeatureCard({ id, title, className, children }: FeatureCardProps) {
+function FeatureCard({ id, title, className, clip = true, children }: FeatureCardProps) {
   const titleId = `feature-${id}`;
   return (
     <article
-      className={`group relative flex flex-col gap-3 overflow-hidden rounded-xl border border-line-8 bg-surface p-8 transition-[transform,border-color,background-color,box-shadow] duration-300 ease-out hover:[transform:translateY(-4px)] hover:border-line-16 hover:bg-surface-hover hover:shadow-card-hover ${className}`}
+      className={`group relative flex flex-col gap-3 ${clip ? "overflow-hidden" : ""} rounded-xl border border-line-8 bg-surface p-8 transition-[transform,border-color,background-color,box-shadow] duration-300 ease-out hover:[transform:translateY(-4px)] hover:border-line-16 hover:bg-surface-hover hover:shadow-card-hover ${className}`}
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(70%_60%_at_50%_0%,var(--color-line-10),transparent_70%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        className="pointer-events-none absolute inset-0 rounded-[inherit] bg-[radial-gradient(70%_60%_at_50%_0%,var(--color-line-10),transparent_70%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
       />
       <h3 id={titleId} className="relative m-0 text-[22px] font-semibold tracking-[-0.02em]">
         {title}
@@ -67,7 +69,12 @@ export function Features({ t }: { t: Dictionary["features"] }) {
           </h2>
         </div>
 
-        <div className="flex flex-wrap gap-4">
+        {/*
+          O Clawd do card Claude Buddy sobe ~25px acima da borda. A partir do lg o card fica na 1ª
+          linha, sob o título da seção; antes disso ele pode cair sob outro card, então as linhas
+          ficam mais afastadas para o Clawd não encostar.
+        */}
+        <div className="flex flex-wrap gap-x-4 gap-y-8 lg:gap-y-4">
           <FeatureCard
             id="github"
             title={t.github.title}
@@ -87,8 +94,14 @@ export function Features({ t }: { t: Dictionary["features"] }) {
           <FeatureCard
             id="claude"
             title={t.claude.title}
+            clip={false}
             className="min-h-[300px] flex-[1_1_360px] reveal reveal-step-1"
           >
+            <ClawdWalker
+              size={32}
+              sprite={24}
+              className="inset-x-6 top-0 [--clawd-duration:14s] sm:[--clawd-duration:26s] lg:[--clawd-duration:46s]"
+            />
             <p className={`${cardBody} max-w-[460px]`}>{t.claude.body}</p>
             <div aria-hidden="true" className="relative mt-auto flex justify-center pt-12">
               <div className="relative flex h-14 items-center gap-1 rounded-xl px-2 glass-dock sm:h-16">
@@ -111,7 +124,7 @@ export function Features({ t }: { t: Dictionary["features"] }) {
                 ))}
                 <span className="mx-1.5 h-7 w-px shrink-0 bg-white/12" />
                 <span className="relative flex size-10 items-center justify-center rounded-[10px] bg-white/6 text-clawd sm:size-11">
-                  <ClawdIcon size={18} />
+                  <ClawdIcon size={18} className="clawd-wobble" />
                   <span className="absolute right-1 bottom-1 size-[5px] animate-pulse rounded-full bg-clawd" />
                 </span>
                 <span className="hidden items-center gap-2.5 px-2.5 text-fg xl:flex">
@@ -119,6 +132,11 @@ export function Features({ t }: { t: Dictionary["features"] }) {
                   <VolumeIcon level={60} size={17} />
                   <BatteryIcon size={17} />
                 </span>
+                <ClawdWalker
+                  size={26}
+                  sprite={18}
+                  className="inset-x-2.5 top-0 [--clawd-duration:10s] sm:[--clawd-duration:15s]"
+                />
               </div>
             </div>
           </FeatureCard>
