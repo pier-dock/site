@@ -15,58 +15,6 @@ export const apps: DemoApp[] = [
   { id: "brave", name: "Brave Browser", icon: braveIcon, key: 4 },
 ];
 
-export type WindowTheme = {
-  title: string;
-  bg: string;
-  bar: string;
-  fg: string;
-  dots: string;
-  border: string;
-};
-
-export const windows: Record<AppId, WindowTheme> = {
-  vscode: {
-    title: "Dock.tsx — pier",
-    bg: "bg-code-bg",
-    bar: "bg-code-bar",
-    fg: "text-fg-2",
-    dots: "bg-win-dots-dark",
-    border: "border-line-12",
-  },
-  spotify: {
-    title: "Spotify",
-    bg: "bg-vinyl",
-    bar: "bg-spotify-bar",
-    fg: "text-spotify-sub",
-    dots: "bg-win-dots-dark",
-    border: "border-white/10",
-  },
-  terminal: {
-    title: "Terminal — zsh",
-    bg: "bg-term-bg",
-    bar: "bg-graphite",
-    fg: "text-fg-2",
-    dots: "bg-win-dots-dark",
-    border: "border-line-14",
-  },
-  brave: {
-    title: "Brave",
-    bg: "bg-white",
-    bar: "bg-win-chrome",
-    fg: "text-win-ink",
-    dots: "bg-win-dots",
-    border: "border-black/10",
-  },
-};
-
-export const editorFiles = [
-  { name: "▾ src", depth: 0 },
-  { name: "Dock.tsx", depth: 1, active: true },
-  { name: "Glass.tsx", depth: 1 },
-  { name: "widgets.ts", depth: 1 },
-  { name: "package.json", depth: 0 },
-];
-
 export type Track = { name: string; duration: number };
 
 /** In Rainbows, na ordem do disco. Durações em segundos. */
