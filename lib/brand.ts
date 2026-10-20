@@ -3,7 +3,7 @@
  * manifest e viewport. Os valores espelham os tokens de `app/globals.css`.
  */
 export const brand = {
-  page: "#08080A",
+  page: "#07080A",
   graphite: "#1C1C1F",
   fg: "#EDEDEF",
   fg2: "#C8C8CC",
