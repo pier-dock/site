@@ -134,11 +134,13 @@ export const ptBR: Dictionary = {
   },
   download: {
     title: "Atraque seus apps.",
-    detectedBefore: "Detectamos",
-    detectedAfter: ". Escolha outro sistema se precisar.",
+    subtitle: "Grátis para macOS, Windows e Linux. Leva um minuto para instalar.",
     tabsLabel: "Sistema operacional",
-    pierFor: "Pier para",
+    downloadShort: "Baixar",
     alts: "Outros formatos",
+    openSource: "Código aberto no",
+    github: "GitHub",
+    releaseNotes: "Notas de versão",
   },
   downloads: {
     allReleases: "Todas as versões",

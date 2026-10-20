@@ -10,7 +10,7 @@ const tabId = (os: OS) => `download-tab-${os}`;
 const panelId = "download-panel";
 
 export function DownloadPanel({ t }: { t: Dictionary["download"] }) {
-  const { os, detected, setOs, downloads } = useOS();
+  const { os, setOs, downloads } = useOS();
   const tabs = useRef<Partial<Record<OS, HTMLButtonElement | null>>>({});
   const d = downloads[os];
 
@@ -33,18 +33,12 @@ export function DownloadPanel({ t }: { t: Dictionary["download"] }) {
   }
 
   return (
-    <>
-      <p className="m-0 reveal-blur text-[17px] text-fg-2 reveal-step-2">
-        {t.detectedBefore}{" "}
-        <strong className="font-semibold text-fg">{downloads[detected].label}</strong>
-        {t.detectedAfter}
-      </p>
-
+    <div className="flex w-full max-w-[640px] flex-col items-center gap-5">
       <div
         role="tablist"
         aria-label={t.tabsLabel}
         onKeyDown={onKeyDown}
-        className="flex reveal-blur rounded-md border border-line-10 bg-white/6 p-1 reveal-step-3"
+        className="flex reveal-blur rounded-md border border-line-8 bg-white/4 p-1 reveal-step-1"
       >
         {osList.map((o) => {
           const selected = o === os;
@@ -61,7 +55,7 @@ export function DownloadPanel({ t }: { t: Dictionary["download"] }) {
               aria-controls={panelId}
               tabIndex={selected ? 0 : -1}
               onClick={() => setOs(o)}
-              className={`rounded-[9px] px-5 py-[9px] text-sm font-medium transition-colors ${
+              className={`rounded-[9px] px-[18px] py-2 text-sm font-medium transition-colors ${
                 selected ? "bg-white/14 text-fg" : "text-fg-3 hover:text-fg"
               }`}
             >
@@ -71,44 +65,45 @@ export function DownloadPanel({ t }: { t: Dictionary["download"] }) {
         })}
       </div>
 
-      <div
+      <article
         role="tabpanel"
         id={panelId}
         aria-labelledby={tabId(os)}
-        className="flex w-full max-w-[640px] reveal-slide flex-col gap-5 rounded-xl p-7 text-left glass-panel"
+        className="flex w-full min-w-0 reveal-slide flex-col gap-[18px] rounded-lg border border-coral/40 p-6 text-left download-card"
       >
-        <div className="flex flex-wrap items-center gap-4">
-          <div className="flex flex-[1_1_240px] flex-col gap-1">
-            <h3 className="m-0 text-lg font-semibold">
-              {t.pierFor} {d.label}
-            </h3>
-            <p className="m-0 text-[13px] text-fg-3">
-              {d.file} · {d.req}
-            </p>
-          </div>
+        <div className="flex items-center gap-2.5">
+          <h3 className="m-0 text-lg font-semibold tracking-[-0.02em]">{d.label}</h3>
           <a
             href={d.url}
-            className="flex h-12 items-center gap-2.5 rounded-md bg-coral px-5 text-[15px] font-semibold text-coral-ink shadow-cta-flat transition-[filter] hover:brightness-110"
+            aria-label={d.button}
+            className="ml-auto flex h-[34px] items-center gap-1.5 rounded-[9px] bg-fg px-3 text-[13px] font-semibold text-fg-inverse transition-opacity hover:opacity-90"
           >
-            <DownloadIcon size={17} />
-            {d.button}
+            <DownloadIcon size={13} />
+            {t.downloadShort}
           </a>
         </div>
 
-        <ul aria-label={t.alts} className="m-0 flex list-none flex-wrap gap-2 p-0">
+        <p className="m-0 flex flex-col gap-1 text-[13px]">
+          <span className="text-fg-2">
+            {d.file} · {d.fileNote}
+          </span>
+          <span className="text-fg-faint">{d.req}</span>
+        </p>
+
+        <ul aria-label={t.alts} className="m-0 flex list-none flex-wrap gap-1.5 p-0">
           {d.alts.map((a) => (
             <li key={a.url}>
               <a
                 href={a.url}
                 {...(a.newTab && { target: "_blank", rel: "noopener" })}
-                className="flex h-[30px] items-center rounded-sm border border-line-10 bg-white/5 px-2.5 text-xs text-fg-soft transition-colors hover:text-fg"
+                className="flex h-[26px] items-center rounded-[7px] border border-line-8 px-[9px] text-xs text-fg-3 transition-colors hover:text-fg"
               >
                 {a.label}
               </a>
             </li>
           ))}
         </ul>
-      </div>
-    </>
+      </article>
+    </div>
   );
 }

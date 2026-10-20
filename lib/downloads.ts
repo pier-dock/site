@@ -9,7 +9,7 @@ export type Download = {
   label: string;
   button: string;
   file: string;
-  /** Linha curta que acompanha o nome do arquivo no hero. */
+  /** Linha curta que acompanha o nome do arquivo no card de download. */
   fileNote: string;
   req: string;
   url: string;
