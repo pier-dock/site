@@ -38,15 +38,11 @@ export const ptBR: Dictionary = {
     language: "Idioma",
   },
   hero: {
-    badge: "Novo: widgets de Clima, Pomodoro e Agenda",
-    badgeCta: "Ver →",
     titleTop: "Sua dock, do seu jeito.",
     titleBottom: "Em qualquer sistema.",
-    subtitle:
-      "O Pier troca a dock do macOS, a barra de tarefas do Windows e o painel do Linux por uma barra de vidro com seus apps, widgets e um atalho para cada app.",
-    github: "Ver código no GitHub",
+    subtitle: "Apps, janelas e widgets numa barra de vidro. No macOS, no Windows e no Linux.",
     free: "Gratuito",
-    alsoFor: "Também para",
+    alsoFor: "também para",
     mobileTitle: "Disponível para desktop",
     mobileNote: "macOS, Windows e Linux · Gratuito",
     mobileSend: "Enviar link para mim",

@@ -36,15 +36,11 @@ export const en = {
     language: "Language",
   },
   hero: {
-    badge: "New: Weather, Pomodoro, and Calendar widgets",
-    badgeCta: "See →",
     titleTop: "Your dock, your way.",
     titleBottom: "On any system.",
-    subtitle:
-      "Pier replaces the macOS Dock, the Windows taskbar, and the Linux panel with a glass bar for your apps, your widgets, and a shortcut for every app.",
-    github: "View code on GitHub",
+    subtitle: "Apps, windows, and widgets in a glass bar. On macOS, Windows, and Linux.",
     free: "Free",
-    alsoFor: "Also for",
+    alsoFor: "also for",
     mobileTitle: "Available for desktop",
     mobileNote: "macOS, Windows, and Linux · Free",
     mobileSend: "Send me the link",

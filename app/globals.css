@@ -23,6 +23,9 @@
   --color-fg-4: #8a8a92;
   --color-fg-muted: #9b9ba1;
   --color-fg-card: #e4e4e7;
+  --color-fg-sub: #8e8e96;
+  --color-fg-faint: #6e6e76;
+  --color-fg-link: #b4b4ba;
   --color-fg-inverse: #0a0a0b;
 
   --color-coral: #ff6363;
@@ -119,7 +122,7 @@
   --color-stage: rgb(14 15 20 / 0.55);
   --color-glass: rgb(28 28 34);
 
-  --shadow-cta: 0 10px 40px rgb(255 99 99 / 0.35), inset 0 1px 0 rgb(255 255 255 / 0.4);
+  --shadow-cta: inset 0 -1px 0 rgb(0 0 0 / 0.25), 0 0 0 1px rgb(255 255 255 / 0.1);
   --shadow-cta-flat: inset 0 1px 0 rgb(255 255 255 / 0.4);
   --shadow-nav-cta: inset 0 -1px 0 rgb(0 0 0 / 0.2);
   --shadow-window: 0 30px 60px rgb(0 0 0 / 0.5);
@@ -348,12 +351,6 @@
   }
 }
 
-@keyframes intro-bloom {
-  from {
-    opacity: 0;
-  }
-}
-
 @utility intro-dock {
   @media (prefers-reduced-motion: no-preference) {
     animation:
@@ -394,7 +391,7 @@
   }
 }
 
-/* Selo, subtítulo e botões: entram em cascata (--i) depois que a dock já passou por eles. */
+/* Subtítulo e botão: entram em cascata (--i) depois que a dock já passou por eles. */
 @utility intro-rise {
   @media (prefers-reduced-motion: no-preference) {
     animation: intro-fade 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
@@ -414,12 +411,6 @@
   @media (prefers-reduced-motion: no-preference) {
     animation: intro-header 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
     animation-delay: calc(var(--intro-reveal) + 300ms);
-  }
-}
-
-@utility intro-bloom {
-  @media (prefers-reduced-motion: no-preference) {
-    animation: intro-bloom 1.8s ease-out both;
   }
 }
 
@@ -493,12 +484,6 @@
   from {
     scale: 0.94;
     translate: 0 24px;
-  }
-}
-
-@keyframes drift {
-  to {
-    translate: 0 -160px;
   }
 }
 
@@ -594,16 +579,6 @@
       animation: stage-rise linear both;
       animation-timeline: view();
       animation-range: entry 0% cover 45%;
-    }
-  }
-}
-
-@utility drift {
-  @media (prefers-reduced-motion: no-preference) {
-    @supports (animation-timeline: scroll()) {
-      animation: drift linear both;
-      animation-timeline: scroll(root);
-      animation-range: 0 100vh;
     }
   }
 }
