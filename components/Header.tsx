@@ -1,5 +1,6 @@
 import { localeInfo, localePath, locales, type Dictionary, type Locale } from "@/lib/i18n";
 import { links } from "@/lib/site";
+import { HeaderCta } from "./HeaderCta";
 import { LogoMark } from "./Logo";
 
 const navLink =
@@ -79,12 +80,7 @@ export function Header({ t, locale }: HeaderProps) {
               );
             })}
           </ul>
-          <a
-            href="#download"
-            className="flex h-9 items-center rounded-[10px] bg-fg px-5 text-sm font-semibold text-fg-inverse shadow-nav-cta transition-opacity hover:opacity-90"
-          >
-            {t.cta}
-          </a>
+          <HeaderCta label={t.cta} />
         </div>
       </div>
     </header>

@@ -26,15 +26,15 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
       >
         {t.skip}
       </a>
-      <Header t={t.nav} locale={lang} />
-      <main id="content" className="overflow-x-clip">
-        <OSProvider downloads={getDownloads(t.downloads, version)}>
+      <OSProvider downloads={getDownloads(t.downloads, version)}>
+        <Header t={t.nav} locale={lang} />
+        <main id="content" className="overflow-x-clip">
           <Hero t={t.hero} demo={t.demo} />
           <Features t={t.features} />
           <WidgetsCarousel t={t.widgets} />
           <Download t={t.download} />
-        </OSProvider>
-      </main>
+        </main>
+      </OSProvider>
       <Footer t={t.footer} />
       <JsonLd data={buildJsonLd(t, lang, version)} />
     </>
