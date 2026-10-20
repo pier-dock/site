@@ -45,7 +45,6 @@ export const en = {
     mobileNote: "macOS, Windows, and Linux · Free",
     mobileSend: "Send me the link",
     mobileCopied: "Link copied",
-    demoBadge: "Interactive: click the apps and widgets",
     demoLabel: "Interactive demo of the Pier dock",
   },
   features: {

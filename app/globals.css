@@ -119,7 +119,6 @@
   --color-system-fill: #9a7bff;
   --color-system-halo: rgb(150 110 255 / 0.24);
 
-  --color-stage: rgb(14 15 20 / 0.55);
   --color-glass: rgb(28 28 34);
 
   --shadow-cta: inset 0 -1px 0 rgb(0 0 0 / 0.25), 0 0 0 1px rgb(255 255 255 / 0.1);
@@ -151,7 +150,7 @@
 }
 
 @utility glass-dock {
-  background: rgb(28 28 34 / 0.42);
+  background: rgb(24 24 28 / 0.55);
   backdrop-filter: blur(28px) saturate(180%);
   border: 1px solid var(--color-line-16);
   box-shadow:
@@ -182,6 +181,28 @@
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.07),
     0 12px 32px rgb(0 0 0 / 0.6);
+}
+
+/* Meio sol atrás da dock: os dois discos terminam transparentes, sem borda visível. */
+@utility sun-halo {
+  background: radial-gradient(
+    closest-side,
+    rgb(255 99 99 / 0.22) 0%,
+    rgb(255 99 99 / 0.11) 55%,
+    rgb(255 99 99 / 0.035) 80%,
+    transparent 100%
+  );
+}
+
+@utility sun-core {
+  background: radial-gradient(
+    closest-side,
+    rgb(255 160 160 / 0.66) 0%,
+    rgb(255 110 110 / 0.56) 40%,
+    rgb(255 99 99 / 0.35) 62%,
+    rgb(255 99 99 / 0.1) 84%,
+    transparent 100%
+  );
 }
 
 /* Só largura e estilo: a cor da borda e do brilho vêm do tema de cada widget. */
@@ -281,8 +302,8 @@
 
 /*
  * Intro ao abrir a página: a dock surge no meio da tela, um "hover" percorre os itens dela um
- * a um, o título aparece quando ele chega no último e então a dock desce até o palco enquanto
- * o resto do hero entra. Só transform e opacity, para rodar no compositor mesmo durante a
+ * a um, o título aparece quando ele chega no último e então a dock desce até o lugar dela
+ * enquanto o resto do hero entra. Só transform e opacity, para rodar no compositor mesmo durante a
  * hidratação. O script inline do Hero grava no <html> --intro-dy (quanto a dock sobe para
  * ficar no meio da tela) e --intro-n (quantos itens da dock estão visíveis: no celular são
  * menos, então o título chega antes). Sem o script, a dock só aparece no lugar.
@@ -397,7 +418,7 @@
   }
 }
 
-/* Palco, janela e selo do palco: só quando a dock está chegando. */
+/* Meio sol: só quando a dock está chegando. */
 @utility intro-late {
   @media (prefers-reduced-motion: no-preference) {
     animation: intro-fade 0.7s ease-out both;
@@ -475,13 +496,6 @@
   from {
     opacity: 0;
     scale: 0.3;
-  }
-}
-
-@keyframes stage-rise {
-  from {
-    scale: 0.94;
-    translate: 0 24px;
   }
 }
 
@@ -567,16 +581,6 @@
       animation: bloom linear both;
       animation-timeline: view();
       animation-range: entry 0% cover 50%;
-    }
-  }
-}
-
-@utility stage-rise {
-  @media (prefers-reduced-motion: no-preference) {
-    @supports (animation-timeline: view()) {
-      animation: stage-rise linear both;
-      animation-timeline: view();
-      animation-range: entry 0% cover 45%;
     }
   }
 }

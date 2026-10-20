@@ -47,7 +47,6 @@ export const ptBR: Dictionary = {
     mobileNote: "macOS, Windows e Linux · Gratuito",
     mobileSend: "Enviar link para mim",
     mobileCopied: "Link copiado",
-    demoBadge: "Interativa: clique nos apps e widgets",
     demoLabel: "Demonstração interativa da dock do Pier",
   },
   features: {
