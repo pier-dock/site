@@ -36,15 +36,6 @@ export function DownloadIcon(props: IconProps) {
   );
 }
 
-export function CodeIcon(props: IconProps) {
-  return (
-    <Icon {...props}>
-      <path d="m8 18-6-6 6-6" />
-      <path d="m16 6 6 6-6 6" />
-    </Icon>
-  );
-}
-
 export function AppleIcon(props: IconProps) {
   return (
     <Icon fill="currentColor" stroke="none" {...props}>

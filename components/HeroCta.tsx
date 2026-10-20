@@ -2,80 +2,59 @@
 
 import type { Dictionary } from "@/lib/i18n";
 import { osList } from "@/lib/os";
-import { links } from "@/lib/site";
-import { CheckIcon, CodeIcon, DownloadIcon, LinkIcon } from "./icons";
+import { CheckIcon, DownloadIcon, LinkIcon } from "./icons";
 import { introOrder } from "./intro";
 import { useOS } from "./OSProvider";
 import { useCopy } from "./useCopy";
 
-const primary =
-  "flex h-[52px] w-full items-center justify-center gap-2.5 rounded-[13px] bg-coral px-[22px] text-base font-semibold text-coral-ink shadow-cta transition-[filter] hover:brightness-110 sm:w-auto";
-const secondary =
-  "flex h-[52px] w-full items-center justify-center gap-2.5 rounded-[13px] border border-line-14 bg-white/7 px-5 text-base font-medium text-fg transition-colors hover:bg-white/10 sm:w-auto";
+const ctaButton =
+  "flex h-12 items-center justify-center gap-2.5 rounded-md bg-fg px-5 text-[15px] font-semibold text-fg-inverse shadow-cta transition-opacity hover:opacity-90";
 const meta =
-  "intro-rise m-0 flex min-h-5 flex-wrap justify-center gap-1.5 self-stretch text-[13px] text-fg-3";
+  "intro-rise m-0 flex min-h-5 flex-wrap justify-center gap-1.5 self-stretch text-[13px] text-fg-faint";
 
 export function HeroCta({ t }: { t: Dictionary["hero"] }) {
   const { os, isMobile, setOs, downloads } = useOS();
   const { copied, copy } = useCopy();
-  const d = downloads[os];
   const others = osList.filter((o) => o !== os);
 
   return (
-    <div className="mt-2 flex flex-col items-center gap-3.5 self-stretch">
-      <div
-        {...introOrder(2)}
-        className="mx-auto flex w-full max-w-sm intro-rise flex-wrap justify-center gap-3 sm:max-w-none"
-      >
+    <div className="mt-4 flex flex-col items-center gap-3.5 self-stretch">
+      <div {...introOrder(2)} className="flex intro-rise justify-center">
         {isMobile ? (
           <button
             type="button"
-            className={primary}
+            className={ctaButton}
             onClick={() => copy(window.location.href.split("#")[0] ?? window.location.href)}
           >
-            {copied ? <CheckIcon size={18} /> : <LinkIcon size={18} />}
+            {copied ? <CheckIcon size={17} /> : <LinkIcon size={17} />}
             <span aria-live="polite">{copied ? t.mobileCopied : t.mobileSend}</span>
           </button>
         ) : (
-          <a href="#download" className={primary}>
-            <DownloadIcon size={18} />
-            {d.button}
+          <a href={downloads[os].url} className={ctaButton}>
+            <DownloadIcon size={17} />
+            {downloads[os].button}
           </a>
         )}
-        <a href={links.repo} target="_blank" rel="noopener" className={secondary}>
-          <CodeIcon size={18} />
-          {t.github}
-        </a>
       </div>
       {isMobile ? (
-        <>
-          <p {...introOrder(3)} className={meta}>
-            <strong className="font-semibold text-fg">{t.mobileTitle}</strong>
-          </p>
-          <p {...introOrder(4)} className={meta}>
-            {t.mobileNote}
-          </p>
-        </>
+        <p {...introOrder(3)} className="m-0 intro-rise text-[13px] text-balance text-fg-faint">
+          <strong className="font-medium text-fg-link">{t.mobileTitle}</strong> · {t.mobileNote}
+        </p>
       ) : (
-        <>
-          <p {...introOrder(3)} className={meta}>
-            {d.file} · {d.fileNote} · {t.free}
-          </p>
-          <p {...introOrder(4)} className={meta}>
-            {t.alsoFor}
-            {others.map((o, i) => (
-              <button
-                key={o}
-                type="button"
-                onClick={() => setOs(o)}
-                className="text-fg underline decoration-white/30 underline-offset-[3px] hover:decoration-fg"
-              >
-                {downloads[o].label}
-                {i < others.length - 1 ? "," : ""}
-              </button>
-            ))}
-          </p>
-        </>
+        <p {...introOrder(3)} className={meta}>
+          {t.free} · {t.alsoFor}
+          {others.map((o, i) => (
+            <button
+              key={o}
+              type="button"
+              onClick={() => setOs(o)}
+              className="text-fg-link underline decoration-white/25 underline-offset-[3px] hover:decoration-fg-link"
+            >
+              {downloads[o].label}
+              {i < others.length - 1 ? "," : ""}
+            </button>
+          ))}
+        </p>
       )}
     </div>
   );
