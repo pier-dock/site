@@ -15,7 +15,6 @@ import {
   WifiIcon,
 } from "../icons";
 import { introHover } from "../intro";
-import { AppWindow } from "./AppWindow";
 import { Clock } from "./Clock";
 import { apps, battery, pendingReviews } from "./data";
 import {
@@ -94,20 +93,9 @@ export default function DockDemo({ t }: { t: Dictionary["demo"] }) {
   }
 
   const active = (id: PopoverId) => (pop === id ? "bg-white/10" : "hover:bg-white/6");
-  const focusedApp = apps[focused];
 
   return (
     <>
-      <div className="pointer-events-none absolute inset-0 intro-late">
-        {focusedApp && (
-          <AppWindow
-            app={focusedApp.id}
-            trackName={player.track.name}
-            playState={player.playing ? t.nowPlaying : t.paused}
-          />
-        )}
-      </div>
-
       {pop === "media" && <MediaPopover player={player} t={t} />}
       {pop === "prs" && <PrsPopover t={t} />}
       {pop === "reviews" && <ReviewsPopover t={t} />}
