@@ -130,11 +130,13 @@ export const en = {
   },
   download: {
     title: "Dock your apps.",
-    detectedBefore: "We detected",
-    detectedAfter: ". Pick another system if you need to.",
+    subtitle: "Free for macOS, Windows, and Linux. Takes a minute to install.",
     tabsLabel: "Operating system",
-    pierFor: "Pier for",
+    downloadShort: "Download",
     alts: "Other formats",
+    openSource: "Open source on",
+    github: "GitHub",
+    releaseNotes: "Release notes",
   },
   downloads: {
     allReleases: "All releases",
