@@ -1,26 +1,26 @@
 import { localeInfo, localePath, locales, type Dictionary, type Locale } from "@/lib/i18n";
 import { links } from "@/lib/site";
-import { DownloadIcon } from "./icons";
 import { LogoMark } from "./Logo";
 
-const navLink = "text-fg-2 transition-colors hover:text-fg";
+const navLink =
+  "flex h-9 items-center rounded-[9px] px-3 text-fg-3 transition-colors hover:bg-white/6 hover:text-fg";
 
 type HeaderProps = { t: Dictionary["nav"]; locale: Locale };
 
 export function Header({ t, locale }: HeaderProps) {
   return (
-    <header className="sticky top-0 z-20 intro-header glass-bar">
-      <div className="mx-auto flex h-16 max-w-[1200px] items-center gap-3 px-6 sm:gap-6">
+    <header className="pointer-events-none sticky top-4 z-20 mt-4 flex intro-header justify-center px-4">
+      <div className="pointer-events-auto flex h-14 w-full max-w-[760px] items-center gap-2 rounded-[16px] pr-2 pl-3.5 glass-nav">
         <a
           href="#top"
           aria-label={t.home}
-          className="flex items-center gap-2.5 text-xl font-bold tracking-[-0.04em] text-fg"
+          className="flex h-10 items-center gap-2 pr-1.5 text-[17px] font-bold tracking-[-0.04em] text-fg"
         >
-          <LogoMark size={26} />
+          <LogoMark size={24} />
           pier
         </a>
-        <nav aria-label={t.label} className="flex flex-1 justify-end sm:justify-start">
-          <ul className="hidden gap-[22px] text-sm sm:flex">
+        <nav aria-label={t.label} className="hidden flex-1 justify-center sm:flex">
+          <ul className="m-0 flex list-none gap-0.5 p-0 text-sm">
             <li>
               <a href="#features" className={navLink}>
                 {t.features}
@@ -49,14 +49,14 @@ export function Header({ t, locale }: HeaderProps) {
             </li>
           </ul>
         </nav>
-        <div className="flex items-center gap-3">
+        <div className="ml-auto flex items-center gap-2">
           <ul
             aria-label={t.language}
-            className="m-0 flex h-9 list-none items-center rounded-[9px] border border-line-10 bg-white/5 p-0.5 text-xs font-semibold"
+            className="m-0 flex h-7 list-none items-center rounded-[8px] border border-line-10 bg-white/5 p-0.5 text-[11px] font-semibold"
           >
             {locales.map((l) => {
               const info = localeInfo[l];
-              const base = "flex h-full items-center rounded-[7px] px-2.5";
+              const base = "flex h-full items-center rounded-[6px] px-2";
               return (
                 <li key={l} className="h-full">
                   {l === locale ? (
@@ -81,9 +81,8 @@ export function Header({ t, locale }: HeaderProps) {
           </ul>
           <a
             href="#download"
-            className="flex h-9 items-center gap-2 rounded-[9px] bg-fg px-3.5 text-[13px] font-semibold text-ink transition-opacity hover:opacity-90"
+            className="flex h-9 items-center rounded-[10px] bg-fg px-5 text-sm font-semibold text-fg-inverse shadow-nav-cta transition-opacity hover:opacity-90"
           >
-            <DownloadIcon size={14} />
             {t.cta}
           </a>
         </div>
