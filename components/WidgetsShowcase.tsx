@@ -147,7 +147,7 @@ export function WidgetsShowcase({ title, subtitle, filters, items }: ShowcasePro
         </div>
       </div>
 
-      <ul className="m-0 mt-16 flex list-none flex-wrap items-center justify-center gap-x-6 gap-y-6 p-0 pb-24 lg:min-h-[480px]">
+      <ul className="m-0 mt-16 flex list-none flex-wrap content-center items-center justify-center gap-x-6 gap-y-6 p-0 pb-24 lg:min-h-[480px]">
         {items.map((item) => (
           <li
             key={item.key}
