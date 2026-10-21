@@ -88,6 +88,8 @@ export const ptBR: Dictionary = {
       weatherSmall: "Clima compacto: ícone de sol e 24°.",
       pomodoro: "Pomodoro: foco, faltam 18 minutos e 42 segundos, sessão 2 de 4.",
       pomodoroSmall: "Pomodoro compacto: anel com 18 minutos restantes.",
+      usage: "Uso do sistema: CPU em 34% e memória em 68%, com o histórico do último minuto.",
+      usageSmall: "Uso do sistema compacto: CPU em 34% com o histórico.",
     },
     pomodoro: { phase: "Foco · 2 de 4" },
     weather: { condition: "Ensolarado", alert: "Chuva às 16h" },
