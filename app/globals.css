@@ -365,7 +365,7 @@
 
 @keyframes marquee-x {
   to {
-    translate: -50% 0;
+    translate: calc(100vw - 100%) 0;
   }
 }
 
@@ -412,13 +412,13 @@
   }
 }
 
-/* Fileiras do mobile na galeria de widgets: a trilha anda metade da largura e recomeça. */
+/* Fileiras do mobile na galeria de widgets: vai até o fim da trilha e volta. */
 .marquee-track {
-  animation: marquee-x var(--marquee-duration, 50s) linear infinite;
+  animation: marquee-x var(--marquee-duration, 10s) ease-in-out infinite alternate;
 }
 
 .marquee-track[data-reverse] {
-  animation-direction: reverse;
+  animation-direction: alternate-reverse;
 }
 
 .marquee-track:active {
@@ -428,10 +428,6 @@
 @media (prefers-reduced-motion: reduce) {
   .marquee-track {
     animation: none;
-  }
-
-  .marquee-copy {
-    display: none;
   }
 }
 

@@ -32,48 +32,39 @@ const categories: { id: WidgetCategory; Icon: typeof TimerIcon }[] = [
 const LEAVE_MS = 180;
 const MOVE_MS = 520;
 
-const rows: { id: MarqueeRow; duration: number; groups: number }[] = [
-  { id: 0, duration: 55, groups: 2 },
-  { id: 1, duration: 70, groups: 2 },
-  // Poucos itens e estreitos: repete mais vezes para a fileira nunca ficar com buraco.
-  { id: 2, duration: 45, groups: 4 },
+const rows: { id: MarqueeRow; duration: number }[] = [
+  { id: 0, duration: 14 },
+  { id: 1, duration: 11 },
+  { id: 2, duration: 9 },
 ];
 
 const prefersReducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /**
- * No mobile, sem filtro, os widgets viram fileiras que deslizam sozinhas, como a dock. O grupo é
- * repetido (o primeiro é o acessível) e a trilha anda metade da largura, o que emenda o laço.
+ * No mobile, sem filtro, os widgets viram fileiras que vão e voltam sozinhas, como a dock. Cada
+ * widget aparece uma vez só. A sombra do vidro é achatada: o overflow da fileira a cortaria em
+ * faixas escuras entre as fileiras.
  */
 function MarqueeRows({ items }: { items: ShowcaseItem[] }) {
   return (
     <div className="-mx-6 mt-10 flex flex-col gap-3 pb-12 sm:hidden">
-      {rows.map((row) => {
-        const group = items.filter((item) => item.row === row.id);
-        return (
-          <div key={row.id} className="[scrollbar-width:none] overflow-x-auto">
-            <div
-              className="marquee-track flex w-max"
-              data-reverse={row.id === 1 ? "" : undefined}
-              style={{ "--marquee-duration": `${row.duration}s` } as React.CSSProperties}
-            >
-              {Array.from({ length: row.groups }, (_, g) => (
-                <div
-                  key={g}
-                  aria-hidden={g > 0 || undefined}
-                  className={`flex shrink-0 gap-3 pr-3 ${g > 0 ? "marquee-copy" : ""}`}
-                >
-                  {group.map((item) => (
-                    <div key={item.key} className="shrink-0">
-                      {item.node}
-                    </div>
-                  ))}
+      {rows.map((row) => (
+        <div key={row.id} className="[scrollbar-width:none] overflow-x-auto">
+          <div
+            className="marquee-track flex w-max gap-3 px-6 **:[[role=img]]:shadow-[inset_0_1px_0_rgb(255_255_255/0.22)]"
+            data-reverse={row.id === 1 ? "" : undefined}
+            style={{ "--marquee-duration": `${row.duration}s` } as React.CSSProperties}
+          >
+            {items
+              .filter((item) => item.row === row.id)
+              .map((item) => (
+                <div key={item.key} className="shrink-0">
+                  {item.node}
                 </div>
               ))}
-            </div>
           </div>
-        );
-      })}
+        </div>
+      ))}
     </div>
   );
 }
