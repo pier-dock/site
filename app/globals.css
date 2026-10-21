@@ -269,12 +269,13 @@ html.intro-lock {
 }
 
 /*
- * Antes do atraso o título fica em opacity 0.01, não 0, e no tamanho real: com opacity 0 ou
- * encolhido o Chrome não registra o h1 como LCP (ou registra com área quase nula).
+ * Antes do atraso o título fica em opacity 0.001, não 0, e no tamanho real: com opacity 0 ou
+ * encolhido o Chrome não registra o h1 como LCP (ou registra com área quase nula). 0.01 já
+ * aparecia como um fantasma do título em telas escuras; 0.001 fica abaixo do que a tela mostra.
  */
 @keyframes intro-title {
   0% {
-    opacity: 0.01;
+    opacity: 0.001;
   }
   0.1% {
     opacity: 0;
