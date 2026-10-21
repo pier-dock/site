@@ -97,6 +97,9 @@ export const en = {
       volume: "Volume at 70%.",
       bluetooth: "Bluetooth: a device is connected.",
       battery: "Battery at 79%.",
+      clock: "Clock: the current time and date.",
+      showDesktop: "Show desktop: minimizes every window.",
+      tray: "Tray, on Windows: opens the hidden tray icons.",
     },
     aiUsage: { caption: "5-hour limit" },
     calendar: {

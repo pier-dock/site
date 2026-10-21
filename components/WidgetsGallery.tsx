@@ -2,7 +2,15 @@ import type { Dictionary } from "@/lib/i18n";
 import { AiUsageSmallTile, AiUsageTile } from "./widgets/AiUsageTile";
 import { CalendarSmallTile, CalendarTile } from "./widgets/CalendarTile";
 import { ClaudeAgentsTile } from "./widgets/ClaudeAgentsTile";
-import { BatteryTile, BluetoothTile, NetworkTile, VolumeTile } from "./widgets/IconTiles";
+import { Clock } from "./DockDemo/Clock";
+import {
+  BatteryTile,
+  BluetoothTile,
+  NetworkTile,
+  ShowDesktopTile,
+  TrayTile,
+  VolumeTile,
+} from "./widgets/IconTiles";
 import { ContribSmallTile, ContribTile, MineTile, ReviewTile } from "./widgets/GithubTiles";
 import { MediaSmallTile, MediaTile } from "./widgets/MediaTile";
 import { PomodoroSmallTile, PomodoroTile } from "./widgets/PomodoroTile";
@@ -43,6 +51,9 @@ export function WidgetsGallery({ t, demo }: WidgetsGalleryProps) {
     { key: "volume", label: t.tiles.volume, node: <VolumeTile /> },
     { key: "bluetooth", label: t.tiles.bluetooth, node: <BluetoothTile /> },
     { key: "battery", label: t.tiles.battery, node: <BatteryTile /> },
+    { key: "clock", label: t.tiles.clock, node: <Clock t={demo} /> },
+    { key: "showDesktop", label: t.tiles.showDesktop, node: <ShowDesktopTile /> },
+    { key: "tray", label: t.tiles.tray, node: <TrayTile /> },
   ];
 
   return (

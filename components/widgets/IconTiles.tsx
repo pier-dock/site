@@ -1,4 +1,11 @@
-import { BatteryIcon, BluetoothIcon, VolumeIcon, WifiIcon } from "../icons";
+import {
+  BatteryIcon,
+  BluetoothIcon,
+  ChevronUpIcon,
+  MonitorIcon,
+  VolumeIcon,
+  WifiIcon,
+} from "../icons";
 
 export function NetworkTile() {
   return (
@@ -36,6 +43,22 @@ export function BatteryTile() {
     >
       <BatteryIcon size={20} />
       <span>79%</span>
+    </div>
+  );
+}
+
+export function ShowDesktopTile() {
+  return (
+    <div aria-hidden="true" className="flex size-[34px] items-center justify-center text-fg">
+      <MonitorIcon size={17} />
+    </div>
+  );
+}
+
+export function TrayTile() {
+  return (
+    <div aria-hidden="true" className="flex size-[34px] items-center justify-center text-fg">
+      <ChevronUpIcon size={17} />
     </div>
   );
 }
