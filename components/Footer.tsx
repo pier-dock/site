@@ -12,9 +12,7 @@ export function Footer({ t }: { t: Dictionary["footer"] }) {
           <LogoMark size={20} dot={false} />
           pier
         </span>
-        <p className="flex-1">
-          {t.madeBy}
-        </p>
+        <p className="flex-1">{t.madeBy}</p>
         <nav aria-label={t.label}>
           <ul className="flex flex-wrap gap-6">
             <li>
