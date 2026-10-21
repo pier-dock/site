@@ -92,7 +92,7 @@ Só estes rodam no navegador: `OSProvider`, `HeroCta`, `DownloadPanel`, `CopyBut
 
 ### Animações
 
-As animações ao rolar usam CSS (`animation-timeline: view()`), sem JavaScript: os utilitários `reveal`, `reveal-step-N`, `reveal-x`, `stage-rise` e `drift` em `app/globals.css`. Em navegadores sem suporte e com `prefers-reduced-motion`, os elementos ficam no estado final, sem nada escondido.
+As animações ao rolar usam CSS (`animation-timeline: view()`), sem JavaScript: os utilitários `reveal`, `reveal-step-N`, `stage-rise` e `drift` em `app/globals.css`. Em navegadores sem suporte e com `prefers-reduced-motion`, os elementos ficam no estado final, sem nada escondido.
 
 ### Intro
 
