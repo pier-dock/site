@@ -2,6 +2,7 @@ import type { Dictionary } from "@/lib/i18n";
 import { ContribSmallTile, ContribTile, MineTile, ReviewTile } from "./widgets/GithubTiles";
 import { MediaSmallTile, MediaTile } from "./widgets/MediaTile";
 import { Tile } from "./widgets/Tile";
+import { WeatherSmallTile, WeatherTile } from "./widgets/WeatherTile";
 
 type WidgetsGalleryProps = { t: Dictionary["widgets"]; demo: Dictionary["demo"] };
 
@@ -17,6 +18,8 @@ export function WidgetsGallery({ t, demo }: WidgetsGalleryProps) {
     },
     { key: "mine", label: t.tiles.mine, node: <MineTile /> },
     { key: "contribSmall", label: t.tiles.contribSmall, node: <ContribSmallTile /> },
+    { key: "weather", label: t.tiles.weather, node: <WeatherTile copy={t.weather} /> },
+    { key: "weatherSmall", label: t.tiles.weatherSmall, node: <WeatherSmallTile /> },
   ];
 
   return (

@@ -82,7 +82,10 @@ export const en = {
       mine: "GitHub: no open pull requests of yours, checks passing.",
       contrib: "GitHub contributions: 2,142 this year, with the activity graph.",
       contribSmall: "GitHub contributions, compact: the activity graph only.",
+      weather: "Weather: 24°, sunny, high of 28° and low of 19°, with rain expected at 4 PM.",
+      weatherSmall: "Weather, compact: sun icon and 24°.",
     },
+    weather: { condition: "Sunny", alert: "Rain at 4 PM" },
   },
   download: {
     title: "Dock your apps.",
