@@ -92,6 +92,7 @@ export const en = {
       calendarSmall: "Calendar, compact: next event in 18 minutes.",
       aiUsage: "AI usage: 62% of the 5-hour limit used.",
       aiUsageSmall: "AI usage, compact: ring at 62%.",
+      claudeAgents: "Claude Agents: Clawd with two Claude Code sessions running.",
     },
     aiUsage: { caption: "5-hour limit" },
     calendar: {

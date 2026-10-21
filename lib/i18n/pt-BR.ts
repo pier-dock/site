@@ -94,6 +94,7 @@ export const ptBR: Dictionary = {
       calendarSmall: "Agenda compacta: próximo compromisso em 18 minutos.",
       aiUsage: "Uso de IA: 62% do limite de 5 horas usado.",
       aiUsageSmall: "Uso de IA compacto: anel em 62%.",
+      claudeAgents: "Claude Agents: o Clawd com duas sessões do Claude Code rodando.",
     },
     aiUsage: { caption: "Limite de 5 horas" },
     calendar: {
