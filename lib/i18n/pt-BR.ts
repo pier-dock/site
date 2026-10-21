@@ -99,6 +99,9 @@ export const ptBR: Dictionary = {
       volume: "Volume em 70%.",
       bluetooth: "Bluetooth: um dispositivo conectado.",
       battery: "Bateria em 79%.",
+      clock: "Relógio: a hora e a data atuais.",
+      showDesktop: "Mostrar área de trabalho: minimiza todas as janelas.",
+      tray: "Bandeja, no Windows: abre os ícones ocultos da bandeja.",
     },
     aiUsage: { caption: "Limite de 5 horas" },
     calendar: {

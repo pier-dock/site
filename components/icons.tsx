@@ -183,6 +183,23 @@ export function BluetoothIcon(props: IconProps) {
   );
 }
 
+export function MonitorIcon(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <rect x="2" y="3" width="20" height="14" rx="2" />
+      <path d="M8 21h8M12 17v4" />
+    </Icon>
+  );
+}
+
+export function ChevronUpIcon(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <path d="m18 15-6-6-6 6" />
+    </Icon>
+  );
+}
+
 export function VideoIcon(props: IconProps) {
   return (
     <Icon strokeWidth={2.4} {...props}>
