@@ -5,7 +5,15 @@ import { PullRequestIcon, PulseIcon, SparklesIcon, TimerIcon } from "./icons";
 
 export type WidgetCategory = "productivity" | "system" | "github" | "ai";
 
-export type ShowcaseItem = { key: string; category: WidgetCategory; node: React.ReactNode };
+/** Fileira do mobile: 0 largos, 1 compactos, 2 só ícone. */
+export type MarqueeRow = 0 | 1 | 2;
+
+export type ShowcaseItem = {
+  key: string;
+  category: WidgetCategory;
+  row: MarqueeRow;
+  node: React.ReactNode;
+};
 
 type ShowcaseProps = {
   title: string;
@@ -24,7 +32,51 @@ const categories: { id: WidgetCategory; Icon: typeof TimerIcon }[] = [
 const LEAVE_MS = 180;
 const MOVE_MS = 520;
 
+const rows: { id: MarqueeRow; duration: number; groups: number }[] = [
+  { id: 0, duration: 55, groups: 2 },
+  { id: 1, duration: 70, groups: 2 },
+  // Poucos itens e estreitos: repete mais vezes para a fileira nunca ficar com buraco.
+  { id: 2, duration: 45, groups: 4 },
+];
+
 const prefersReducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/**
+ * No mobile, sem filtro, os widgets viram fileiras que deslizam sozinhas, como a dock. O grupo é
+ * repetido (o primeiro é o acessível) e a trilha anda metade da largura, o que emenda o laço.
+ */
+function MarqueeRows({ items }: { items: ShowcaseItem[] }) {
+  return (
+    <div className="-mx-6 mt-10 flex flex-col gap-3 pb-12 sm:hidden">
+      {rows.map((row) => {
+        const group = items.filter((item) => item.row === row.id);
+        return (
+          <div key={row.id} className="[scrollbar-width:none] overflow-x-auto">
+            <div
+              className="marquee-track flex w-max"
+              data-reverse={row.id === 1 ? "" : undefined}
+              style={{ "--marquee-duration": `${row.duration}s` } as React.CSSProperties}
+            >
+              {Array.from({ length: row.groups }, (_, g) => (
+                <div
+                  key={g}
+                  aria-hidden={g > 0 || undefined}
+                  className={`flex shrink-0 gap-3 pr-3 ${g > 0 ? "marquee-copy" : ""}`}
+                >
+                  {group.map((item) => (
+                    <div key={item.key} className="shrink-0">
+                      {item.node}
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
 
 export function WidgetsShowcase({ title, subtitle, filters, items }: ShowcaseProps) {
   // `active` é o botão pressionado; `applied` é o filtro já aplicado à lista, que só muda depois
@@ -54,7 +106,7 @@ export function WidgetsShowcase({ title, subtitle, filters, items }: ShowcasePro
     leaving.current = [];
     for (const item of items) {
       const el = elements.current.get(item.key);
-      if (!el || !isShown(item, applied)) continue;
+      if (!el || el.offsetParent === null || !isShown(item, applied)) continue;
       if (isShown(item, next)) {
         positions.set(item.key, el.getBoundingClientRect());
       } else {
@@ -151,7 +203,11 @@ export function WidgetsShowcase({ title, subtitle, filters, items }: ShowcasePro
         </div>
       </div>
 
-      <ul className="m-0 mt-10 flex list-none flex-wrap content-center items-center justify-center gap-3 p-0 pb-12 sm:mt-16 sm:gap-6 sm:pb-24 lg:min-h-[480px]">
+      {applied === null && <MarqueeRows items={items} />}
+
+      <ul
+        className={`m-0 mt-10 ${applied === null ? "hidden sm:flex" : "flex"} list-none flex-wrap content-center items-center justify-center gap-3 p-0 pb-12 sm:mt-16 sm:gap-6 sm:pb-24 lg:min-h-[480px]`}
+      >
         {items.map((item) => (
           <li
             key={item.key}

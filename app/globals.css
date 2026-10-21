@@ -363,6 +363,12 @@
   }
 }
 
+@keyframes marquee-x {
+  to {
+    translate: -50% 0;
+  }
+}
+
 @keyframes reveal-slide {
   from {
     translate: 0 90px;
@@ -403,6 +409,29 @@
   from {
     opacity: 0;
     scale: 0.3;
+  }
+}
+
+/* Fileiras do mobile na galeria de widgets: a trilha anda metade da largura e recomeça. */
+.marquee-track {
+  animation: marquee-x var(--marquee-duration, 50s) linear infinite;
+}
+
+.marquee-track[data-reverse] {
+  animation-direction: reverse;
+}
+
+.marquee-track:active {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+
+  .marquee-copy {
+    display: none;
   }
 }
 
