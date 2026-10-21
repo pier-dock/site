@@ -64,11 +64,13 @@ app/
   globals.css           tokens do @theme, vidro, temas dos widgets e animações de rolagem
 assets/apps/            ícones SVG dos apps da demo
 components/             seções da página; DockDemo/ é a demo interativa
+  WidgetsGallery.tsx    galeria de widgets (servidor): lista os tiles e agrupa por categoria
+  WidgetsShowcase.tsx   filtros, animações e fileiras do mobile (cliente)
+  widgets/              um arquivo por widget da dock, desenhado como na dock (Tile.tsx é o vidro)
 lib/
   i18n/                 en.ts (define o tipo Dictionary), pt-BR.ts e index.ts (idiomas, rotas, fill)
   os.ts                 detectPlatform(): função pura que recebe UA e client hints
   downloads.ts          dados de download por sistema
-  widgets.ts            getWidgets(): widgets do carrossel com os textos do idioma
   seo.ts                metadata, hreflang, viewport e JSON-LD
   site.ts               variáveis de ambiente, autores e links
 tests/                  Vitest
@@ -88,11 +90,13 @@ Para adicionar um idioma:
 
 ### Client Components
 
-Só estes rodam no navegador: `OSProvider`, `HeroCta`, `DownloadPanel`, `CopyButton` e `DockDemo/*`. A demo da dock fica num chunk separado (`next/dynamic`). O HTML dela já vem pronto do build, com o relógio em `--:--` até a hidratação.
+Só estes rodam no navegador: `OSProvider`, `HeroCta`, `DownloadPanel`, `CopyButton`, `WidgetsShowcase` e `DockDemo/*`. A demo da dock fica num chunk separado (`next/dynamic`). O HTML dela já vem pronto do build, com o relógio em `--:--` até a hidratação.
 
 ### Animações
 
 As animações ao rolar usam CSS (`animation-timeline: view()`), sem JavaScript: os utilitários `reveal`, `reveal-step-N`, `stage-rise` e `drift` em `app/globals.css`. Em navegadores sem suporte e com `prefers-reduced-motion`, os elementos ficam no estado final, sem nada escondido.
+
+A galeria de widgets não usa `view()`: a entrada (uma vez, quando a seção aparece) e a reorganização ao filtrar usam a Web Animations API em `WidgetsShowcase.tsx`. Uma animação ligada à rolagem reiniciava quando um filtro devolvia itens do `display: none`.
 
 ### Intro
 
@@ -104,12 +108,16 @@ Ao abrir a página, a dock surge no meio da tela e um "hover" percorre os itens 
 
 Sem JavaScript, a dock só aparece no lugar. Com `prefers-reduced-motion`, nada anima.
 
-### Incluir um widget no carrossel
+O mesmo script desliga a restauração de rolagem do navegador e vai ao topo, então recarregar sempre cai na hero e mostra a intro. Enquanto ela roda, a classe `intro-lock` trava a rolagem do `<html>`. Link com âncora (`#widgets`) é respeitado: não volta ao topo nem trava.
 
-1. Adicione os textos em `widgets.items` nos dicionários (`lib/i18n/en.ts` e `pt-BR.ts`).
-2. Adicione o widget em `getWidgets()` (`lib/widgets.ts`), com `id`, ícone e o tipo de `data`.
-3. Crie o tema `widget-<id>` em `app/globals.css` (fundo, `border-color` e `--widget-halo`, o brilho do hover), com as cores como tokens no `@theme`.
-4. Crie o visual em `components/widgets/` e registre-o no `switch` de `WidgetCard.tsx`.
+### Incluir um widget na galeria
+
+Cada tile é o widget como na dock (vidro, raio e tamanhos reais), ampliado.
+
+1. Crie o tile em `components/widgets/` com os valores fixos de exemplo. Para widgets que têm forma larga e compacta, exporte as duas.
+2. Adicione o nome (tooltip) em `widgets.names` e a descrição em `widgets.tiles` nos dicionários (`lib/i18n/en.ts` e `pt-BR.ts`). A descrição vira texto de verdade, escondido só visualmente, para leitores de tela e buscadores.
+3. Registre-o na lista `tiles` de `components/WidgetsGallery.tsx` (`key`, `name`, `label`, `node`).
+4. Coloque a `key` em `categories` (filtro) e, se não for da fileira dos compactos, em `rows` (fileiras do mobile: 0 largos, 1 compactos, 2 só ícone).
 
 ### Tokens
 
