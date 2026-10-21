@@ -1,4 +1,5 @@
 import type { Dictionary } from "@/lib/i18n";
+import { AiUsageSmallTile, AiUsageTile } from "./widgets/AiUsageTile";
 import { CalendarSmallTile, CalendarTile } from "./widgets/CalendarTile";
 import { ContribSmallTile, ContribTile, MineTile, ReviewTile } from "./widgets/GithubTiles";
 import { MediaSmallTile, MediaTile } from "./widgets/MediaTile";
@@ -33,6 +34,8 @@ export function WidgetsGallery({ t, demo }: WidgetsGalleryProps) {
       label: t.tiles.calendarSmall,
       node: <CalendarSmallTile copy={t.calendar} />,
     },
+    { key: "aiUsage", label: t.tiles.aiUsage, node: <AiUsageTile caption={t.aiUsage.caption} /> },
+    { key: "aiUsageSmall", label: t.tiles.aiUsageSmall, node: <AiUsageSmallTile /> },
   ];
 
   return (
