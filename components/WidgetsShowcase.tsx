@@ -51,7 +51,7 @@ function MarqueeRows({ items }: { items: ShowcaseItem[] }) {
       {rows.map((row) => (
         <div key={row.id} className="[scrollbar-width:none] overflow-x-auto">
           <div
-            className="marquee-track flex w-max gap-3 px-6 **:[[role=img]]:shadow-[inset_0_1px_0_rgb(255_255_255/0.22)]"
+            className="marquee-track flex w-max gap-3 px-6 **:[[role=img]]:shadow-[inset_0_1px_0_rgb(255_255_255/0.22)]!"
             data-reverse={row.id === 1 ? "" : undefined}
             style={{ "--marquee-duration": `${row.duration}s` } as React.CSSProperties}
           >
@@ -185,7 +185,7 @@ export function WidgetsShowcase({ title, subtitle, filters, items }: ShowcasePro
               type="button"
               aria-pressed={active === id}
               onClick={() => select(id)}
-              className="flex h-10 shrink-0 cursor-pointer items-center gap-2 rounded-full px-4 text-sm font-medium text-fg-2 glass-dock transition-colors duration-150 hover:bg-white/10 hover:text-fg aria-pressed:border-white/30 aria-pressed:bg-white/15 aria-pressed:text-fg"
+              className="flex h-10 shrink-0 cursor-pointer items-center gap-2 rounded-full px-4 text-sm font-medium text-fg-2 glass-dock transition-colors duration-150 hover:bg-white/10 hover:text-fg aria-pressed:border-white/30 aria-pressed:bg-white/15 aria-pressed:text-fg max-sm:shadow-[inset_0_1px_0_rgb(255_255_255/0.22)]!"
             >
               <Icon size={16} />
               {filters[id]}
