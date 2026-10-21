@@ -130,7 +130,7 @@ function MarqueeRow({ items, speed }: { items: ShowcaseItem[]; speed: number }) 
     <div data-enter className="overflow-hidden">
       <div
         ref={track}
-        className="flex w-max cursor-grab touch-pan-y select-none **:[[role=img]]:shadow-[inset_0_1px_0_rgb(255_255_255/0.22)]!"
+        className="flex w-max cursor-grab touch-pan-y select-none **:[.glass-dock]:shadow-[inset_0_1px_0_rgb(255_255_255/0.22)]!"
       >
         {[0, 1].map((copy) => (
           <div key={copy} aria-hidden={copy > 0 || undefined} className="flex shrink-0 gap-3 pr-3">
