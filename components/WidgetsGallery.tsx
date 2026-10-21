@@ -160,18 +160,18 @@ export function WidgetsGallery({ t, demo }: WidgetsGalleryProps) {
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(55% 45% at 50% 58%, color-mix(in srgb, var(--color-coral) 46%, transparent), transparent 70%)",
+            "radial-gradient(circle 260px at 50% 58%, color-mix(in srgb, var(--color-coral) 46%, transparent), transparent 100%)",
         }}
       />
       <WidgetsShowcase
         title={t.title}
         subtitle={t.subtitle}
         filters={t.filters}
-        items={tiles.map((tile, i) => ({
+        items={tiles.map((tile) => ({
           key: tile.key,
           category: categories[tile.key] ?? "productivity",
           node: (
-            <Tile name={tile.name} label={tile.label} index={i % 3}>
+            <Tile name={tile.name} label={tile.label}>
               {tile.node}
             </Tile>
           ),
