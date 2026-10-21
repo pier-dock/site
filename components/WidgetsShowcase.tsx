@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
+import { fill } from "@/lib/i18n";
 import { PullRequestIcon, PulseIcon, SparklesIcon, TimerIcon } from "./icons";
 
 export type WidgetCategory = "productivity" | "system" | "github" | "ai";
@@ -18,7 +19,7 @@ export type ShowcaseItem = {
 type ShowcaseProps = {
   title: string;
   subtitle: string;
-  filters: Record<WidgetCategory | "label", string>;
+  filters: Record<WidgetCategory | "label" | "status", string>;
   items: ShowcaseItem[];
 };
 
@@ -319,6 +320,10 @@ export function WidgetsShowcase({ title, subtitle, filters, items }: ShowcasePro
             </button>
           ))}
         </div>
+        {/* Anuncia a nova contagem para leitores de tela depois que o filtro é aplicado. */}
+        <p role="status" className="sr-only">
+          {fill(filters.status, { n: items.filter((item) => isShown(item, applied)).length })}
+        </p>
       </div>
 
       {showRows && <MarqueeRows items={items} />}

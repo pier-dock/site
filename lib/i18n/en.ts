@@ -77,6 +77,7 @@ export const en = {
     subtitle: "Useful info without opening another window.",
     filters: {
       label: "Filter widgets",
+      status: "Showing {n} widgets",
       productivity: "Productivity",
       system: "System",
       github: "GitHub",
