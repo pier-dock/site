@@ -131,14 +131,18 @@ export function WidgetsShowcase({ title, subtitle, filters, items }: ShowcasePro
           </p>
         </div>
 
-        <div role="group" aria-label={filters.label} className="flex flex-wrap gap-2">
+        <div
+          role="group"
+          aria-label={filters.label}
+          className="-mx-6 flex w-[calc(100%+3rem)] [scrollbar-width:none] gap-2 overflow-x-auto px-6 sm:mx-0 sm:w-auto sm:flex-wrap sm:overflow-visible sm:px-0"
+        >
           {categories.map(({ id, Icon }) => (
             <button
               key={id}
               type="button"
               aria-pressed={active === id}
               onClick={() => select(id)}
-              className="flex h-10 cursor-pointer items-center gap-2 rounded-full px-4 text-sm font-medium text-fg-2 glass-dock transition-colors duration-150 hover:bg-white/10 hover:text-fg aria-pressed:border-white/30 aria-pressed:bg-white/15 aria-pressed:text-fg"
+              className="flex h-10 shrink-0 cursor-pointer items-center gap-2 rounded-full px-4 text-sm font-medium text-fg-2 glass-dock transition-colors duration-150 hover:bg-white/10 hover:text-fg aria-pressed:border-white/30 aria-pressed:bg-white/15 aria-pressed:text-fg"
             >
               <Icon size={16} />
               {filters[id]}
@@ -147,7 +151,7 @@ export function WidgetsShowcase({ title, subtitle, filters, items }: ShowcasePro
         </div>
       </div>
 
-      <ul className="m-0 mt-16 flex list-none flex-wrap content-center items-center justify-center gap-x-6 gap-y-6 p-0 pb-24 lg:min-h-[480px]">
+      <ul className="m-0 mt-10 flex list-none flex-wrap content-center items-center justify-center gap-3 p-0 pb-12 sm:mt-16 sm:gap-6 sm:pb-24 lg:min-h-[480px]">
         {items.map((item) => (
           <li
             key={item.key}
