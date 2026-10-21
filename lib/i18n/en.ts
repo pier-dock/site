@@ -84,7 +84,10 @@ export const en = {
       contribSmall: "GitHub contributions, compact: the activity graph only.",
       weather: "Weather: 24°, sunny, high of 28° and low of 19°, with rain expected at 4 PM.",
       weatherSmall: "Weather, compact: sun icon and 24°.",
+      pomodoro: "Pomodoro: focus, 18 minutes and 42 seconds left, session 2 of 4.",
+      pomodoroSmall: "Pomodoro, compact: ring with 18 minutes left.",
     },
+    pomodoro: { phase: "Focus · 2 of 4" },
     weather: { condition: "Sunny", alert: "Rain at 4 PM" },
   },
   download: {
