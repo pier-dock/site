@@ -2,6 +2,7 @@ import type { Dictionary } from "@/lib/i18n";
 import { ContribSmallTile, ContribTile, MineTile, ReviewTile } from "./widgets/GithubTiles";
 import { MediaSmallTile, MediaTile } from "./widgets/MediaTile";
 import { PomodoroSmallTile, PomodoroTile } from "./widgets/PomodoroTile";
+import { UsageSmallTile, UsageTile } from "./widgets/UsageTile";
 import { Tile } from "./widgets/Tile";
 import { WeatherSmallTile, WeatherTile } from "./widgets/WeatherTile";
 
@@ -23,6 +24,8 @@ export function WidgetsGallery({ t, demo }: WidgetsGalleryProps) {
     { key: "weatherSmall", label: t.tiles.weatherSmall, node: <WeatherSmallTile /> },
     { key: "pomodoro", label: t.tiles.pomodoro, node: <PomodoroTile phase={t.pomodoro.phase} /> },
     { key: "pomodoroSmall", label: t.tiles.pomodoroSmall, node: <PomodoroSmallTile /> },
+    { key: "usage", label: t.tiles.usage, node: <UsageTile /> },
+    { key: "usageSmall", label: t.tiles.usageSmall, node: <UsageSmallTile /> },
   ];
 
   return (

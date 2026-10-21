@@ -86,6 +86,8 @@ export const en = {
       weatherSmall: "Weather, compact: sun icon and 24°.",
       pomodoro: "Pomodoro: focus, 18 minutes and 42 seconds left, session 2 of 4.",
       pomodoroSmall: "Pomodoro, compact: ring with 18 minutes left.",
+      usage: "System usage: CPU at 34% and memory at 68%, with the last minute of history.",
+      usageSmall: "System usage, compact: CPU at 34% with its history.",
     },
     pomodoro: { phase: "Focus · 2 of 4" },
     weather: { condition: "Sunny", alert: "Rain at 4 PM" },
