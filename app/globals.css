@@ -237,6 +237,11 @@
   --intro-reveal: calc(var(--intro-title) + 400ms);
 }
 
+/* Sem rolagem enquanto a intro roda; o script do Hero liga e desliga a classe. */
+html.intro-lock {
+  overflow: hidden;
+}
+
 @keyframes intro-dock-in {
   from {
     opacity: 0;
