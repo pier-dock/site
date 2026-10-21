@@ -82,7 +82,7 @@ export function WidgetsGallery({ t, demo }: WidgetsGalleryProps) {
           </p>
         </div>
 
-        <ul className="m-0 mt-16 flex list-none flex-wrap items-center justify-center gap-x-12 gap-y-16 fade-bottom p-0 pb-56">
+        <ul className="m-0 mt-16 flex list-none flex-wrap items-center justify-center gap-x-12 gap-y-16 fade-bottom p-0 pb-24">
           {tiles.map((tile, i) => (
             <li key={tile.key}>
               <Tile label={tile.label} index={i % 3}>
