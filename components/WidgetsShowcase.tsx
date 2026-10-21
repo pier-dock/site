@@ -33,9 +33,9 @@ const LEAVE_MS = 180;
 const MOVE_MS = 520;
 
 const rows: { id: MarqueeRow; duration: number }[] = [
-  { id: 0, duration: 14 },
-  { id: 1, duration: 11 },
-  { id: 2, duration: 9 },
+  { id: 0, duration: 40 },
+  { id: 1, duration: 55 },
+  { id: 2, duration: 30 },
 ];
 
 const prefersReducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
