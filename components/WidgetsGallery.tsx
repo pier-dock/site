@@ -126,7 +126,15 @@ export function WidgetsGallery({ t, demo }: WidgetsGalleryProps) {
       aria-labelledby="widgets-title"
       className="relative overflow-clip border-t border-line-8 pt-28"
     >
-      <div className="mx-auto max-w-[1200px] px-6">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-[60%]"
+        style={{
+          background:
+            "radial-gradient(60% 80% at 50% 100%, rgb(255 79 163 / 0.42), transparent 70%)",
+        }}
+      />
+      <div className="relative mx-auto max-w-[1200px] px-6">
         <div className="flex max-w-[560px] reveal-blur flex-col gap-1.5">
           <h2
             id="widgets-title"
@@ -139,8 +147,8 @@ export function WidgetsGallery({ t, demo }: WidgetsGalleryProps) {
           </p>
         </div>
 
-        <div className="relative mt-16">
-          <ul className="m-0 flex list-none flex-wrap items-center justify-center gap-x-12 gap-y-16 p-0 pb-24">
+        <div className="mt-16">
+          <ul className="m-0 flex list-none flex-wrap items-center justify-center gap-x-6 gap-y-6 p-0 pb-24">
             {tiles.map((tile, i) => (
               <li key={tile.key}>
                 <Tile name={tile.name} label={tile.label} index={i % 3}>
@@ -149,10 +157,6 @@ export function WidgetsGallery({ t, demo }: WidgetsGalleryProps) {
               </li>
             ))}
           </ul>
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 z-10 bg-linear-to-b from-transparent from-20% to-page to-92%"
-          />
         </div>
       </div>
     </section>

@@ -8,8 +8,8 @@ type TileProps = {
 };
 
 /**
- * O widget como na dock: vidro, raio e tamanhos reais, só que ampliado. Acima do degradê que
- * esmaece o fim da galeria (z-20), o tile em hover acende junto com o tooltip.
+ * O widget como na dock: vidro, raio e tamanhos reais, só que ampliado. No hover acende e
+ * mostra o tooltip com o nome.
  */
 export function Tile({ name, label, index, children }: TileProps) {
   return (
@@ -17,7 +17,7 @@ export function Tile({ name, label, index, children }: TileProps) {
       role="img"
       aria-label={label}
       style={{ "--reveal-step": index } as React.CSSProperties}
-      className="group relative flex [zoom:1.4] reveal items-center rounded-xl p-1.5 glass-dock sm:[zoom:1.6] mouse:hover:z-20"
+      className="group relative flex [zoom:1.4] reveal cursor-pointer items-center rounded-xl p-1.5 glass-dock sm:[zoom:1.6]"
     >
       <span
         aria-hidden="true"
