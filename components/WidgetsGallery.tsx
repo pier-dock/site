@@ -153,7 +153,7 @@ export function WidgetsGallery({ t, demo }: WidgetsGalleryProps) {
     <section
       id="widgets"
       aria-labelledby="widgets-title"
-      className="relative overflow-clip border-t border-line-8 pt-28"
+      className="relative overflow-clip border-t border-line-8 pt-20 sm:pt-28"
     >
       <div
         aria-hidden="true"

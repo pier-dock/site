@@ -14,7 +14,7 @@ export function Tile({ name, label, children }: TileProps) {
     <div
       role="img"
       aria-label={label}
-      className="group relative flex [zoom:1.4] cursor-pointer items-center rounded-xl p-1.5 glass-dock sm:[zoom:1.6]"
+      className="group relative flex [zoom:1.1] cursor-pointer items-center rounded-xl p-1.5 glass-dock sm:[zoom:1.6]"
     >
       <span
         aria-hidden="true"
