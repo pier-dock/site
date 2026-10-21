@@ -75,6 +75,13 @@ export const en = {
   widgets: {
     title: "There's a widget for that.",
     subtitle: "Useful info without opening another window.",
+    filters: {
+      label: "Filter widgets",
+      productivity: "Productivity",
+      system: "System",
+      github: "GitHub",
+      ai: "AI",
+    },
     names: {
       media: "Media player",
       review: "Pull requests to review",

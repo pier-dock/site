@@ -77,6 +77,13 @@ export const ptBR: Dictionary = {
   widgets: {
     title: "Tem um widget para isso.",
     subtitle: "Informação útil sem abrir mais uma janela.",
+    filters: {
+      label: "Filtrar widgets",
+      productivity: "Produtividade",
+      system: "Sistema",
+      github: "GitHub",
+      ai: "IA",
+    },
     names: {
       media: "Player de mídia",
       review: "Pull requests para revisar",

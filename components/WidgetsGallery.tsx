@@ -22,7 +22,36 @@ import { MediaSmallTile, MediaTile } from "./widgets/MediaTile";
 import { PomodoroSmallTile, PomodoroTile } from "./widgets/PomodoroTile";
 import { UsageSmallTile, UsageTile } from "./widgets/UsageTile";
 import { Tile } from "./widgets/Tile";
+import { WidgetsShowcase, type WidgetCategory } from "./WidgetsShowcase";
 import { WeatherSmallTile, WeatherTile } from "./widgets/WeatherTile";
+
+const categories: Record<string, WidgetCategory> = {
+  media: "productivity",
+  mediaSmall: "productivity",
+  weather: "productivity",
+  weatherSmall: "productivity",
+  pomodoro: "productivity",
+  pomodoroSmall: "productivity",
+  calendar: "productivity",
+  calendarSmall: "productivity",
+  usage: "system",
+  usageSmall: "system",
+  network: "system",
+  volume: "system",
+  bluetooth: "system",
+  battery: "system",
+  clock: "system",
+  showDesktop: "system",
+  tray: "system",
+  review: "github",
+  mine: "github",
+  contrib: "github",
+  contribSmall: "github",
+  commits: "github",
+  aiUsage: "ai",
+  aiUsageSmall: "ai",
+  claudeAgents: "ai",
+};
 
 type WidgetsGalleryProps = { t: Dictionary["widgets"]; demo: Dictionary["demo"] };
 
@@ -134,31 +163,20 @@ export function WidgetsGallery({ t, demo }: WidgetsGalleryProps) {
             "radial-gradient(55% 45% at 50% 58%, color-mix(in srgb, var(--color-coral) 46%, transparent), transparent 70%)",
         }}
       />
-      <div className="relative mx-auto max-w-[1200px] px-6">
-        <div className="flex max-w-[560px] reveal-blur flex-col gap-1.5">
-          <h2
-            id="widgets-title"
-            className="m-0 text-[clamp(22px,2.4vw,28px)] leading-[1.2] font-semibold tracking-[-0.02em]"
-          >
-            {t.title}
-          </h2>
-          <p className="m-0 text-[clamp(22px,2.4vw,28px)] leading-[1.2] font-medium tracking-[-0.02em] text-fg-4">
-            {t.subtitle}
-          </p>
-        </div>
-
-        <div className="mt-16">
-          <ul className="m-0 flex list-none flex-wrap items-center justify-center gap-x-6 gap-y-6 p-0 pb-24">
-            {tiles.map((tile, i) => (
-              <li key={tile.key}>
-                <Tile name={tile.name} label={tile.label} index={i % 3}>
-                  {tile.node}
-                </Tile>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
+      <WidgetsShowcase
+        title={t.title}
+        subtitle={t.subtitle}
+        filters={t.filters}
+        items={tiles.map((tile, i) => ({
+          key: tile.key,
+          category: categories[tile.key] ?? "productivity",
+          node: (
+            <Tile name={tile.name} label={tile.label} index={i % 3}>
+              {tile.node}
+            </Tile>
+          ),
+        }))}
+      />
     </section>
   );
 }
