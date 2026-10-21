@@ -128,10 +128,10 @@ export function WidgetsGallery({ t, demo }: WidgetsGalleryProps) {
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-[60%]"
+        className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(60% 80% at 50% 100%, rgb(255 79 163 / 0.42), transparent 70%)",
+            "radial-gradient(55% 45% at 50% 58%, color-mix(in srgb, var(--color-coral) 46%, transparent), transparent 70%)",
         }}
       />
       <div className="relative mx-auto max-w-[1200px] px-6">
