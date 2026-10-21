@@ -97,6 +97,8 @@ export const ptBR: Dictionary = {
       claudeAgents: "Claude Agents: o Clawd com duas sessões do Claude Code rodando.",
       network: "Rede: conectado ao Wi-Fi.",
       volume: "Volume em 70%.",
+      bluetooth: "Bluetooth: um dispositivo conectado.",
+      battery: "Bateria em 79%.",
     },
     aiUsage: { caption: "Limite de 5 horas" },
     calendar: {
