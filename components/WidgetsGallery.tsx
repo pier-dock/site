@@ -2,6 +2,7 @@ import type { Dictionary } from "@/lib/i18n";
 import { AiUsageSmallTile, AiUsageTile } from "./widgets/AiUsageTile";
 import { CalendarSmallTile, CalendarTile } from "./widgets/CalendarTile";
 import { ClaudeAgentsTile } from "./widgets/ClaudeAgentsTile";
+import { NetworkTile, VolumeTile } from "./widgets/IconTiles";
 import { ContribSmallTile, ContribTile, MineTile, ReviewTile } from "./widgets/GithubTiles";
 import { MediaSmallTile, MediaTile } from "./widgets/MediaTile";
 import { PomodoroSmallTile, PomodoroTile } from "./widgets/PomodoroTile";
@@ -38,6 +39,8 @@ export function WidgetsGallery({ t, demo }: WidgetsGalleryProps) {
     { key: "aiUsage", label: t.tiles.aiUsage, node: <AiUsageTile caption={t.aiUsage.caption} /> },
     { key: "aiUsageSmall", label: t.tiles.aiUsageSmall, node: <AiUsageSmallTile /> },
     { key: "claudeAgents", label: t.tiles.claudeAgents, node: <ClaudeAgentsTile /> },
+    { key: "network", label: t.tiles.network, node: <NetworkTile /> },
+    { key: "volume", label: t.tiles.volume, node: <VolumeTile /> },
   ];
 
   return (

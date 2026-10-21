@@ -95,6 +95,8 @@ export const ptBR: Dictionary = {
       aiUsage: "Uso de IA: 62% do limite de 5 horas usado.",
       aiUsageSmall: "Uso de IA compacto: anel em 62%.",
       claudeAgents: "Claude Agents: o Clawd com duas sessões do Claude Code rodando.",
+      network: "Rede: conectado ao Wi-Fi.",
+      volume: "Volume em 70%.",
     },
     aiUsage: { caption: "Limite de 5 horas" },
     calendar: {
