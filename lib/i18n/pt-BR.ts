@@ -84,7 +84,10 @@ export const ptBR: Dictionary = {
       mine: "GitHub: nenhum pull request seu aberto, checks passando.",
       contrib: "Contribuições no GitHub: 2.142 neste ano, com o gráfico de atividade.",
       contribSmall: "Contribuições no GitHub compactas: só o gráfico de atividade.",
+      weather: "Clima: 24°, ensolarado, máxima de 28° e mínima de 19°, com chuva prevista às 16h.",
+      weatherSmall: "Clima compacto: ícone de sol e 24°.",
     },
+    weather: { condition: "Ensolarado", alert: "Chuva às 16h" },
   },
   download: {
     title: "Atraque seus apps.",
