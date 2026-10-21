@@ -93,6 +93,8 @@ export const en = {
       aiUsage: "AI usage: 62% of the 5-hour limit used.",
       aiUsageSmall: "AI usage, compact: ring at 62%.",
       claudeAgents: "Claude Agents: Clawd with two Claude Code sessions running.",
+      network: "Network: connected to Wi-Fi.",
+      volume: "Volume at 70%.",
     },
     aiUsage: { caption: "5-hour limit" },
     calendar: {
