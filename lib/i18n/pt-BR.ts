@@ -102,6 +102,7 @@ export const ptBR: Dictionary = {
       clock: "Relógio: a hora e a data atuais.",
       showDesktop: "Mostrar área de trabalho: minimiza todas as janelas.",
       tray: "Bandeja, no Windows: abre os ícones ocultos da bandeja.",
+      commits: "GitHub: 7 commits hoje.",
     },
     aiUsage: { caption: "Limite de 5 horas" },
     calendar: {

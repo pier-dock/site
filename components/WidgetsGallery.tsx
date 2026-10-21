@@ -11,7 +11,13 @@ import {
   TrayTile,
   VolumeTile,
 } from "./widgets/IconTiles";
-import { ContribSmallTile, ContribTile, MineTile, ReviewTile } from "./widgets/GithubTiles";
+import {
+  CommitsTile,
+  ContribSmallTile,
+  ContribTile,
+  MineTile,
+  ReviewTile,
+} from "./widgets/GithubTiles";
 import { MediaSmallTile, MediaTile } from "./widgets/MediaTile";
 import { PomodoroSmallTile, PomodoroTile } from "./widgets/PomodoroTile";
 import { UsageSmallTile, UsageTile } from "./widgets/UsageTile";
@@ -54,6 +60,7 @@ export function WidgetsGallery({ t, demo }: WidgetsGalleryProps) {
     { key: "clock", label: t.tiles.clock, node: <Clock t={demo} /> },
     { key: "showDesktop", label: t.tiles.showDesktop, node: <ShowDesktopTile /> },
     { key: "tray", label: t.tiles.tray, node: <TrayTile /> },
+    { key: "commits", label: t.tiles.commits, node: <CommitsTile /> },
   ];
 
   return (

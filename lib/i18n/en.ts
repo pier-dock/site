@@ -100,6 +100,7 @@ export const en = {
       clock: "Clock: the current time and date.",
       showDesktop: "Show desktop: minimizes every window.",
       tray: "Tray, on Windows: opens the hidden tray icons.",
+      commits: "GitHub: 7 commits today.",
     },
     aiUsage: { caption: "5-hour limit" },
     calendar: {

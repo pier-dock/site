@@ -200,6 +200,15 @@ export function ChevronUpIcon(props: IconProps) {
   );
 }
 
+export function CommitIcon(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <circle cx="12" cy="12" r="3" />
+      <path d="M3 12h6M15 12h6" />
+    </Icon>
+  );
+}
+
 export function VideoIcon(props: IconProps) {
   return (
     <Icon strokeWidth={2.4} {...props}>
