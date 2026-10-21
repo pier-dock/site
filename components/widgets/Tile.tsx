@@ -2,8 +2,6 @@ type TileProps = {
   /** Nome curto mostrado no tooltip, como na dock. */
   name: string;
   label: string;
-  /** Posição na galeria: escalona a entrada ao rolar. */
-  index: number;
   children: React.ReactNode;
 };
 
@@ -11,13 +9,12 @@ type TileProps = {
  * O widget como na dock: vidro, raio e tamanhos reais, só que ampliado. No hover acende e
  * mostra o tooltip com o nome.
  */
-export function Tile({ name, label, index, children }: TileProps) {
+export function Tile({ name, label, children }: TileProps) {
   return (
     <div
       role="img"
       aria-label={label}
-      style={{ "--reveal-step": index } as React.CSSProperties}
-      className="group relative flex [zoom:1.4] reveal cursor-pointer items-center rounded-xl p-1.5 glass-dock sm:[zoom:1.6]"
+      className="group relative flex [zoom:1.4] cursor-pointer items-center rounded-xl p-1.5 glass-dock sm:[zoom:1.6]"
     >
       <span
         aria-hidden="true"
