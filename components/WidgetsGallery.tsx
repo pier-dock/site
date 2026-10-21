@@ -22,7 +22,7 @@ import { MediaSmallTile, MediaTile } from "./widgets/MediaTile";
 import { PomodoroSmallTile, PomodoroTile } from "./widgets/PomodoroTile";
 import { UsageSmallTile, UsageTile } from "./widgets/UsageTile";
 import { Tile } from "./widgets/Tile";
-import { WidgetsShowcase, type WidgetCategory } from "./WidgetsShowcase";
+import { WidgetsShowcase, type MarqueeRow, type WidgetCategory } from "./WidgetsShowcase";
 import { WeatherSmallTile, WeatherTile } from "./widgets/WeatherTile";
 
 const categories: Record<string, WidgetCategory> = {
@@ -51,6 +51,22 @@ const categories: Record<string, WidgetCategory> = {
   aiUsage: "ai",
   aiUsageSmall: "ai",
   claudeAgents: "ai",
+};
+
+const rows: Record<string, MarqueeRow> = {
+  media: 0,
+  weather: 0,
+  pomodoro: 0,
+  calendar: 0,
+  usage: 0,
+  aiUsage: 0,
+  network: 2,
+  volume: 2,
+  bluetooth: 2,
+  battery: 2,
+  clock: 2,
+  showDesktop: 2,
+  tray: 2,
 };
 
 type WidgetsGalleryProps = { t: Dictionary["widgets"]; demo: Dictionary["demo"] };
@@ -170,6 +186,7 @@ export function WidgetsGallery({ t, demo }: WidgetsGalleryProps) {
         items={tiles.map((tile) => ({
           key: tile.key,
           category: categories[tile.key] ?? "productivity",
+          row: rows[tile.key] ?? 1,
           node: (
             <Tile name={tile.name} label={tile.label}>
               {tile.node}
