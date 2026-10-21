@@ -1,6 +1,6 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { PullRequestIcon, PulseIcon, SparklesIcon, TimerIcon } from "./icons";
 
 export type WidgetCategory = "productivity" | "system" | "github" | "ai";
@@ -32,38 +32,112 @@ const categories: { id: WidgetCategory; Icon: typeof TimerIcon }[] = [
 const LEAVE_MS = 180;
 const MOVE_MS = 520;
 
-const rows: { id: MarqueeRow; duration: number }[] = [
-  { id: 0, duration: 40 },
-  { id: 1, duration: 55 },
-  { id: 2, duration: 30 },
+// Velocidade da deriva em px/s; negativo anda para a esquerda.
+const rows: { id: MarqueeRow; speed: number }[] = [
+  { id: 0, speed: -22 },
+  { id: 1, speed: 28 },
+  { id: 2, speed: -18 },
 ];
 
 const prefersReducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /**
- * No mobile, sem filtro, os widgets viram fileiras que vão e voltam sozinhas, como a dock. Cada
- * widget aparece uma vez só. A sombra do vidro é achatada: o overflow da fileira a cortaria em
- * faixas escuras entre as fileiras.
+ * Fileira infinita: o grupo de widgets aparece duas vezes (a cópia é só visual) e a posição dá a
+ * volta a cada largura de grupo, então nunca chega ao fim. Anda sozinha e se arrasta com o dedo,
+ * continuando com a inércia do arrasto.
+ */
+function MarqueeRow({ items, speed }: { items: ShowcaseItem[]; speed: number }) {
+  const track = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = track.current;
+    if (!el) return;
+    const reduced = prefersReducedMotion();
+    let x = 0;
+    let velocity = 0;
+    let dragging = false;
+    let lastX = 0;
+    let last = performance.now();
+    let frame = 0;
+
+    const wrap = (value: number) => {
+      const width = (el.firstElementChild as HTMLElement).offsetWidth;
+      if (!width) return value;
+      return (((value % width) + width) % width) - width;
+    };
+
+    const tick = (now: number) => {
+      const dt = Math.min((now - last) / 1000, 0.05);
+      last = now;
+      if (!dragging) {
+        x += (reduced ? 0 : speed) * dt + velocity * dt;
+        velocity *= Math.pow(0.04, dt);
+        if (Math.abs(velocity) < 1) velocity = 0;
+      }
+      x = wrap(x);
+      el.style.transform = `translate3d(${x}px, 0, 0)`;
+      frame = requestAnimationFrame(tick);
+    };
+    frame = requestAnimationFrame(tick);
+
+    const down = (e: PointerEvent) => {
+      dragging = true;
+      lastX = e.clientX;
+      velocity = 0;
+      el.setPointerCapture(e.pointerId);
+    };
+    const move = (e: PointerEvent) => {
+      if (!dragging) return;
+      const dx = e.clientX - lastX;
+      lastX = e.clientX;
+      x += dx;
+      velocity = dx * 60;
+    };
+    const up = () => {
+      dragging = false;
+    };
+    el.addEventListener("pointerdown", down);
+    el.addEventListener("pointermove", move);
+    el.addEventListener("pointerup", up);
+    el.addEventListener("pointercancel", up);
+    return () => {
+      cancelAnimationFrame(frame);
+      el.removeEventListener("pointerdown", down);
+      el.removeEventListener("pointermove", move);
+      el.removeEventListener("pointerup", up);
+      el.removeEventListener("pointercancel", up);
+    };
+  }, [speed]);
+
+  return (
+    <div className="overflow-hidden">
+      <div
+        ref={track}
+        className="flex w-max cursor-grab touch-pan-y select-none **:[[role=img]]:shadow-[inset_0_1px_0_rgb(255_255_255/0.22)]!"
+      >
+        {[0, 1].map((copy) => (
+          <div key={copy} aria-hidden={copy > 0 || undefined} className="flex shrink-0 gap-3 pr-3">
+            {items.map((item) => (
+              <div key={item.key} className="shrink-0">
+                {item.node}
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/**
+ * No mobile, sem filtro, os widgets viram fileiras infinitas, como a dock. A sombra do vidro é
+ * achatada: o overflow da fileira a cortaria em faixas escuras entre as fileiras.
  */
 function MarqueeRows({ items }: { items: ShowcaseItem[] }) {
   return (
     <div className="-mx-6 mt-10 flex flex-col gap-3 pb-12 sm:hidden">
       {rows.map((row) => (
-        <div key={row.id} className="[scrollbar-width:none] overflow-x-auto">
-          <div
-            className="marquee-track flex w-max gap-3 px-6 **:[[role=img]]:shadow-[inset_0_1px_0_rgb(255_255_255/0.22)]!"
-            data-reverse={row.id === 1 ? "" : undefined}
-            style={{ "--marquee-duration": `${row.duration}s` } as React.CSSProperties}
-          >
-            {items
-              .filter((item) => item.row === row.id)
-              .map((item) => (
-                <div key={item.key} className="shrink-0">
-                  {item.node}
-                </div>
-              ))}
-          </div>
-        </div>
+        <MarqueeRow key={row.id} speed={row.speed} items={items.filter((i) => i.row === row.id)} />
       ))}
     </div>
   );

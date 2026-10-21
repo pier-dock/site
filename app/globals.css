@@ -363,12 +363,6 @@
   }
 }
 
-@keyframes marquee-x {
-  to {
-    translate: calc(100vw - 100%) 0;
-  }
-}
-
 @keyframes reveal-slide {
   from {
     translate: 0 90px;
@@ -409,25 +403,6 @@
   from {
     opacity: 0;
     scale: 0.3;
-  }
-}
-
-/* Fileiras do mobile na galeria de widgets: vai até o fim da trilha e volta. */
-.marquee-track {
-  animation: marquee-x var(--marquee-duration, 10s) ease-in-out infinite alternate;
-}
-
-.marquee-track[data-reverse] {
-  animation-direction: alternate-reverse;
-}
-
-.marquee-track:active {
-  animation-play-state: paused;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .marquee-track {
-    animation: none;
   }
 }
 
