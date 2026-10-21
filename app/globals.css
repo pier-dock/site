@@ -448,12 +448,6 @@
   }
 }
 
-/* A galeria some no fundo da página, sem corte seco antes da próxima seção. */
-@utility fade-bottom {
-  -webkit-mask-image: linear-gradient(to bottom, #000 20%, transparent 92%);
-  mask-image: linear-gradient(to bottom, #000 20%, transparent 92%);
-}
-
 @utility dock-drop {
   @media (prefers-reduced-motion: no-preference) {
     @supports (animation-timeline: view()) {
