@@ -90,7 +90,10 @@ export const en = {
       usageSmall: "System usage, compact: CPU at 34% with its history.",
       calendar: "Calendar: Team standup in 18 minutes, with a Join button for the video call.",
       calendarSmall: "Calendar, compact: next event in 18 minutes.",
+      aiUsage: "AI usage: 62% of the 5-hour limit used.",
+      aiUsageSmall: "AI usage, compact: ring at 62%.",
     },
+    aiUsage: { caption: "5-hour limit" },
     calendar: {
       title: "Team standup",
       countdown: "in 18 min",

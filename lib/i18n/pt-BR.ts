@@ -92,7 +92,10 @@ export const ptBR: Dictionary = {
       usageSmall: "Uso do sistema compacto: CPU em 34% com o histórico.",
       calendar: "Agenda: Standup do time em 18 minutos, com botão para entrar na chamada de vídeo.",
       calendarSmall: "Agenda compacta: próximo compromisso em 18 minutos.",
+      aiUsage: "Uso de IA: 62% do limite de 5 horas usado.",
+      aiUsageSmall: "Uso de IA compacto: anel em 62%.",
     },
+    aiUsage: { caption: "Limite de 5 horas" },
     calendar: {
       title: "Standup do time",
       countdown: "em 18 min",
