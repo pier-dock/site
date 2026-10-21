@@ -110,7 +110,7 @@ function MarqueeRow({ items, speed }: { items: ShowcaseItem[]; speed: number }) 
   }, [speed]);
 
   return (
-    <div className="overflow-hidden">
+    <div data-enter className="overflow-hidden">
       <div
         ref={track}
         className="flex w-max cursor-grab touch-pan-y select-none **:[[role=img]]:shadow-[inset_0_1px_0_rgb(255_255_255/0.22)]!"
@@ -148,6 +148,7 @@ export function WidgetsShowcase({ title, subtitle, filters, items }: ShowcasePro
   // de os widgets que saem terminarem a saída.
   const [active, setActive] = useState<WidgetCategory | null>(null);
   const [applied, setApplied] = useState<WidgetCategory | null>(null);
+  const root = useRef<HTMLDivElement>(null);
   const elements = useRef(new Map<string, HTMLLIElement>());
   const before = useRef<Map<string, DOMRect> | null>(null);
   const leaving = useRef<Animation[]>([]);
@@ -233,8 +234,41 @@ export function WidgetsShowcase({ title, subtitle, filters, items }: ShowcasePro
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [applied]);
 
+  // Entrada única ao chegar na seção: os widgets sobem em cascata. Um observador (e não uma
+  // animação ligada à rolagem) evita que ela reinicie quando um filtro devolve itens do display:none.
+  useEffect(() => {
+    const el = root.current;
+    if (!el || prefersReducedMotion()) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) return;
+        observer.disconnect();
+        const targets = [...el.querySelectorAll<HTMLElement>("[data-enter]")].filter(
+          (t) => t.offsetParent !== null,
+        );
+        targets.forEach((t, i) =>
+          t.animate(
+            [
+              { opacity: 0, transform: "translateY(32px) scale(0.94)" },
+              { opacity: 1, transform: "translateY(0) scale(1)" },
+            ],
+            {
+              duration: 700,
+              delay: Math.min(i * 45, 900),
+              easing: "cubic-bezier(0.2, 0.8, 0.2, 1)",
+              fill: "backwards",
+            },
+          ),
+        );
+      },
+      { threshold: 0.12 },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="relative mx-auto max-w-[1200px] px-6">
+    <div ref={root} className="relative mx-auto max-w-[1200px] px-6">
       <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-6">
         <div className="flex max-w-[560px] reveal-blur flex-col gap-1.5">
           <h2
@@ -276,6 +310,7 @@ export function WidgetsShowcase({ title, subtitle, filters, items }: ShowcasePro
         {items.map((item) => (
           <li
             key={item.key}
+            data-enter
             hidden={!isShown(item, applied)}
             ref={(el) => {
               if (el) elements.current.set(item.key, el);
