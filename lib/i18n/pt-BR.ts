@@ -86,7 +86,10 @@ export const ptBR: Dictionary = {
       contribSmall: "Contribuições no GitHub compactas: só o gráfico de atividade.",
       weather: "Clima: 24°, ensolarado, máxima de 28° e mínima de 19°, com chuva prevista às 16h.",
       weatherSmall: "Clima compacto: ícone de sol e 24°.",
+      pomodoro: "Pomodoro: foco, faltam 18 minutos e 42 segundos, sessão 2 de 4.",
+      pomodoroSmall: "Pomodoro compacto: anel com 18 minutos restantes.",
     },
+    pomodoro: { phase: "Foco · 2 de 4" },
     weather: { condition: "Ensolarado", alert: "Chuva às 16h" },
   },
   download: {
