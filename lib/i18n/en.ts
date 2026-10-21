@@ -95,6 +95,8 @@ export const en = {
       claudeAgents: "Claude Agents: Clawd with two Claude Code sessions running.",
       network: "Network: connected to Wi-Fi.",
       volume: "Volume at 70%.",
+      bluetooth: "Bluetooth: a device is connected.",
+      battery: "Battery at 79%.",
     },
     aiUsage: { caption: "5-hour limit" },
     calendar: {
