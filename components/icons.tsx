@@ -72,15 +72,6 @@ export function LinuxIcon(props: IconProps) {
   );
 }
 
-export function CopyIcon(props: IconProps) {
-  return (
-    <Icon {...props}>
-      <rect x="9" y="9" width="12" height="12" rx="2" />
-      <path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1" />
-    </Icon>
-  );
-}
-
 export function CheckIcon(props: IconProps) {
   return (
     <Icon strokeWidth={2.4} {...props}>
@@ -120,31 +111,12 @@ export function ReviewIcon(props: IconProps) {
   );
 }
 
-export function MusicIcon(props: IconProps) {
-  return (
-    <Icon {...props}>
-      <path d="M9 18V5l12-2v13" />
-      <circle cx="6" cy="18" r="3" />
-      <circle cx="18" cy="16" r="3" />
-    </Icon>
-  );
-}
-
 export function TimerIcon(props: IconProps) {
   return (
     <Icon {...props}>
       <circle cx="12" cy="13" r="8" />
       <path d="M12 9v4l2 2" />
       <path d="M10 2h4" />
-    </Icon>
-  );
-}
-
-export function CalendarIcon(props: IconProps) {
-  return (
-    <Icon {...props}>
-      <rect x="3" y="4" width="18" height="18" rx="2" />
-      <path d="M16 2v4 M8 2v4 M3 10h18" />
     </Icon>
   );
 }
@@ -306,21 +278,6 @@ export function SkipForwardIcon({ size = 18, ...props }: IconProps) {
       {...props}
     >
       <path d="M16.5 5H19v14h-2.5z M4 5v14l11-7z" />
-    </svg>
-  );
-}
-
-export function PlayIcon({ size = 20, ...props }: IconProps) {
-  return (
-    <svg
-      aria-hidden="true"
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      {...props}
-    >
-      <path d="M8 5v14l11-7z" />
     </svg>
   );
 }
