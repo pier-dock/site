@@ -1,4 +1,5 @@
 import type { Dictionary } from "@/lib/i18n";
+import { CalendarSmallTile, CalendarTile } from "./widgets/CalendarTile";
 import { ContribSmallTile, ContribTile, MineTile, ReviewTile } from "./widgets/GithubTiles";
 import { MediaSmallTile, MediaTile } from "./widgets/MediaTile";
 import { PomodoroSmallTile, PomodoroTile } from "./widgets/PomodoroTile";
@@ -26,6 +27,12 @@ export function WidgetsGallery({ t, demo }: WidgetsGalleryProps) {
     { key: "pomodoroSmall", label: t.tiles.pomodoroSmall, node: <PomodoroSmallTile /> },
     { key: "usage", label: t.tiles.usage, node: <UsageTile /> },
     { key: "usageSmall", label: t.tiles.usageSmall, node: <UsageSmallTile /> },
+    { key: "calendar", label: t.tiles.calendar, node: <CalendarTile copy={t.calendar} /> },
+    {
+      key: "calendarSmall",
+      label: t.tiles.calendarSmall,
+      node: <CalendarSmallTile copy={t.calendar} />,
+    },
   ];
 
   return (
