@@ -28,39 +28,96 @@ type WidgetsGalleryProps = { t: Dictionary["widgets"]; demo: Dictionary["demo"] 
 
 export function WidgetsGallery({ t, demo }: WidgetsGalleryProps) {
   const tiles = [
-    { key: "media", label: t.tiles.media, node: <MediaTile /> },
-    { key: "review", label: t.tiles.review, node: <ReviewTile /> },
-    { key: "mediaSmall", label: t.tiles.mediaSmall, node: <MediaSmallTile /> },
+    { key: "media", name: t.names.media, label: t.tiles.media, node: <MediaTile /> },
+    { key: "review", name: t.names.review, label: t.tiles.review, node: <ReviewTile /> },
+    { key: "mediaSmall", name: t.names.media, label: t.tiles.mediaSmall, node: <MediaSmallTile /> },
     {
       key: "contrib",
+      name: t.names.contrib,
       label: t.tiles.contrib,
       node: <ContribTile total={demo.contribTotal} thisYear={demo.contribThisYear} />,
     },
-    { key: "mine", label: t.tiles.mine, node: <MineTile /> },
-    { key: "contribSmall", label: t.tiles.contribSmall, node: <ContribSmallTile /> },
-    { key: "weather", label: t.tiles.weather, node: <WeatherTile copy={t.weather} /> },
-    { key: "weatherSmall", label: t.tiles.weatherSmall, node: <WeatherSmallTile /> },
-    { key: "pomodoro", label: t.tiles.pomodoro, node: <PomodoroTile phase={t.pomodoro.phase} /> },
-    { key: "pomodoroSmall", label: t.tiles.pomodoroSmall, node: <PomodoroSmallTile /> },
-    { key: "usage", label: t.tiles.usage, node: <UsageTile /> },
-    { key: "usageSmall", label: t.tiles.usageSmall, node: <UsageSmallTile /> },
-    { key: "calendar", label: t.tiles.calendar, node: <CalendarTile copy={t.calendar} /> },
+    { key: "mine", name: t.names.mine, label: t.tiles.mine, node: <MineTile /> },
+    {
+      key: "contribSmall",
+      name: t.names.contrib,
+      label: t.tiles.contribSmall,
+      node: <ContribSmallTile />,
+    },
+    {
+      key: "weather",
+      name: t.names.weather,
+      label: t.tiles.weather,
+      node: <WeatherTile copy={t.weather} />,
+    },
+    {
+      key: "weatherSmall",
+      name: t.names.weather,
+      label: t.tiles.weatherSmall,
+      node: <WeatherSmallTile />,
+    },
+    {
+      key: "pomodoro",
+      name: t.names.pomodoro,
+      label: t.tiles.pomodoro,
+      node: <PomodoroTile phase={t.pomodoro.phase} />,
+    },
+    {
+      key: "pomodoroSmall",
+      name: t.names.pomodoro,
+      label: t.tiles.pomodoroSmall,
+      node: <PomodoroSmallTile />,
+    },
+    { key: "usage", name: t.names.usage, label: t.tiles.usage, node: <UsageTile /> },
+    { key: "usageSmall", name: t.names.usage, label: t.tiles.usageSmall, node: <UsageSmallTile /> },
+    {
+      key: "calendar",
+      name: t.names.calendar,
+      label: t.tiles.calendar,
+      node: <CalendarTile copy={t.calendar} />,
+    },
     {
       key: "calendarSmall",
+      name: t.names.calendar,
       label: t.tiles.calendarSmall,
       node: <CalendarSmallTile copy={t.calendar} />,
     },
-    { key: "aiUsage", label: t.tiles.aiUsage, node: <AiUsageTile caption={t.aiUsage.caption} /> },
-    { key: "aiUsageSmall", label: t.tiles.aiUsageSmall, node: <AiUsageSmallTile /> },
-    { key: "claudeAgents", label: t.tiles.claudeAgents, node: <ClaudeAgentsTile /> },
-    { key: "network", label: t.tiles.network, node: <NetworkTile /> },
-    { key: "volume", label: t.tiles.volume, node: <VolumeTile /> },
-    { key: "bluetooth", label: t.tiles.bluetooth, node: <BluetoothTile /> },
-    { key: "battery", label: t.tiles.battery, node: <BatteryTile /> },
-    { key: "clock", label: t.tiles.clock, node: <Clock t={demo} /> },
-    { key: "showDesktop", label: t.tiles.showDesktop, node: <ShowDesktopTile /> },
-    { key: "tray", label: t.tiles.tray, node: <TrayTile /> },
-    { key: "commits", label: t.tiles.commits, node: <CommitsTile /> },
+    {
+      key: "aiUsage",
+      name: t.names.aiUsage,
+      label: t.tiles.aiUsage,
+      node: <AiUsageTile caption={t.aiUsage.caption} />,
+    },
+    {
+      key: "aiUsageSmall",
+      name: t.names.aiUsage,
+      label: t.tiles.aiUsageSmall,
+      node: <AiUsageSmallTile />,
+    },
+    {
+      key: "claudeAgents",
+      name: t.names.claudeAgents,
+      label: t.tiles.claudeAgents,
+      node: <ClaudeAgentsTile />,
+    },
+    { key: "network", name: t.names.network, label: t.tiles.network, node: <NetworkTile /> },
+    { key: "volume", name: t.names.volume, label: t.tiles.volume, node: <VolumeTile /> },
+    {
+      key: "bluetooth",
+      name: t.names.bluetooth,
+      label: t.tiles.bluetooth,
+      node: <BluetoothTile />,
+    },
+    { key: "battery", name: t.names.battery, label: t.tiles.battery, node: <BatteryTile /> },
+    { key: "clock", name: t.names.clock, label: t.tiles.clock, node: <Clock t={demo} /> },
+    {
+      key: "showDesktop",
+      name: t.names.showDesktop,
+      label: t.tiles.showDesktop,
+      node: <ShowDesktopTile />,
+    },
+    { key: "tray", name: t.names.tray, label: t.tiles.tray, node: <TrayTile /> },
+    { key: "commits", name: t.names.commits, label: t.tiles.commits, node: <CommitsTile /> },
   ];
 
   return (
@@ -82,15 +139,21 @@ export function WidgetsGallery({ t, demo }: WidgetsGalleryProps) {
           </p>
         </div>
 
-        <ul className="m-0 mt-16 flex list-none flex-wrap items-center justify-center gap-x-12 gap-y-16 fade-bottom p-0 pb-24">
-          {tiles.map((tile, i) => (
-            <li key={tile.key}>
-              <Tile label={tile.label} index={i % 3}>
-                {tile.node}
-              </Tile>
-            </li>
-          ))}
-        </ul>
+        <div className="relative mt-16">
+          <ul className="m-0 flex list-none flex-wrap items-center justify-center gap-x-12 gap-y-16 p-0 pb-24">
+            {tiles.map((tile, i) => (
+              <li key={tile.key}>
+                <Tile name={tile.name} label={tile.label} index={i % 3}>
+                  {tile.node}
+                </Tile>
+              </li>
+            ))}
+          </ul>
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 z-10 bg-linear-to-b from-transparent from-20% to-page to-92%"
+          />
+        </div>
       </div>
     </section>
   );
