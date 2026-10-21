@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from "react";
 import { PullRequestIcon, PulseIcon, SparklesIcon, TimerIcon } from "./icons";
 
 export type WidgetCategory = "productivity" | "system" | "github" | "ai";
@@ -38,6 +38,23 @@ const rows: { id: MarqueeRow; speed: number }[] = [
   { id: 1, speed: 28 },
   { id: 2, speed: -18 },
 ];
+
+const mobileQuery = "(max-width: 639px)";
+
+function subscribeMobile(onChange: () => void) {
+  const mq = window.matchMedia(mobileQuery);
+  mq.addEventListener("change", onChange);
+  return () => mq.removeEventListener("change", onChange);
+}
+
+// As fileiras do mobile só existem no cliente: o HTML do servidor leva cada widget uma vez (na
+// lista), em vez de repeti-los nas fileiras e nas cópias do laço.
+const useIsMobile = () =>
+  useSyncExternalStore(
+    subscribeMobile,
+    () => window.matchMedia(mobileQuery).matches,
+    () => false,
+  );
 
 const prefersReducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -148,6 +165,8 @@ export function WidgetsShowcase({ title, subtitle, filters, items }: ShowcasePro
   // de os widgets que saem terminarem a saída.
   const [active, setActive] = useState<WidgetCategory | null>(null);
   const [applied, setApplied] = useState<WidgetCategory | null>(null);
+  const isMobile = useIsMobile();
+  const showRows = isMobile && applied === null;
   const root = useRef<HTMLDivElement>(null);
   const elements = useRef(new Map<string, HTMLLIElement>());
   const before = useRef<Map<string, DOMRect> | null>(null);
@@ -302,10 +321,10 @@ export function WidgetsShowcase({ title, subtitle, filters, items }: ShowcasePro
         </div>
       </div>
 
-      {applied === null && <MarqueeRows items={items} />}
+      {showRows && <MarqueeRows items={items} />}
 
       <ul
-        className={`m-0 mt-10 ${applied === null ? "hidden sm:flex" : "flex"} list-none flex-wrap content-center items-center justify-center gap-3 p-0 pb-12 sm:mt-16 sm:gap-6 sm:pb-24 lg:min-h-[480px]`}
+        className={`m-0 mt-10 ${showRows ? "hidden" : "flex"} list-none flex-wrap content-center items-center justify-center gap-3 p-0 pb-12 sm:mt-16 sm:gap-6 sm:pb-24 lg:min-h-[480px]`}
       >
         {items.map((item) => (
           <li
