@@ -77,63 +77,13 @@ export const ptBR: Dictionary = {
   widgets: {
     title: "Tem um widget para isso.",
     subtitle: "Informação útil sem abrir mais uma janela.",
-    carouselLabel: "Widgets do Pier",
-    items: {
-      media: {
-        name: "Mídia",
-        description:
-          "Veja o que está tocando e controle Spotify, Apple Music ou qualquer player direto da dock.",
-        visualLabel: "Tocando Weird Fishes/Arpeggi, de Radiohead, em 2:13 de 5:18.",
-      },
-      pomodoro: {
-        name: "Pomodoro",
-        description:
-          "Ciclos de foco e pausa com o anel sempre à vista. Liga o Não perturbe sozinho.",
-        visualLabel: "Foco: faltam 18 minutos e 42 segundos, sessão 2 de 4.",
-        phase: "Foco · 2 de 4",
-        pause: "Pausar",
-      },
-      agenda: {
-        name: "Agenda",
-        description:
-          "O próximo compromisso com contagem regressiva e Entrar na chamada em um clique.",
-        visualLabel:
-          "Agora: Daily do time, das 16:00 às 16:30, termina em 18 minutos. Depois: Revisão de design às 17:30.",
-        now: "Agora",
-        nowTitle: "Daily do time",
-        endsIn: "Termina em 18 min",
-        join: "Entrar",
-        next: ["Revisão de design", "Academia", "Amanhã · Planejamento"],
-      },
-      weather: {
-        name: "Clima",
-        description:
-          "Temperatura agora, próximas horas e um aviso quando a chuva estiver chegando.",
-        visualLabel: "24 graus, parcialmente nublado. Chuva às 16h.",
-        summary: "Parcialmente nublado",
-        alert: "Chuva às 16h · leve um guarda-chuva",
-        hours: ["15h", "16h", "17h", "18h", "19h"],
-      },
-      github: {
-        name: "GitHub",
-        description:
-          "Suas contribuições do ano, PRs abertos e revisões que estão esperando por você.",
-        visualLabel: "2.142 contribuições em 2026, nenhum PR aberto e 12 revisões pendentes.",
-        total: "2.142",
-        caption: "contribuições em 2026",
-        prs: "PRs abertos",
-        reviews: "Revisões",
-      },
-      system: {
-        name: "Uso do sistema",
-        description: "CPU, memória e rede em tempo real, e quais apps estão pesando na máquina.",
-        visualLabel: "CPU em 34%, memória com 10,9 de 16 GB, rede baixando 2,4 MB/s.",
-        cpu: "CPU · últimos 60 s",
-        memory: "Memória",
-        memoryValue: "10,9 de 16 GB",
-        network: "Rede",
-        networkValue: "↓ 2,4 MB/s · ↑ 180 KB/s",
-      },
+    tiles: {
+      media: "Player de mídia: Weird Fishes/Arpeggi, de Radiohead, tocando.",
+      mediaSmall: "Player de mídia compacto: capa do álbum com tocar e pausar.",
+      review: "GitHub: 12 pull requests esperando a sua revisão.",
+      mine: "GitHub: nenhum pull request seu aberto, checks passando.",
+      contrib: "Contribuições no GitHub: 2.142 neste ano, com o gráfico de atividade.",
+      contribSmall: "Contribuições no GitHub compactas: só o gráfico de atividade.",
     },
   },
   download: {

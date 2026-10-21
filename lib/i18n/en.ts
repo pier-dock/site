@@ -75,61 +75,13 @@ export const en = {
   widgets: {
     title: "There's a widget for that.",
     subtitle: "Useful info without opening another window.",
-    carouselLabel: "Pier widgets",
-    items: {
-      media: {
-        name: "Media",
-        description:
-          "See what's playing and control Spotify, Apple Music, or any player right from the dock.",
-        visualLabel: "Playing Weird Fishes/Arpeggi by Radiohead, at 2:13 of 5:18.",
-      },
-      pomodoro: {
-        name: "Pomodoro",
-        description:
-          "Focus and break cycles with the ring always in view. Turns on Do Not Disturb for you.",
-        visualLabel: "Focus: 18 minutes and 42 seconds left, session 2 of 4.",
-        phase: "Focus · 2 of 4",
-        pause: "Pause",
-      },
-      agenda: {
-        name: "Calendar",
-        description: "Your next event with a countdown, and Join the call in one click.",
-        visualLabel:
-          "Now: Team standup, from 16:00 to 16:30, ends in 18 minutes. Next: Design review at 17:30.",
-        now: "Now",
-        nowTitle: "Team standup",
-        endsIn: "Ends in 18 min",
-        join: "Join",
-        next: ["Design review", "Gym", "Tomorrow · Planning"],
-      },
-      weather: {
-        name: "Weather",
-        description: "The temperature now, the next few hours, and a heads-up when rain is coming.",
-        visualLabel: "24 degrees, partly cloudy. Rain at 16:00.",
-        summary: "Partly cloudy",
-        alert: "Rain at 16:00 · bring an umbrella",
-        hours: ["15:00", "16:00", "17:00", "18:00", "19:00"],
-      },
-      github: {
-        name: "GitHub",
-        description: "Your contributions for the year, open PRs, and the reviews waiting on you.",
-        visualLabel: "2,142 contributions in 2026, no open PRs, and 12 pending reviews.",
-        total: "2,142",
-        caption: "contributions in 2026",
-        prs: "Open PRs",
-        reviews: "Reviews",
-      },
-      system: {
-        name: "System usage",
-        description:
-          "CPU, memory, and network in real time, and which apps are weighing on your machine.",
-        visualLabel: "CPU at 34%, memory at 10.9 of 16 GB, network downloading 2.4 MB/s.",
-        cpu: "CPU · last 60 s",
-        memory: "Memory",
-        memoryValue: "10.9 of 16 GB",
-        network: "Network",
-        networkValue: "↓ 2.4 MB/s · ↑ 180 KB/s",
-      },
+    tiles: {
+      media: "Media player: Weird Fishes/Arpeggi by Radiohead, playing.",
+      mediaSmall: "Media player, compact: album cover with play and pause.",
+      review: "GitHub: 12 pull requests waiting for your review.",
+      mine: "GitHub: no open pull requests of yours, checks passing.",
+      contrib: "GitHub contributions: 2,142 this year, with the activity graph.",
+      contribSmall: "GitHub contributions, compact: the activity graph only.",
     },
   },
   download: {

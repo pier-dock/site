@@ -222,100 +222,6 @@
 }
 
 /* Só largura e estilo: a cor da borda e do brilho vêm do tema de cada widget. */
-@utility widget-card {
-  border-width: 1px;
-  border-style: solid;
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.1);
-  transition:
-    box-shadow 0.3s ease-out,
-    transform 0.3s ease-out;
-
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow:
-      inset 0 1px 0 rgb(255 255 255 / 0.1),
-      0 0 60px var(--widget-halo);
-  }
-}
-
-@utility widget-media {
-  background:
-    radial-gradient(90% 60% at 50% 62%, var(--color-media-glow), transparent 70%),
-    linear-gradient(
-      180deg,
-      var(--color-media-1) 0%,
-      var(--color-media-2) 55%,
-      var(--color-media-3) 100%
-    );
-  border-color: var(--color-media-edge);
-  --widget-halo: var(--color-media-halo);
-}
-
-@utility widget-pomodoro {
-  background:
-    radial-gradient(90% 60% at 50% 62%, var(--color-pomo-glow), transparent 70%),
-    linear-gradient(
-      180deg,
-      var(--color-pomo-1) 0%,
-      var(--color-pomo-2) 55%,
-      var(--color-pomo-3) 100%
-    );
-  border-color: var(--color-pomo-edge);
-  --widget-halo: var(--color-pomo-halo);
-}
-
-@utility widget-agenda {
-  background:
-    radial-gradient(90% 60% at 50% 60%, var(--color-agenda-glow), transparent 70%),
-    linear-gradient(
-      180deg,
-      var(--color-agenda-1) 0%,
-      var(--color-agenda-2) 55%,
-      var(--color-agenda-3) 100%
-    );
-  border-color: var(--color-agenda-edge);
-  --widget-halo: var(--color-agenda-halo);
-}
-
-@utility widget-weather {
-  background:
-    radial-gradient(90% 60% at 50% 55%, var(--color-weather-glow), transparent 70%),
-    linear-gradient(
-      180deg,
-      var(--color-weather-1) 0%,
-      var(--color-weather-2) 55%,
-      var(--color-weather-3) 100%
-    );
-  border-color: var(--color-weather-edge);
-  --widget-halo: var(--color-weather-halo);
-}
-
-@utility widget-github {
-  background:
-    radial-gradient(90% 55% at 50% 70%, var(--color-github-glow), transparent 70%),
-    linear-gradient(
-      180deg,
-      var(--color-github-1) 0%,
-      var(--color-github-2) 55%,
-      var(--color-github-3) 100%
-    );
-  border-color: var(--color-line-12);
-  --widget-halo: var(--color-github-halo);
-}
-
-@utility widget-system {
-  background:
-    radial-gradient(90% 60% at 50% 62%, var(--color-system-glow), transparent 70%),
-    linear-gradient(
-      180deg,
-      var(--color-system-1) 0%,
-      var(--color-system-2) 55%,
-      var(--color-system-3) 100%
-    );
-  border-color: var(--color-system-edge);
-  --widget-halo: var(--color-system-halo);
-}
-
 /*
  * Intro ao abrir a página: a dock surge no meio da tela, um "hover" percorre os itens dela um
  * a um, o título aparece quando ele chega no último e então a dock desce até o lugar dela
@@ -464,26 +370,11 @@
   }
 }
 
-@keyframes reveal-x {
-  from {
-    opacity: 0.35;
-    scale: 0.92;
-  }
-}
-
 @keyframes reveal-blur {
   from {
     translate: 0 64px;
     scale: 0.94;
     filter: blur(12px);
-  }
-}
-
-/* Cabe no padding de baixo do carrossel (pb-24): nada é cortado durante a subida. */
-@keyframes widget-rise {
-  from {
-    translate: 0 64px;
-    rotate: 4deg;
   }
 }
 
@@ -557,28 +448,10 @@
   }
 }
 
-@utility carousel-timeline {
-  view-timeline: --carousel block;
-}
-
-/*
- * Cards do carrossel: sobem em cascata quando o carrossel entra na tela (--carousel,
- * eixo vertical) e crescem conforme entram pela rolagem horizontal (view(inline)).
- */
-@utility widget-rise {
-  @media (prefers-reduced-motion: no-preference) {
-    @supports (animation-timeline: view()) {
-      transform-origin: 0% 100%;
-      animation:
-        widget-rise cubic-bezier(0.2, 0.8, 0.2, 1) both,
-        reveal-x linear both;
-      animation-timeline: --carousel, view(inline);
-      /* Em cascata durante a entrada: o último card alinha quando o carrossel termina de entrar. */
-      animation-range:
-        entry calc(var(--reveal-step, 0) * 8%) entry calc(60% + var(--reveal-step, 0) * 8%),
-        entry 0% entry 100%;
-    }
-  }
+/* A galeria some no fundo da página, sem corte seco antes da próxima seção. */
+@utility fade-bottom {
+  -webkit-mask-image: linear-gradient(to bottom, #000 40%, transparent);
+  mask-image: linear-gradient(to bottom, #000 40%, transparent);
 }
 
 @utility dock-drop {

@@ -6,7 +6,7 @@ import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { JsonLd } from "@/components/JsonLd";
 import { OSProvider } from "@/components/OSProvider";
-import { WidgetsCarousel } from "@/components/WidgetsCarousel";
+import { WidgetsGallery } from "@/components/WidgetsGallery";
 import { getDownloads } from "@/lib/downloads";
 import { getDictionary, isLocale } from "@/lib/i18n";
 import { getLatestVersion } from "@/lib/release";
@@ -31,7 +31,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         <main id="content" className="overflow-x-clip">
           <Hero t={t.hero} demo={t.demo} />
           <Features t={t.features} />
-          <WidgetsCarousel t={t.widgets} />
+          <WidgetsGallery t={t.widgets} demo={t.demo} />
           <Download t={t.download} />
         </main>
       </OSProvider>
