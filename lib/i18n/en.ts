@@ -61,7 +61,7 @@ export const en = {
     },
     shortcuts: {
       title: "A shortcut for every app",
-      body: "Ctrl Alt 1 to 9 opens or focuses the pinned app. If it's already in front, it minimizes.",
+      body: "{keys} 1 to 9 opens or focuses the pinned app. If it's already in front, it minimizes.",
     },
     platforms: {
       title: "One app, three systems",
