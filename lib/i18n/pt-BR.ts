@@ -70,8 +70,8 @@ export const ptBR: Dictionary = {
       body: "A mesma dock e as mesmas configurações no macOS, no Windows e no Linux. Exporte e leve para outra máquina.",
     },
     claude: {
-      title: "Claude Buddy",
-      body: "O Clawd, mascote do Claude, anda pela dock enquanto o Claude Code trabalha, pula quando uma sessão pede permissão e descansa quando está tudo parado.",
+      title: "Companhia para a sua dock",
+      body: "O Clawd, mascote do Claude, anda pela dock enquanto o Claude Code trabalha, pula quando uma sessão pede permissão e descansa quando está tudo parado. Quer mais companhia? Escolha Pokémon para andar com ele.",
     },
   },
   widgets: {
