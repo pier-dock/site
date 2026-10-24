@@ -4,6 +4,7 @@ import { ClawdIcon, ClawdWalker } from "./Clawd";
 import { ContributionGrid } from "./ContributionGrid";
 import { apps } from "./DockDemo/data";
 import { AppleIcon, BatteryIcon, LinuxIcon, VolumeIcon, WifiIcon, WindowsIcon } from "./icons";
+import { PokemonTile, PokemonWalker } from "./PokemonBuddy";
 import { ShortcutsContent } from "./ShortcutsList";
 
 const cardBody = "relative m-0 text-[15px] leading-[1.55] text-fg-2";
@@ -62,9 +63,9 @@ export function Features({ t }: { t: Dictionary["features"] }) {
         </div>
 
         {/*
-          O Clawd do card Claude Buddy sobe ~25px acima da borda. A partir do lg o card fica na 1ª
-          linha, sob o título da seção; antes disso ele pode cair sob outro card, então as linhas
-          ficam mais afastadas para o Clawd não encostar.
+          O Clawd e o Pokémon do card de buddies sobem ~25px acima da borda. A partir do lg o card
+          fica na 1ª linha, sob o título da seção; antes disso ele pode cair sob outro card, então
+          as linhas ficam mais afastadas para eles não encostarem.
         */}
         <div className="flex flex-wrap gap-x-4 gap-y-8 lg:gap-y-4">
           <FeatureCard
@@ -92,7 +93,11 @@ export function Features({ t }: { t: Dictionary["features"] }) {
             <ClawdWalker
               size={32}
               sprite={24}
-              className="inset-x-6 top-0 [--clawd-duration:14s] sm:[--clawd-duration:26s] lg:[--clawd-duration:46s]"
+              className="top-0 right-[calc(50%+6px)] left-6 [--clawd-duration:7s] sm:[--clawd-duration:13s] lg:[--clawd-duration:23s]"
+            />
+            <PokemonWalker
+              size={32}
+              className="top-0 right-6 left-[calc(50%+6px)] [--clawd-duration:9s] sm:[--clawd-duration:17s] lg:[--clawd-duration:30s]"
             />
             <p className={`${cardBody} max-w-[460px]`}>{t.claude.body}</p>
             <div aria-hidden="true" className="relative mt-auto flex justify-center pt-12">
@@ -119,6 +124,7 @@ export function Features({ t }: { t: Dictionary["features"] }) {
                   <ClawdIcon size={18} className="clawd-wobble" />
                   <span className="absolute right-1 bottom-1 size-[5px] animate-pulse rounded-full bg-clawd" />
                 </span>
+                <PokemonTile />
                 <span className="hidden items-center gap-2.5 px-2.5 text-fg xl:flex">
                   <WifiIcon size={17} />
                   <VolumeIcon level={60} size={17} />
@@ -127,7 +133,11 @@ export function Features({ t }: { t: Dictionary["features"] }) {
                 <ClawdWalker
                   size={26}
                   sprite={18}
-                  className="inset-x-2.5 top-0 [--clawd-duration:10s] sm:[--clawd-duration:15s]"
+                  className="top-0 right-[calc(50%+4px)] left-2.5 [--clawd-duration:5s] sm:[--clawd-duration:7.5s]"
+                />
+                <PokemonWalker
+                  size={26}
+                  className="top-0 right-2.5 left-[calc(50%+4px)] [--clawd-duration:6.5s] sm:[--clawd-duration:10s]"
                 />
               </div>
             </div>

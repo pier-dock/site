@@ -68,8 +68,8 @@ export const en = {
       body: "The same dock and the same settings on macOS, Windows, and Linux. Export them and take them to another machine.",
     },
     claude: {
-      title: "Claude Buddy",
-      body: "Clawd, Claude's mascot, walks the dock while Claude Code works, jumps when a session needs permission, and rests when everything is idle.",
+      title: "Company for your dock",
+      body: "Clawd, Claude's mascot, walks the dock while Claude Code works, jumps when a session needs permission, and rests when everything is idle. Want more company? Pick Pokémon to walk along with it.",
     },
   },
   widgets: {

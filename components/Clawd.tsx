@@ -17,25 +17,26 @@ export function ClawdIcon({ size, className }: ClawdIconProps) {
   );
 }
 
-type ClawdWalkerProps = {
+type WalkerProps = {
   /** Lado da caixa que anda; o sprite fica centralizado nela. */
   size: number;
-  sprite: number;
+  /** Quanto a caixa desce além da borda para os pés do sprite tocarem nela. */
+  overlap: number;
   /**
    * Posição da trilha no pai: ela fica sobre a borda de cima, com a largura do passeio. Também
    * leva a duração de uma ida e volta (--clawd-duration), que muda por breakpoint para manter a
    * velocidade perto da da dock (~46px/s) com qualquer largura de trilha.
    */
   className?: string;
+  children: React.ReactNode;
 };
 
 /**
- * Clawd andando de ponta a ponta sobre a borda de cima do pai, como o `ClawdPet` da dock: vira
- * de lado nas pontas e balança enquanto anda. Só CSS: a ida e volta usa a largura da trilha
- * (unidades cqw), então funciona em qualquer tamanho. A caixa desce até os pés tocarem a borda.
+ * Anda de ponta a ponta sobre a borda de cima do pai, como o `ClawdPet` da dock: vira de lado
+ * nas pontas. Só CSS: a ida e volta usa a largura da trilha (unidades cqw), então funciona em
+ * qualquer tamanho.
  */
-export function ClawdWalker({ size, sprite, className = "" }: ClawdWalkerProps) {
-  const overlap = (size - sprite) / 2 + sprite * feetGap;
+export function Walker({ size, overlap, className = "", children }: WalkerProps) {
   const vars = { "--clawd-size": `${size}px` } as CSSProperties;
 
   return (
@@ -48,8 +49,20 @@ export function ClawdWalker({ size, sprite, className = "" }: ClawdWalkerProps) 
         className="absolute left-0 flex clawd-walk items-center justify-center text-clawd"
         style={{ width: size, height: size, bottom: -overlap }}
       >
-        <ClawdIcon size={sprite} className="clawd-wobble" />
+        {children}
       </div>
     </div>
+  );
+}
+
+type ClawdWalkerProps = Pick<WalkerProps, "size" | "className"> & { sprite: number };
+
+export function ClawdWalker({ size, sprite, className }: ClawdWalkerProps) {
+  const overlap = (size - sprite) / 2 + sprite * feetGap;
+
+  return (
+    <Walker size={size} overlap={overlap} className={className}>
+      <ClawdIcon size={sprite} className="clawd-wobble" />
+    </Walker>
   );
 }
