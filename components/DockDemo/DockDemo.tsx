@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { fill, type Dictionary } from "@/lib/i18n";
+import { shortcutKeys } from "@/lib/shortcuts";
 import { AlbumArt } from "../AlbumArt";
 import { ContributionGrid } from "../ContributionGrid";
 import {
@@ -15,6 +16,7 @@ import {
   WifiIcon,
 } from "../icons";
 import { introHover } from "../intro";
+import { useOS } from "../OSProvider";
 import { Clock } from "./Clock";
 import { apps, battery, pendingReviews } from "./data";
 import {
@@ -47,6 +49,7 @@ function dockItem(target: EventTarget | null) {
 
 export default function DockDemo({ t }: { t: Dictionary["demo"] }) {
   const player = usePlayer();
+  const { keycaps } = shortcutKeys[useOS().os];
   const [focused, setFocused] = useState(3);
   const [minimized, setMinimized] = useState<boolean[]>(() => apps.map(() => false));
   const [hover, setHover] = useState(-1);
@@ -138,7 +141,7 @@ export default function DockDemo({ t }: { t: Dictionary["demo"] }) {
                   >
                     {a.name}
                     <kbd className="rounded bg-white/10 px-[5px] py-0.5 font-mono text-[10.5px] text-fg-2">
-                      Ctrl Alt {a.key}
+                      {keycaps} {a.key}
                     </kbd>
                   </span>
                 )}

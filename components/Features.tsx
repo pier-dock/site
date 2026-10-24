@@ -1,25 +1,17 @@
 import Image from "next/image";
-import braveIcon from "@/assets/apps/brave.svg";
-import spotifyIcon from "@/assets/apps/spotify.svg";
-import vscodeIcon from "@/assets/apps/vscode.svg";
 import type { Dictionary } from "@/lib/i18n";
 import { ClawdIcon, ClawdWalker } from "./Clawd";
 import { ContributionGrid } from "./ContributionGrid";
 import { apps } from "./DockDemo/data";
-import { BatteryIcon, VolumeIcon, WifiIcon } from "./icons";
+import { AppleIcon, BatteryIcon, LinuxIcon, VolumeIcon, WifiIcon, WindowsIcon } from "./icons";
+import { ShortcutsContent } from "./ShortcutsList";
 
 const cardBody = "relative m-0 text-[15px] leading-[1.55] text-fg-2";
 
-const shortcuts = [
-  { name: "Visual Studio Code", icon: vscodeIcon, key: 1, delay: "delay-0" },
-  { name: "Spotify", icon: spotifyIcon, key: 2, delay: "delay-75" },
-  { name: "Brave Browser", icon: braveIcon, key: 3, delay: "delay-150" },
-];
-
 const platforms = [
-  { name: "macOS", delay: "delay-0" },
-  { name: "Windows", delay: "delay-75" },
-  { name: "Linux", delay: "delay-150" },
+  { name: "macOS", icon: AppleIcon, delay: "delay-0" },
+  { name: "Windows", icon: WindowsIcon, delay: "delay-75" },
+  { name: "Linux", icon: LinuxIcon, delay: "delay-150" },
 ];
 
 type FeatureCardProps = {
@@ -166,26 +158,7 @@ export function Features({ t }: { t: Dictionary["features"] }) {
             title={t.shortcuts.title}
             className="min-h-[280px] flex-[1_1_300px] reveal reveal-step-1"
           >
-            <p className={cardBody}>{t.shortcuts.body}</p>
-            <ul className="relative m-0 mt-auto flex list-none flex-col gap-2 p-0">
-              {shortcuts.map((s) => (
-                <li key={s.key} className="flex items-center gap-2.5 text-sm">
-                  <Image
-                    src={s.icon}
-                    alt=""
-                    width={26}
-                    height={26}
-                    className={`size-[26px] rounded-[7px] transition-transform duration-300 ease-out group-hover:[transform:translateY(-3px)_scale(1.12)] ${s.delay}`}
-                  />
-                  <span className="flex-1">{s.name}</span>
-                  <kbd
-                    className={`rounded bg-white/8 px-1.5 py-0.5 font-mono text-[11px] text-fg-2 transition-colors duration-300 group-hover:bg-white/14 group-hover:text-fg ${s.delay}`}
-                  >
-                    Ctrl Alt {s.key}
-                  </kbd>
-                </li>
-              ))}
-            </ul>
+            <ShortcutsContent body={t.shortcuts.body} bodyClassName={cardBody} />
           </FeatureCard>
 
           <FeatureCard
@@ -194,12 +167,18 @@ export function Features({ t }: { t: Dictionary["features"] }) {
             className="min-h-[280px] flex-[1_1_300px] reveal reveal-step-2"
           >
             <p className={cardBody}>{t.platforms.body}</p>
-            <ul className="relative m-0 mt-auto flex list-none flex-wrap gap-2 p-0">
+            <ul className="relative m-0 mt-auto grid list-none grid-cols-3 gap-2 p-0">
               {platforms.map((p) => (
                 <li
                   key={p.name}
-                  className={`flex h-8 items-center rounded-sm border border-line-10 bg-white/7 px-3 text-[13px] transition-colors duration-300 group-hover:border-line-18 group-hover:bg-white/12 ${p.delay}`}
+                  className="flex flex-col items-center gap-2.5 rounded-xl border border-line-10 bg-white/5 px-2 py-4 text-[13px] font-medium transition-colors duration-300 group-hover:border-line-18 group-hover:bg-white/9"
                 >
+                  <span
+                    aria-hidden="true"
+                    className={`flex size-11 items-center justify-center rounded-[12px] bg-fg text-fg-inverse shadow-nav-cta transition-transform duration-300 ease-out group-hover:[transform:translateY(-3px)] ${p.delay}`}
+                  >
+                    <p.icon size={22} />
+                  </span>
                   {p.name}
                 </li>
               ))}

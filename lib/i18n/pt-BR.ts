@@ -63,7 +63,7 @@ export const ptBR: Dictionary = {
     },
     shortcuts: {
       title: "Um atalho para cada app",
-      body: "Ctrl Alt 1 a 9 abre ou foca o app fixado. Se ele já está na frente, minimiza.",
+      body: "{keys} 1 a 9 abre ou foca o app fixado. Se ele já está na frente, minimiza.",
     },
     platforms: {
       title: "Um app, três sistemas",
